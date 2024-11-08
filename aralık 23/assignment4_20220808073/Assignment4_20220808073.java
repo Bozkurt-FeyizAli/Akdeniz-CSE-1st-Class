@@ -24,6 +24,46 @@
         double[] studentScores= new double[countCategory(studentInformation)];
         // get information
         getCategoryInformatinsAsArray(categoryInformation, category,
+    public static void writeGrades(String[] student, double[] grade,
+                                   String studentGradeFileName,
+                                   String errorLogFileName){
+        String[] gradeLetters= new String[student.length];        
+        double[] studentGPAScores=new double[student.length];
+        String[] studentStatus=  new String[student.length];
+        studentGradesInformations(grade, gradeLetters,
+                                  studentStatus, studentGPAScores);
+        File file= new File(studentGradeFileName);
+        try {
+            file.createNewFile();
+            FileWriter informationWriter = new FileWriter(file);
+                for(int i=0;i<student.length;i++){
+                    if(grade[i]==Double.MIN_VALUE){
+                    }
+                    else{
+                    informationWriter.write(student[i]+" "+
+                                              grade[i]+" "+
+                                       gradeLetters[i]+" "+
+                                   studentGPAScores[i]+" "+
+                                      studentStatus[i]+"\n");
+                    }
+                }
+            informationWriter.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("ERROR: Belirtilen dosya bulunamadı.");
+        } catch (IOException e) {
+            System.out.println("ERROR: IOException occurred");
+        }
+    }
+    public static void studentInformationsForWriteGrades
+                                                    (double[] grade,
+                                                     String[] gradeLetters,
+                                                     double[] studentGPAScores,
+                                                     String[] studentStatus){
+
+    }
+
+    public static void formatCategoryName(String name[]){
+            for(int i=0;i<name.length;i++){
     public static  String gradeLetter(double grade ){
         if      (grade>=87.5) return "AA";
         else if (grade>=80.5) return "BA";
