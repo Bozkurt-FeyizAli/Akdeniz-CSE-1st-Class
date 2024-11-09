@@ -221,6 +221,22 @@ public class Assignment4_20220808073{
         return file;
     }
 
+    public static File weightErrorWriter(String writeErrors){
+        File file= new File(writeErrors);
+        try {
+            file.createNewFile();
+            FileWriter informationWriter = new FileWriter(file);
+            informationWriter.write
+    ("ERROR: course details - invalid weight - does not sum 100\n");
+            informationWriter.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("ERROR: File not found.\n");
+        } catch (IOException e) {
+            System.out.println("ERROR: IOException occurred\n");
+        }
+        return file;
+    }
+
     public static void studentGrades(String studentScoresFile,
                                      String[] category, int[] quantity,
                                      int[] weight, String writeErrors,
