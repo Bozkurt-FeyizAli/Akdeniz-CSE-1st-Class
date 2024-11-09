@@ -164,6 +164,30 @@ public class Assignment4_20220808073{
         }
     }
 
+    public static boolean categoryInformationError(String[] category,
+                                                   int[] quantity,
+                                                   int[] weight,
+                                                   String writeErrors){
+
+        if(category.length==quantity.length&&category.length==weight.length){
+            boolean isQuantityValid=isQuantityValid(quantity);
+            boolean isWeightValid= isWeightValid(weight);
+            if(!isQuantityValid){
+                quantityErrorWriter(writeErrors);
+                return false;
+            }
+            if(!isWeightValid){
+                weightErrorWriter(writeErrors);
+                return false;
+            }
+            return true;
+            }
+            else{
+                ArrayLenthErrorWriter(writeErrors);
+                return false;
+        }
+    }
+
     public static void studentGrades(String studentScoresFile,
                                      String[] category, int[] quantity,
                                      int[] weight, String writeErrors,
