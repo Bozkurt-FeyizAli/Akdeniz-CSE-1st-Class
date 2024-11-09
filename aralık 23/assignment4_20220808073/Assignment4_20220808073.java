@@ -1,3 +1,11 @@
+// @ Feyiz Ali Bozkurt @ Since 23 December 2023
+import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+public class Assignment4_20220808073{
+    public static void main(String[] args)  {
         String categoryInformation="";
         String studentInformation="";
         String writeStudentGrades="";
@@ -24,6 +32,48 @@
         double[] studentScores= new double[countCategory(studentInformation)];
         // get information
         getCategoryInformatinsAsArray(categoryInformation, category,
+                                      quantity, weight);
+        // overview to values
+        continueToProgram=categoryInformationError(category, quantity,
+                                                   weight, writeErrors);
+        // contnue or not
+        if(!continueToProgram){
+            System.out.println
+        ("ERROR: Program will not continue due to invalid informations.\n");
+        }
+        else{
+            // student info
+            studentGrades(studentInformation, category, quantity, weight,
+                          writeErrors, studentScores, studentNames);
+            // write result
+            writeGrades(studentNames, studentScores,
+                        writeStudentGrades, writeErrors);  
+            }
+        errorStudentGradeWriter(writeErrors, studentNames, studentScores);        
+        }
+        else{
+           System.out.println("ERROR: invalid commendLine argument.");
+        }   
+    }
+
+    public static File commendLineErrorWriter(String fileName){
+        File file= new File(fileName);
+        try {
+            file.createNewFile();
+            FileWriter informationWriter = new FileWriter(file);
+            informationWriter.write
+            ("ERROR: invalid commendLine argument number\n");
+            informationWriter.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("ERROR: File not found.\n");
+
+        } catch (IOException e) {
+            System.out.println("ERROR: IOException occurred\n");
+
+        }
+        return file;
+    }
+    
     public static void studentGrades(String studentScoresFile,
                                      String[] category, int[] quantity,
                                      int[] weight, String writeErrors,
