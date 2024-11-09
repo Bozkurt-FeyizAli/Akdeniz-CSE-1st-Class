@@ -74,6 +74,30 @@ public class Assignment4_20220808073{
         return file;
     }
     
+    public static void getStudentNames(String studentScoresFile,
+                                       String[] studentNames,
+                                       int[] quantity, String category){
+                                        
+        int timesOfScore=0;
+        for(int i=0;i<category.length();i++){
+            timesOfScore+=quantity[i];
+        }
+        int numberOfStudents = countCategory(studentScoresFile);
+        File file = new File(studentScoresFile);
+        try (Scanner input= new Scanner(file);){
+        for (int index = 0;input.hasNext(); index++) {
+            studentNames[index]= input.next();
+            for(int i=0;i<timesOfScore;i++){
+            String tempScore= input.next();
+            }
+        }
+
+        } catch (FileNotFoundException e) {
+            System.out.println(e);
+        }
+
+    }
+
     public static void studentGrades(String studentScoresFile,
                                      String[] category, int[] quantity,
                                      int[] weight, String writeErrors,
