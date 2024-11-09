@@ -129,6 +129,23 @@ public class Assignment4_20220808073{
         return file;
     }
 
+    public static void studentGradesInformations(double[] studentScoresFile,
+                                                 String[] gradeLetters,
+                                                 String[] studentStatus,
+                                                 double[] studentGPAScores ){
+
+        for(int i=0; i<studentGPAScores.length;i++){
+            if(studentScoresFile[i]==Double.MIN_VALUE){
+                continue;
+            }
+            else{
+                    gradeLetters[i]=gradeLetter(studentScoresFile[i]);
+                   studentStatus[i]=status(studentScoresFile[i]);
+                studentGPAScores[i]=gpaPoints(studentScoresFile[i]);
+            }
+        }
+    }
+
     public static void studentGrades(String studentScoresFile,
                                      String[] category, int[] quantity,
                                      int[] weight, String writeErrors,
