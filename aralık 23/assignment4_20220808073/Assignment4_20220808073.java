@@ -146,6 +146,24 @@ public class Assignment4_20220808073{
         }
     }
 
+    public static void getCategoryInformatinsAsArray
+    (String categoryInformation, String[] category,
+     int[] quantity, int[] weight ){
+
+        File file = new File(categoryInformation);
+        try (Scanner input= new Scanner(file);){
+            int index=0;
+            while(input.hasNext()){
+                category[index]=input.next();
+                quantity[index]=Integer.parseInt(input.next());
+                weight[index]=Integer.parseInt(input.next());
+                index++;
+            }
+        }catch (FileNotFoundException e) {
+            System.out.println(e);
+        }
+    }
+
     public static void studentGrades(String studentScoresFile,
                                      String[] category, int[] quantity,
                                      int[] weight, String writeErrors,
