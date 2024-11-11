@@ -1,3 +1,36 @@
+    public static void main(String[] args) {
+
+
+        int[][] points = {
+            {1, 2},
+            {3, 4},
+            {5, 6},
+            {7, 8}
+            // Diğer noktaları ekleyebilirsiniz
+        };
+
+        int pointIndex = 3; // Örnek bir nokta indisini seçin
+
+        int[] closestPoints = getClosestPoints(points, pointIndex);
+
+        System.out.println("Closest points to point at index " + pointIndex + ":");
+        for (int index : closestPoints) {
+            System.out.println("Index " + index);
+        }
+        double firstDistance = distance(points[pointIndex], points[0]);
+        int minDistancePoint = 0;
+        for(int i=0; i<points.length;i++){
+            if(i!=pointIndex){
+                double secondDistance = distance(points[pointIndex], points[i]);
+                if(secondDistance < firstDistance){
+                    firstDistance = secondDistance;
+                    minDistancePoint = i;
+                }
+                else if(secondDistance == firstDistance){
+                    minDistancePoint++;
+                }
+            }
+        }
     public static double distance(int[] pointA, int[] pointB) {
         /*
          * Helper method for calculating distance between given two points
