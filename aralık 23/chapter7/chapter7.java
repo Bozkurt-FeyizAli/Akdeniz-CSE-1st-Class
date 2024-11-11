@@ -1,3 +1,39 @@
+    public static void eliminateDuplicates(int numbers[]) {
+        int count=0;
+        int[] uniqueNumbersTransient= new int[numbers.length];
+        for (int i = 0; i < numbers.length; i++) {
+            boolean isDuplicate = false;
+            for (int j = 0; j < count; j++) {
+                if (numbers[i] == uniqueNumbersTransient[j]) {
+                    isDuplicate = true;
+                    break;
+                }
+            }
+            if (!isDuplicate) {
+                count++;
+            }
+        }
+        int[] uniqueNumbersPermanent= new int[count];
+        count=0;
+        for (int i = 0; i < numbers.length; i++) {
+            boolean isDuplicate = false;
+            for (int j = 0; j < count; j++) {
+                if (numbers[i] == uniqueNumbersPermanent[j]) {
+                    isDuplicate = true;
+                    break;
+                }
+            }
+            if (!isDuplicate) {
+                uniqueNumbersPermanent[count] = numbers[i];
+                count++;
+            }
+        }
+        for (int k : uniqueNumbersPermanent) {
+           System.out.println(k); 
+        }
+    
+    }
+
     public static void shuffle(int array[], int number){
     for(int i=0;i<number;i++){
         int a=(int)(Math.random()*array.length);
