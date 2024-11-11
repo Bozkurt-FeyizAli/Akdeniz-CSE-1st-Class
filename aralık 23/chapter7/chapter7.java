@@ -1,3 +1,24 @@
+    public static double distance(int[] pointA, int[] pointB) {
+        /*
+         * Helper method for calculating distance between given two points
+         * 
+         * Args:
+         *      pointA (int[d]) : a point in d-dimensional space
+         *      pointB (int[d]) : a point in d-dimensional space
+         * 
+         * Returns:
+         *      (double): distance between given two points UP TO 1 DECIMAL PLACE (see round method bellow)
+         */
+
+        // Your code goes here...
+        double distance =0;
+        for (int i =0 ; i<pointB.length;i++) {
+        distance += Math.pow(pointA[i] - pointB[i], 2);
+
+        }
+        return Math.sqrt(distance);
+
+    }
     public static void eliminateDuplicates(int numbers[]) {
         int count=0;
         int[] uniqueNumbersTransient= new int[numbers.length];
