@@ -1,3 +1,12 @@
+    public static void shuffle(int array[], int number){
+    for(int i=0;i<number;i++){
+        int a=(int)(Math.random()*array.length);
+        int b=(int)(Math.random()*array.length);
+        int swap=array[a];
+        array[a]=array[b]; 
+        array[b]=swap;   
+    }
+    }
     public static void lockers(boolean[] lockers){
         for(int student=1;student<=lockers.length;student++){
             for(int lock=student;lock<=lockers.length;lock++){
@@ -6,6 +15,20 @@
             }
         }  
     }
+    public static void printDistinctNumbers(int[] numbers){
+        eliminateDuplicates(numbers);
+        int arraylenght=0;
+        for(int i=0;i<numbers.length;i++){
+            if(numbers[i]!=0){
+                arraylenght++;
+            }
+        }
+        int[] arrayResult=new int[arraylenght];
+        for(int i=0;i<arrayResult.length;i++){
+            arrayResult[i]=numbers[i];
+        }
+    }
+ 
     public static void displayStatistics(double[] data) {
     double sum = 0;
     double sumSquare = 0;
