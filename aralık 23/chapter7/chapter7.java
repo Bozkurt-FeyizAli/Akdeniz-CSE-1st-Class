@@ -15,6 +15,25 @@
             }
         }  
     }
+    
+    public static void countOccurrenceOfNumbers(Scanner scanner){
+        int arrayLenght=scanner.nextInt();
+                int[] numbers=new int[arrayLenght];
+        for(int i=0;i<arrayLenght;i++){
+        numbers[i]=scanner.nextInt();
+        }
+        for(int i=0;i<numbers.length;i++){
+            int count=0;
+            for(int j=0;j<numbers.length;j++){
+                if(numbers[i] == numbers[j])
+            count++;   
+            }
+            if(count==1)
+            System.out.printf("%d occours %d time\n", numbers[i], count);
+            else System.out.printf("%d occours %d times\n", numbers[i], count);
+        }
+    }
+
     public static void printDistinctNumbers(int[] numbers){
         eliminateDuplicates(numbers);
         int arraylenght=0;
