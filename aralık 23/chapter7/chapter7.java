@@ -1,3 +1,5 @@
+import java.util.Scanner;
+public class chapter7{
     public static void main(String[] args) {
 
 
@@ -17,6 +19,51 @@
         for (int index : closestPoints) {
             System.out.println("Index " + index);
         }
+
+
+
+
+    //     Scanner scanner= new Scanner(System.in);
+    // int[] dizi={2,22522,44444444,66666};
+    // boolean[] locks=new boolean[10];
+    // double[] data={1.9, 2.5, 3.7, 2, 1, 6, 3, 4, 5, 2};
+    // System.out.println(computeTimeDifference(data));
+    // System.out.println(computingGCD(dizi));
+    // displayStatistics(data);
+//     shuffle(dizi, 10000);
+// for (int k : dizi) {
+//     System.out.println(k);
+// }
+// lockers(locks);
+// for(int i=1;i<=locks.length;i++){
+//     System.out.println(i);
+// }
+// for (boolean k : locks) {
+//     System.out.println(k);
+// }
+//   countOccurrenceOfNumbers(scanner);
+// printDistinctNumbers(dizi);
+// for (int k : dizi) {
+//     System.out.println(k);
+// }
+
+    }
+
+    public static int[] getClosestPoints(int[][] points, int pointIndex) {
+        /*
+         * Write a method that returns the array indices of the closest points to the given
+         * point index. if m number of points share the same minimum distance to
+         * given point index, then your array will have all of those points
+         * 
+         * Args:
+         *      points (int[n][d]) : array of n points in d dimensional space
+         *      pointIndex (int) : index of a point from points array that we will search for closest m points
+         * 
+         * Returns:
+         *      (int[m]) : array of point indices that share the same minimum distance to given point
+         */
+
+        // Your code goes here...
         double firstDistance = distance(points[pointIndex], points[0]);
         int minDistancePoint = 0;
         for(int i=0; i<points.length;i++){
@@ -31,6 +78,20 @@
                 }
             }
         }
+        int[] closestPoints = new int[minDistancePoint];
+        int val=0;
+        for(int i=0; i<points.length;i++){
+            if(i!=pointIndex){
+                double secondDistance = distance(points[pointIndex], points[i]);
+                if(secondDistance == firstDistance){
+                    closestPoints[val++] = minDistancePoint;
+                }
+            }
+        }
+        return closestPoints;
+
+    }
+
     public static double distance(int[] pointA, int[] pointB) {
         /*
          * Helper method for calculating distance between given two points
@@ -52,6 +113,7 @@
         return Math.sqrt(distance);
 
     }
+
     public static void eliminateDuplicates(int numbers[]) {
         int count=0;
         int[] uniqueNumbersTransient= new int[numbers.length];
@@ -97,6 +159,7 @@
         array[b]=swap;   
     }
     }
+ 
     public static void lockers(boolean[] lockers){
         for(int student=1;student<=lockers.length;student++){
             for(int lock=student;lock<=lockers.length;lock++){
