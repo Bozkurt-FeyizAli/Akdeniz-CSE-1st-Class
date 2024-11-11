@@ -1,3 +1,28 @@
+    public static void lockers(boolean[] lockers){
+        for(int student=1;student<=lockers.length;student++){
+            for(int lock=student;lock<=lockers.length;lock++){
+                if(lock%student==0)
+                lockers[lock-1] = !lockers[lock-1];  
+            }
+        }  
+    }
+    public static void displayStatistics(double[] data) {
+    double sum = 0;
+    double sumSquare = 0;
+    double deviation = 0.0;
+
+    for (int i=0;i<data.length;i++) {
+        sum+=data[i];
+        sumSquare+=Math.pow(data[i],2);
+    }
+    double mean = sum/data.length;
+    deviation = Math.sqrt((sumSquare - (Math.pow(sum, 2) /
+                data.length)) / (data.length - 1));
+
+    System.out.printf("Mean = %.2f .\n", mean);
+    System.out.printf("Standard deviation is %.5f\n", deviation);
+}
+    
     public static int computingGCD(int[] numbers){
     int gcd=1;
     int minArray=numbers[0];
