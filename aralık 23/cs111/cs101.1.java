@@ -1,3 +1,37 @@
+import java.util.Scanner;
+public class cs101_1 {
+    public static void main(String[] args){
+Scanner input = new Scanner(System.in);
+random0to10(2,67);
+System.out.println(random0to10(1));
+randomChar(45,90);
+randomChar();
+randomWord(9);
+random(9,7,5);
+
+    }
+    // Creates random number 0 to 10
+        public static int random0to10(){
+int number=(int)(Math.random()*11);
+return number;
+    }
+
+
+        
+    
+    // overloading, same name differemt result; method header,all things; method signutureafter type.
+
+        public static int random0to10(int a){
+int number=(int)(Math.random()*11);
+return number;}
+
+
+        public static void random0to10(int a,int b){
+int number=a+(int)(Math.random()*b-1);
+System.out.println(number);
+        }
+
+
         public static char randomChar(int a,int b){
 char number=(char)(a+(int)(Math.random()*(b-a+1)));
 return number;}
@@ -23,4 +57,10 @@ public static int random(int... exculded){
     result=random(exculded);
     }
     return result;
+}
+
+
+
+
+
 }
