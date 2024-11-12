@@ -1,3 +1,42 @@
+class Semester implements Comparable<Semester>{
+    private final int season;
+    private final int year;
+    public Semester(int season, int year)throws GeneralErrorException {
+        if(season>3||season<1)
+            throw new GeneralErrorException("Semester invalid paramter foe season "+season+ " invalid values: 1, 2 or 3.");
+        this.season = season;
+        this.year = year;
+    }
+    public String getSeason(){
+             if(season==1) return "Fall";
+        else if(season==2) return "Spring";
+        else               return "Summer";   
+    }
+    public int getYear(){
+        return year;
+    }
+    @Override
+    public String toString() {
+        return getSeason()+" – " +getYear();
+    }
+    @Override
+    public int compareTo(Semester o) {
+        return getYear()-o.getYear()-o.getSeason().compareTo(getSeason());
+    }
+}
+class SemesterNotFoundException extends RuntimeException{
+    private Student student;
+    private Semester semester;
+    public SemesterNotFoundException(Student student, Semester semester) {
+        this.student = student;
+        this.semester = semester;
+    }
+    @Override
+    public String toString() {
+        return "SemesterNotFoundException: " + student.getID() + 
+        " has not taken any courses in " + semester;
+    }
+}
 class InvalidGradeException extends RuntimeException{
     double grade;
     InvalidGradeException(double grade){
