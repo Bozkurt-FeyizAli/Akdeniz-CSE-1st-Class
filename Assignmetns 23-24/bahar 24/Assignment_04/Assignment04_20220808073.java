@@ -1,3 +1,31 @@
+class InvalidGradeException extends RuntimeException{
+    double grade;
+    InvalidGradeException(double grade){
+       setGrade(grade);
+    }
+    public void setGrade(double grade) {
+        this.grade = grade;
+    }
+    @Override
+    public String toString(){
+        return String.format("InvalidGradeException: %f",  grade);
+    }
+}
+
+class CourseNotFoundException extends RuntimeException{
+    Student student;
+    Course course;
+    CourseNotFoundException(Student student, Course course){
+        this.student=student;
+        this.course=course;
+    }
+    @Override
+    public String toString(){
+        return "CourseNotFoundException: " + student.getID()
+        + " has not yet taken " + course.courseCode(); 
+    }
+}
+
 class InvalidRankException extends RuntimeException{
     int rank;
     InvalidRankException(int rank){
