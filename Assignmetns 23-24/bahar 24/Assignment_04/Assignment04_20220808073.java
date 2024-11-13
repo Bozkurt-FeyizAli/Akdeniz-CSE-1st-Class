@@ -1,3 +1,37 @@
+    public double GPAPoints(double result){
+             if (result>=89.5) return 4.0;
+        else if (result>=84.5) return 3.5;    
+        else if (result>=79.5) return 3.0;
+        else if (result>=74.5) return 2.5; 
+        else if (result>=69.5) return 2.0;    
+        else                   return 0.0;
+    }
+    @Override
+    public String gradeLetter(double result) {
+        if      (result>=89.5) return "AA";
+        else if (result>=84.5) return "BA";    
+        else if (result>=79.5) return "BB";
+        else if (result>=74.5) return "CB"; 
+        else if (result>=69.5) return "CC";  
+        else                   return "FF";
+    }
+    public String getLevel() throws GeneralErrorException{
+             if(rank==1) return "Master’s Student " ;
+        else if(rank==2) return "Doctoral Student"  ;
+        else if(rank==3) return "Doctoral Candidate";
+        else throw new GeneralErrorException("rank is invalid");
+    }
+    public String getThesisTopic(){
+        return thesisTopic;
+    }
+    public void setThesisTopic(String thesisTopic){
+        this.thesisTopic=thesisTopic;
+    }
+    @Override
+    public String toString(){
+        return super.toString();
+    }
+}
 class Semester implements Comparable<Semester>{
     private final int season;
     private final int year;
