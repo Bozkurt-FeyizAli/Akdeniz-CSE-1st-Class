@@ -1,3 +1,31 @@
+class GradStudent extends Student{
+    private int rank;
+    private String thesisTopic;
+    private Course TeachingAssistant;
+    GradStudent(String name, String email, long number, Department department,
+                int rank, String thesisTopic) throws InvalidRankException{
+        super(name, email, number, department);
+        setRank(rank);
+        setThesisTopic(thesisTopic);
+    }
+    public void setRank(int rank) throws InvalidRankException{
+        if(rank>0&&rank<4)
+            this.rank=rank;
+        else 
+            throw new InvalidRankException(rank);
+    }
+    public void setTeachingAssistant(Course course) throws CourseNotFoundException{
+        if(!isCourseTaken(course))
+            throw new CourseNotFoundException(this, course);
+        if(getHGrade(course)>=80)
+            TeachingAssistant=course;
+        else 
+            throw new CourseNotFoundException(this, course);
+    }
+    public Course getTeachingAssistant(){
+        return TeachingAssistant;
+    }
+    @Override
     public String listGrades(Semester semester) throws SemesterNotFoundException{
         if(getStudentCourses().get(semester).size()==0)
             throw new SemesterNotFoundException(this, semester);
