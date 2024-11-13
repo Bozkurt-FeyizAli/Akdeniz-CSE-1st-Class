@@ -1,3 +1,29 @@
+    public String listGrades(Semester semester) throws SemesterNotFoundException{
+        if(getStudentCourses().get(semester).size()==0)
+            throw new SemesterNotFoundException(this, semester);
+        String message="";
+        for (var coursesGrade : getStudentCourses().get(semester).entrySet()) {
+            Course c= coursesGrade.getKey();
+            message+= c.courseCode()+" - "+gradeLetter(coursesGrade.getValue())+"\n";
+        }
+        return message;   
+    }
+    @Override
+    public String listGrades(Course course){
+        if(!isCourseTaken(course))
+            throw new CourseNotFoundException(this, course);
+        String message="";
+        for (var sCG : getStudentCourses().entrySet()) {
+            Semester s=sCG.getKey();
+            TreeMap<Course, Double> cG=sCG.getValue();
+            for (var courseGrade : cG.entrySet()) {
+                if(courseGrade.getKey()==course)
+                    message+=  s.toString()+" - "+gradeLetter(courseGrade.getValue());           
+            }
+        }
+        return message;
+    }
+    @Override
     public String transcript(){
         String message="";
         double GPA=0;
