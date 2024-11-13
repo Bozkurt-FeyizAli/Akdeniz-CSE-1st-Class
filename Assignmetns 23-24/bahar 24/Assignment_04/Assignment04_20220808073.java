@@ -1,3 +1,25 @@
+    public String courseGradeLetter(Course course) 
+                    throws CourseNotFoundException{
+        if(!isCourseTaken(course))
+            throw new CourseNotFoundException(this, course);
+        double result =getHGrade(course);
+        if      (result>=89.5) return "AA";
+        else if (result>=84.5) return "BA";    
+        else if (result>=79.5) return "BB";
+        else if (result>=74.5) return "CB"; 
+        else if (result>=69.5) return "CC";  
+        else                   return "FF";
+    }
+    @Override
+    public String courseResult(Course course) 
+               throws CourseNotFoundException{
+        if(!isCourseTaken(course))
+            throw new CourseNotFoundException(this, course);
+        double result =getHGrade(course);
+        if (result>=69.5) return               "Passed";  
+        else              return               "Failed";
+    }
+    @Override
     public double GPAPoints(double result){
              if (result>=89.5) return 4.0;
         else if (result>=84.5) return 3.5;    
