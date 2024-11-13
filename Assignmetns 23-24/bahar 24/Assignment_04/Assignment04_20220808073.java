@@ -1,3 +1,37 @@
+    public String transcript(){
+        String message="";
+        double GPA=0;
+        int AKTS=0;
+        for (var sCG : getStudentCourses().entrySet()) {
+            Semester s=sCG.getKey();
+            message+=s.toString()+"\n";
+            TreeMap<Course, Double> cG=sCG.getValue();
+            AKTS=0;
+            GPA=0;
+            for (var cg : cG.entrySet()) {
+                Course c=cg.getKey();
+                message+="   "+c.courseCode()+" - "+courseGradeLetter(c)+"\n";
+                GPA+=GPAPoints(cg.getValue())*cg.getKey().getAKTS();
+                AKTS+=cg.getKey().getAKTS();
+            }
+            message+="GPA: - "+GPA/AKTS+"\n\n";
+        }
+        message+="OverallGPA: "+getGPA();
+        return message;
+    }
+    @Override
+    public double courseGPAPoints(Course course)
+                    throws CourseNotFoundException{
+        if(!isCourseTaken(course))
+            throw new CourseNotFoundException(this, course);
+        double result =getHGrade(course);
+             if (result>=89.5) return 4.0;
+        else if (result>=84.5) return 3.5;    
+        else if (result>=79.5) return 3.0;
+        else if (result>=74.5) return 2.5; 
+        else if (result>=69.5) return 2.0;    
+        else                   return 0.0;
+    }
     @Override
     public String courseGradeLetter(Course course) 
                     throws CourseNotFoundException{
@@ -55,6 +89,7 @@
         return super.toString();
     }
 }
+
 class Semester implements Comparable<Semester>{
     private final int season;
     private final int year;
@@ -94,6 +129,7 @@ class SemesterNotFoundException extends RuntimeException{
         " has not taken any courses in " + semester;
     }
 }
+
 class InvalidGradeException extends RuntimeException{
     double grade;
     InvalidGradeException(double grade){
@@ -149,6 +185,7 @@ class DepartmentMismatchException extends RuntimeException{
         this.department=department;
         this.person=person;
     }
+    @Override
     public String toString(){
         if(course==null)
             return "DepartmentMismatchException: " + person.getName() +
