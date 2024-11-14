@@ -2,6 +2,22 @@
         if(grade>100||grade<0)
             throw new InvalidGradeException(grade);   
     }
+    public double getHGrade(Course course) throws CourseNotFoundException{
+        if(!isCourseTaken(course))
+            throw new CourseNotFoundException(this, course);
+        double grdReturn=-1;
+        for (var sc : studentCourses.entrySet()) {
+            TreeMap<Course, Double> cg=sc.getValue();
+            for (var g : cg.entrySet()) {
+                if(g.getKey()==course){
+                    if(g.getValue()>grdReturn)
+                        grdReturn=g.getValue();
+                }
+                    
+            }
+        }
+        return grdReturn;
+    }
     public double courseGPAPoints(Course course) {
         double result=getHGrade(course);
                  if (result>=87.5) return 4.0;
