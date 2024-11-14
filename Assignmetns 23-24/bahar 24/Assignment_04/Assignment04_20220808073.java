@@ -1,5 +1,26 @@
+    public double GPAPoints(double result) {
+                 if (result>=87.5) return 4.0;
+            else if (result>=80.5) return 3.5;    
+            else if (result>=73.5) return 3.0;
+            else if (result>=66.5) return 2.5; 
+            else if (result>=59.5) return 2.0;     
+            else if (result>=52.5) return 1.5;          
+            else if (result>=45.5) return 1.0;
+            else if (result>=34.5) return 0.5;    
+            else                   return 0.0;  
+        }
     public TreeMap<Semester, TreeMap<Course, Double>> getStudentCourses() {
         return studentCourses;
+    }
+    public String listGrades(Semester semester) throws SemesterNotFoundException{
+        if(!studentCourses.keySet().contains(semester))
+            throw new SemesterNotFoundException(this, semester);
+        String message="";
+        for (var coursesGrade : studentCourses.get(semester).entrySet()) {
+            Course c= coursesGrade.getKey();
+            message+= c.courseCode()+" - "+gradeLetter(coursesGrade.getValue())+"\n";
+        }
+        return message;   
     }
     public String listGrades(Course course){
         if(!isCourseTaken(course))
