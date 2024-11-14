@@ -1,3 +1,23 @@
+    public double getGPA() {
+        double GPA=0;
+        HashSet<Course> courses= new HashSet<>();
+        for (var sCG : studentCourses.entrySet()) {
+            for (var cG : sCG.getValue().entrySet()) {
+                courses.add(cG.getKey());
+            }
+        } 
+        for (Course course : courses) {
+                GPA+=courseGPAPoints(course)*course.getAKTS();
+        }
+        return GPA/getAttemptedAKTS();
+    }
+    public boolean isCourseTaken(Course course){
+        for (var studentCourse : studentCourses.entrySet()) {
+           if(studentCourse.getValue().containsKey(course))
+                return true;
+        }
+        return false; 
+    }
     public void addCourse(Course course, Semester semester, double grade) throws InvalidGradeException{
         isGradeInvalid(grade);
         if(course==null||semester==null)
