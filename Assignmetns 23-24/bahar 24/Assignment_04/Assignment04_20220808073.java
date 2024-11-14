@@ -1,3 +1,7 @@
+    public void isGradeInvalid(double grade) throws InvalidGradeException{
+        if(grade>100||grade<0)
+            throw new InvalidGradeException(grade);   
+    }
     public double courseGPAPoints(Course course) {
         double result=getHGrade(course);
                  if (result>=87.5) return 4.0;
@@ -22,6 +26,21 @@
         else if (result>=34.5) return "FD";    
         else                   return "FF";
     }
+    public String courseResult(Course course) {
+            double result =getHGrade(course);
+             if (result>=59.5) return               "Passed";              
+        else if (result>=45.5) return "Conditionally Passed";  
+        else                   return               "Failed";
+    }
+    @Override
+    public String toString() throws GeneralErrorException{ 
+        if(getGPA()<=4.00&&getGPA()>=0.00){
+        return  super.toString() + " – GPA: " + getGPA(); 
+        }
+        else throw new GeneralErrorException("GPA is invalid");
+    }
+}
+
 class GradStudent extends Student{
     private int rank;
     private String thesisTopic;
