@@ -1,3 +1,25 @@
+    public String transcript(){
+        String message="";
+        double GPA=0;
+        int AKTS=0;
+        for (var sCG : studentCourses.entrySet()) {
+            Semester s=sCG.getKey();
+            message+=s.toString()+"\n";
+            TreeMap<Course, Double> cG=sCG.getValue();
+            AKTS=0;
+            GPA=0;
+            for (var cg : cG.entrySet()) {
+                Course c=cg.getKey();
+                message+="   d"+c.courseCode()+" - "+courseGradeLetter(c)+"\n";
+                GPA+=GPAPoints(cg.getValue())*cg.getKey().getAKTS();
+                AKTS+=cg.getKey().getAKTS();
+            }
+            message+="GPA: - "+GPA/AKTS+"\n\n";
+        }
+        message+="OverallGPA: "+getGPA();
+        return message;
+    }
+    
     public void isGradeInvalid(double grade) throws InvalidGradeException{
         if(grade>100||grade<0)
             throw new InvalidGradeException(grade);   
