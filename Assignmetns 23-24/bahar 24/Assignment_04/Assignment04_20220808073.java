@@ -1,3 +1,26 @@
+    public void addCourse(Course course, Semester semester, double grade) throws InvalidGradeException{
+        isGradeInvalid(grade);
+        if(course==null||semester==null)
+            throw new GeneralErrorException("Student value is invalid ");
+        TreeMap<Course, Double> courseGrade=studentCourses.get(semester);
+        if (courseGrade==null) {
+            courseGrade=new TreeMap<>();
+            studentCourses.put(semester, courseGrade);
+        }
+        courseGrade.put(course, grade);
+        
+    }
+    public  String gradeLetter(double grade ){
+        if      (grade>=87.5) return "AA"; 
+        else if (grade>=80.5) return "BA";
+        else if (grade>=73.5) return "BB";
+        else if (grade>=66.5) return "CB";
+        else if (grade>=59.5) return "CC";
+        else if (grade>=52.5) return "DC";
+        else if (grade>=45.5) return "DD";
+        else if (grade>=34.5) return "FD";
+        else                  return "FF";
+    }
     public double GPAPoints(double result) {
                  if (result>=87.5) return 4.0;
             else if (result>=80.5) return 3.5;    
