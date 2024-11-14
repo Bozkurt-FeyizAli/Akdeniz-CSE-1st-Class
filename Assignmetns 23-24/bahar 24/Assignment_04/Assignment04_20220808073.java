@@ -1,3 +1,27 @@
+    public double courseGPAPoints(Course course) {
+        double result=getHGrade(course);
+                 if (result>=87.5) return 4.0;
+            else if (result>=80.5) return 3.5;    
+            else if (result>=73.5) return 3.0;
+            else if (result>=66.5) return 2.5; 
+            else if (result>=59.5) return 2.0;     
+            else if (result>=52.5) return 1.5;          
+            else if (result>=45.5) return 1.0;
+            else if (result>=34.5) return 0.5;    
+            else                   return 0.0;  
+        }
+    public String courseGradeLetter(Course course) {   
+        double result =getHGrade(course);
+             if (result>=87.5) return "AA";
+        else if (result>=80.5) return "BA";    
+        else if (result>=73.5) return "BB";
+        else if (result>=66.5) return "CB"; 
+        else if (result>=59.5) return "CC";     
+        else if (result>=52.5) return "DC";          
+        else if (result>=45.5) return "DD";
+        else if (result>=34.5) return "FD";    
+        else                   return "FF";
+    }
 class GradStudent extends Student{
     private int rank;
     private String thesisTopic;
