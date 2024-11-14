@@ -1,3 +1,20 @@
+    public TreeMap<Semester, TreeMap<Course, Double>> getStudentCourses() {
+        return studentCourses;
+    }
+    public String listGrades(Course course){
+        if(!isCourseTaken(course))
+            throw new CourseNotFoundException(this, course);
+        String message="";
+        for (var sCG : studentCourses.entrySet()) {
+            Semester s=sCG.getKey();
+            TreeMap<Course, Double> cG=sCG.getValue();
+            for (var courseGrade : cG.entrySet()) {
+                if(courseGrade.getKey()==course)
+                    message+=  s.toString()+" - "+gradeLetter(courseGrade.getValue())+"\n";           
+            }
+        }
+        return message;
+    }
     public String transcript(){
         String message="";
         double GPA=0;
