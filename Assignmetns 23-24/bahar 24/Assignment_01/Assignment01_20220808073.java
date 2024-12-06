@@ -96,3 +96,49 @@ class Course{
     ("%s%d - %s (%d)", departmentCode, courseNumber, title, AKTS);
     }
 }
+//   CLASS  2
+class Person{
+    private String name;
+    private String email;
+    private Long ID;
+    private String departmentCode;
+    
+    // Course helperMethods= new Course(departmentCode, 0, email, 
+                           //  departmentCode, 0);
+    public boolean isDepartmentCodeVaild(String department){
+        return (department.length()==3||department.length()==4);
+    }
+
+    //  {username}@{university name}.{domain}
+    public boolean isEmailValid(String email){
+        if     (!email.contains("@"))
+            return false;
+        else if(!email.contains("."))
+            return false;
+        else if((email.indexOf("@", 2)-email.indexOf(".",
+                 email.indexOf("@")))>-2)
+            return false;  
+        // else if
+        // (email.indexOf(".", email.indexOf("."))-email.indexOf(".")<1)
+        // (email.indexOf(".", email.length()-2)==email.length()-1||
+          //email.indexOf("@")==0)
+            // return false;          
+        else 
+            return true;
+    }
+    public Person(String name, String email, long number, 
+                  String departmentCode){
+        setName(name);
+        setEmail(email);
+        setDepartmentCode(departmentCode);
+        setID(number);
+    }
+    public String getName(){
+        return name;
+    }
+    public void setName(String name){
+        this.name=name;
+    }
+    public String getEmail(){
+        return email;
+    }
