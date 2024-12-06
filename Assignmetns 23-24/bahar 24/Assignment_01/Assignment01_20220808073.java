@@ -142,3 +142,37 @@ class Person{
     public String getEmail(){
         return email;
     }
+    public void setEmail(String email){
+        if(isEmailValid(email))
+            this.email=email;
+        else {
+            System.out.println("ERROR");   
+            Error.runTimeError();
+        }
+    }
+    public long getID(){
+        return ID;
+    }
+    public void setID(long ID){
+        this.ID=ID;
+    }
+    public String getDepartmentCode(){
+        return departmentCode;
+    }
+    public void setDepartmentCode(String departmentCode){
+        if(isDepartmentCodeVaild(departmentCode))
+            this.departmentCode=departmentCode;   
+        else {
+            System.out.println("ERROR");
+            Error.runTimeError();
+        }
+    }
+    public static void runtimeError(){
+        System.out.println(0/0);
+    }
+    @Override
+    public String toString(){
+        return String.format("%s (%d) - %s", name, ID, email);
+    }
+    
+}
