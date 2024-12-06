@@ -44,3 +44,55 @@ class Course{
     public String getDepartmentCode(){
        return departmentCode;
     }
+    public void setDepartmentCode(String departmentCode){
+        if(isDepartmentCodeVaild(departmentCode))
+            this.departmentCode=departmentCode;
+        else {
+            System.out.println("ERROR");
+            // Error.runTimeError();
+            Error.runTimeError();
+        }
+    } 
+    public int getCourseNumber(){
+        return courseNumber;
+    }
+    public void setCourseNumber(int courseNumber){
+        if(isCourseNumberValid(courseNumber))
+            this.courseNumber=courseNumber;
+        else{
+            System.out.println("ERROR");
+            Error.runTimeError();
+        }
+    }
+    public String getTitle(){
+        return title;
+    }
+    public void setTitle(String title){
+        this.title=title;
+    }
+    public String getDescription(){
+        return description;
+    }
+    public void setDescription(String description){
+        this.description=description;
+    }
+    public int getAKTS(){
+        return AKTS;
+    }
+    public void setAKTS(int AKTS){
+        if(isAKTSValid(AKTS))
+            this.AKTS=AKTS;
+        else{
+            System.out.println("ERROR");
+            Error.runTimeError();
+        }
+    }
+    public String courseCode(){
+        return departmentCode+Integer.toString(courseNumber);
+    }
+    @Override
+    public String toString(){
+        return String.format
+    ("%s%d - %s (%d)", departmentCode, courseNumber, title, AKTS);
+    }
+}
