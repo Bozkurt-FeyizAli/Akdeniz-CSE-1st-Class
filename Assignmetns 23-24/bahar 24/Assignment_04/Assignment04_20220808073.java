@@ -30,6 +30,46 @@ public class Assignment04_20220808073{
             System.out.println("Teaching Assistant:\n"+gs.getTeachingAssistant());
         }
 }
+class Department{ 
+    private String code;
+    private String name;
+    private Teacher chair;
+
+    Department(String code, String name){
+        setCode(code);
+        setName(name);   
+    }
+    public void setChair(Teacher chair) throws DepartmentMismatchException,
+                                               GeneralErrorException {
+        if (chair == null) {
+            this.chair = null; 
+        } else {
+            if (chair.getDepartment() != this) {
+                throw new DepartmentMismatchException(this, chair);
+            }
+            this.chair = chair;
+        }
+    }
+    public void setCode(String code) {
+        if(isCodeValid(code))
+            this.code = code;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public Teacher getChair() {
+        if (chair != null && chair.getDepartment() == this) {
+            return chair;
+        } else {
+            return null; 
+        }
+    }
+    public String getCode() {
+        return code;
+    }
+    public String getName() {
+        return name;
+    }
     public double getGPA() {
         double GPA=0;
         HashSet<Course> courses= new HashSet<>();
