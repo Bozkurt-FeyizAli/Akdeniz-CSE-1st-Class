@@ -206,6 +206,60 @@ abstract class Person{
         departmentCode.length()+" valid values are 3 nd; 4");
     }
     //  {username}@{university name}.{domain}
+    public boolean isEmailValid(String email) throws GeneralErrorException{
+        if     (!email.contains("@"))
+            throw new GeneralErrorException("Person email is invalid with value "+
+            email+" valid values **@**.**");
+        else if(!email.contains("."))
+        throw new GeneralErrorException("Person email is invalid with value "+
+        email+" valid values **@**.**");
+        else if((email.indexOf("@", 2)-email.indexOf(".",
+                 email.indexOf("@")))>-2)
+                throw new GeneralErrorException("Person email is invalid with value "+
+                email+" valid values **@**.**");
+        else 
+            return true;
+    }
+
+    public Person (String name, String email, long ID, Department department){
+        setName(name);
+        setEmail(email);
+        this.department=department;
+        setID(ID);
+    }
+    public Department getDepartment() {
+        return department;
+    }
+    public String getName(){
+        return name;
+    }
+    public void setName(String name){
+        this.name=name;
+    }
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+    public String getEmail(){
+        return email;
+    }
+    public void setEmail(String email){
+        if(isEmailValid(email))
+            this.email=email;
+    }
+    public long getID(){
+        return ID;
+    }
+    public void setID(long ID){
+        this.ID=ID;
+    }
+    // public String getDepartmentCode(){
+    //     return departmentCode;
+    // }
+    @Override
+    public String toString(){
+        return String.format("%s (%d) – %s", name, ID, email);
+    }
+}
     public double getGPA() {
         double GPA=0;
         HashSet<Course> courses= new HashSet<>();
