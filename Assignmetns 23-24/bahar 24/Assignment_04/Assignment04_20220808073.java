@@ -260,6 +260,61 @@ abstract class Person{
         return String.format("%s (%d) – %s", name, ID, email);
     }
 }
+
+class Teacher extends Person{
+    private int rank;
+
+    public Teacher(String name, String email, long ID, 
+                   Department department, int rank){
+        super(name, email, ID, department);
+        if(isRankValid(rank))
+            this.rank=rank;
+    }
+    public boolean isRankValid(int rank){
+        if(rank>0&&rank<=5)
+            return true;
+        else throw new InvalidRankException(rank);
+    }
+    public String getTitle() throws GeneralErrorException{
+             if(rank==1) return "Lecturer";
+        else if(rank==2) return "Adjunct Instructor";
+        else if(rank==3) return "Assistant Professor";
+        else if(rank==4) return "Associate Professor";
+        else             return "Professor";    
+    }
+    public void promote(){
+        if(rank>4)
+            throw new InvalidRankException(rank);
+        rank++;
+    }
+    public void demote(){
+        if(rank<2)
+            throw new InvalidRankException(rank);
+        rank--;
+    }
+    @Override
+public void setDepartment(Department department) {
+    if (department == null) {
+        super.setDepartment(department);
+    } else {
+        Department currentDepartment = getDepartment();
+        if (currentDepartment != null && currentDepartment.getChair() == this){
+            try {
+                currentDepartment.setChair(null);
+            } catch (GeneralErrorException e) {
+                System.out.println("Failed to set chair: " + e.getMessage());
+            }
+        }
+        super.setDepartment(department);
+    }
+}
+    @Override
+    public String toString(){
+        return String.format
+        ("%s %s", getTitle(), super.toString());
+    }
+}
+
     public double getGPA() {
         double GPA=0;
         HashSet<Course> courses= new HashSet<>();
