@@ -348,6 +348,7 @@ class Student extends Person{
                 AKTS+=course.getAKTS();
         }
         return AKTS;
+    }
     public double getGPA() {
         double GPA=0;
         HashSet<Course> courses= new HashSet<>();
@@ -368,6 +369,7 @@ class Student extends Person{
         }
         return false; 
     }
+    
     public void addCourse(Course course, Semester semester, double grade) throws InvalidGradeException{
         isGradeInvalid(grade);
         if(course==null||semester==null)
@@ -778,3 +780,4 @@ class GeneralErrorException extends RuntimeException{
         return "GeneralErrorException: " + message + getMessage();
     }
 }
+
