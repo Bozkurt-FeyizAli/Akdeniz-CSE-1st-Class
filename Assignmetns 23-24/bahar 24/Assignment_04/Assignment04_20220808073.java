@@ -70,6 +70,54 @@ class Department{
     public String getName() {
         return name;
     }
+    public boolean isCodeValid(String code) throws GeneralErrorException{
+        if((code.length()==3||code.length()==4))
+            return true;
+        throw new GeneralErrorException(" Department code is invalid vith value"+
+                          code.length()+" valid values are 3 nd; 4");
+    }
+}
+
+class Course implements Comparable<Course>{
+    private Department department;
+    private Teacher teacher;
+    private int courseNumber;
+    private String title;
+    private String description;
+    private int AKTS;
+    private double GPA;
+    
+    public boolean isDepartmentCodeVaild(String department) throws 
+                                             GeneralErrorException{
+        return (department.length()==3||department.length()==4);
+    }
+    public boolean isCourseNumberValid(int courseNumber){
+        if     (courseNumber>=100&& courseNumber<1000) return true ;
+        else if(courseNumber>=5000&&courseNumber<6000) return true ;
+        else if(courseNumber>=7000&&courseNumber<8000) return true ;
+        else 
+        throw new 
+        GeneralErrorException("Course , department code is invalid with value "+courseNumber+
+                             " valid values 100-999 , 5000-5999 , 7000-7999");
+    }
+    public boolean isAKTSValid(int AKTS) throws GeneralErrorException{
+        if (AKTS>0)
+            return true;
+        else throw new GeneralErrorException("Course AKTS is invalid with value "+AKTS+" it must be poisitive.");
+    }
+    Course(Department department,int courseNumber,
+           String title, String description, 
+           int AKTS, Teacher teacher){
+        this.department=department;
+        setCourseNumber(courseNumber);
+        setTitle(title);
+        setDescription(description);
+        setAKTS(AKTS);
+         if((teacher.getDepartment()!=department))
+            throw new DepartmentMismatchException(department, teacher);
+        else 
+            setTeacher(teacher);
+    }
     public double getGPA() {
         double GPA=0;
         HashSet<Course> courses= new HashSet<>();
