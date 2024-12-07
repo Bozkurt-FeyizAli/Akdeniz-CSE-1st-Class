@@ -159,6 +159,53 @@ class Course implements Comparable<Course>{
     public String getDescription(){
         return description;
     }
+    public void setDescription(String description){
+        this.description=description;
+    }
+    public int getAKTS(){
+        return AKTS;
+    }
+    public void setAKTS(int AKTS){
+        if(isAKTSValid(AKTS))
+            this.AKTS=AKTS;    
+    }
+    public String courseCode(){
+        return department.getCode()+Integer.toString(courseNumber);
+    }
+    @Override
+    public String toString(){
+        return String.format
+    ("%s%d - %s (%d)", department.getCode(), courseNumber, 
+                              title, AKTS);
+    }
+    @Override
+    public int compareTo(Course o) {
+        return courseCode().compareTo(o.courseCode());
+    }
+}
+
+abstract class Person{
+    private Department department;
+    private String name;
+    private String email;
+    private long ID;
+    // private String departmentCode;
+    public double grade;
+    
+    public boolean isDepartmentCodeVaild(String departmentCode) 
+                                   throws GeneralErrorException{
+        if(departmentCode==null)
+            throw new 
+            GeneralErrorException("Department code is invalid vith value"+
+        "null"+" valid values are 3 nd; 4");
+        if(departmentCode.length()==3||departmentCode.length()==4)
+            return true;
+        else 
+        throw new 
+        GeneralErrorException("Department code is invalid vith value"+
+        departmentCode.length()+" valid values are 3 nd; 4");
+    }
+    //  {username}@{university name}.{domain}
     public double getGPA() {
         double GPA=0;
         HashSet<Course> courses= new HashSet<>();
