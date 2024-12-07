@@ -119,6 +119,47 @@ class Course implements Comparable<Course>{
             setTeacher(teacher);
     }
     public double getGPA() {
+        return GPA;
+    }
+    public void setGPA(double GPA) {
+        this.GPA = GPA;
+    }
+    public Teacher getTeacher() {
+        return teacher;
+    }
+    public Department getDepartment() {
+        return department;
+    }
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+    public void setTeacher(Teacher teacher){
+        if(teacher.getDepartment()==department)
+            this.teacher = teacher;
+        else    
+        throw new DepartmentMismatchException(department, teacher);          
+    }
+    public void setDepartmentCode(String departmentCode){
+        if(isDepartmentCodeVaild(departmentCode))
+            setDepartmentCode(departmentCode);
+    } 
+    public int getCourseNumber(){
+        return courseNumber;
+    }
+    public void setCourseNumber(int courseNumber){
+        if(isCourseNumberValid(courseNumber))
+            this.courseNumber=courseNumber;
+    }
+    public String getTitle(){
+        return title;
+    }
+    public void setTitle(String title){
+        this.title=title;
+    }
+    public String getDescription(){
+        return description;
+    }
+    public double getGPA() {
         double GPA=0;
         HashSet<Course> courses= new HashSet<>();
         for (var sCG : studentCourses.entrySet()) {
