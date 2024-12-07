@@ -315,6 +315,39 @@ public void setDepartment(Department department) {
     }
 }
 
+class Student extends Person{
+    private TreeMap<Semester ,TreeMap<Course, Double>> studentCourses;
+    
+    public Student(String name, String email, long ID, Department department){
+        super(name, email, ID, department);
+        studentCourses= new TreeMap<>();
+    }
+    public int getAKTS(){
+        int passedAKTS=0;
+        HashSet<Course> courses= new HashSet<>();
+        for (var sCG : studentCourses.entrySet()) {
+            for (var cG : sCG.getValue().entrySet()) {
+                courses.add(cG.getKey());
+            }
+        } 
+        for (Course course : courses) {
+            if(courseGradeLetter(course).equals("Passed"))
+                passedAKTS+=course.getAKTS();
+        }
+        return passedAKTS;
+    }
+    public int getAttemptedAKTS(){
+        int AKTS=0;
+        HashSet<Course> courses= new HashSet<>();
+        for (var sCG : studentCourses.entrySet()) {
+            for (var cG : sCG.getValue().entrySet()) {
+                courses.add(cG.getKey());
+            }
+        } 
+        for (Course course : courses) {
+                AKTS+=course.getAKTS();
+        }
+        return AKTS;
     public double getGPA() {
         double GPA=0;
         HashSet<Course> courses= new HashSet<>();
