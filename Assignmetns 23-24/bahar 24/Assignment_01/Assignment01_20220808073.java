@@ -234,3 +234,75 @@ class Teacher extends Person{
     }
 }
 //      CLASS 4
+class Student extends Person{
+    private int AKTS;
+    // Course fab=new Course("d", 541, "2", "itle,a", AKTS);
+    public Student(String name, String email, Long number, String department){
+        super(name, email, number, department);
+        this.AKTS=0;
+    }
+    public boolean isAKTSValid(int AKTS){
+        return AKTS>0;
+    }
+    public int getAKTS(){
+        return AKTS;
+    }
+    public void setAKTS(int AKTS){
+        if(isAKTSValid(AKTS))
+            this.AKTS=AKTS;
+        else{
+            System.out.println("ERROR");
+            Error.runTimeError();
+            // runtimeError();
+        }
+    }
+    public void passCourse(Course course){
+        AKTS+=course.getAKTS();
+    }
+    @Override
+    public String toString(){
+        return super.toString();
+    }
+}
+//      CLASS 5
+class GradStudent extends Student{
+    private int rank;
+    private String thesisTopic;
+    GradStudent(String name, String email, Long number, String department, 
+                int rank, String thesisTopic){
+        super(name, email, number, department);
+        setRank(rank);
+        setThesisTopic(thesisTopic);
+
+    }
+    public void setRank(int rank){
+        if(rank>0&&rank<4)
+            this.rank=rank;
+        else {
+            System.out.println("ERROR");
+            Error.runTimeError();
+        }
+    }
+    public String getLevel(){
+        if     (rank==1)
+        // check that later
+            return "Master’s Student ";
+        else if(rank==2)
+            return "Doctoral Student";
+        else if(rank==3)
+            return "Doctoral Candidate";
+        else 
+            return "ERROR";
+    }
+    public String getThesisTopic(){
+        return thesisTopic;
+    }
+    public void setThesisTopic(String thesisTopic){
+        this.thesisTopic=thesisTopic;
+    }
+    @Override
+    public String toString(){
+        return super.toString();
+    }
+}
+
