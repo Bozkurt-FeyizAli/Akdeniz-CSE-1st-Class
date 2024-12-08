@@ -203,3 +203,75 @@ class Course{
     }
 }
 
+abstract class Person{
+    private Department department;
+    private String name;
+    private String email;
+    private Long ID;
+    private String departmentCode;
+    public double grade;
+    
+    public boolean isDepartmentCodeVaild(String departmentCode) 
+                                   throws GeneralErrorException{
+        if(departmentCode==null)
+            throw new 
+            GeneralErrorException("departmentCode is null.");
+        if(departmentCode.length()==3||departmentCode.length()==4)
+            return true;
+        else 
+        throw new 
+        GeneralErrorException("department code is invalid.");
+    }
+    //  {username}@{university name}.{domain}
+    public boolean isEmailValid(String email) throws GeneralErrorException{
+        if     (!email.contains("@"))
+            throw new GeneralErrorException("email is invalid.");
+        else if(!email.contains("."))
+            throw new GeneralErrorException("email is invalid.");
+        else if((email.indexOf("@", 2)-email.indexOf(".",
+                 email.indexOf("@")))>-2)
+            throw new GeneralErrorException("email is invalid.");
+        else 
+            return true;
+    }
+
+    public Person (String name, String email, long ID, Department department){
+        setName(name);
+        setEmail(email);
+        setDepartment(department);
+        setID(ID);
+    }
+    public Department getDepartment() {
+        return department;
+    }
+    public String getName(){
+        return name;
+    }
+    public void setName(String name){
+        this.name=name;
+    }
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+    public String getEmail(){
+        return email;
+    }
+    public void setEmail(String email){
+        if(isEmailValid(email))
+            this.email=email;
+    }
+    public long getID(){
+        return ID;
+    }
+    public void setID(long ID){
+        this.ID=ID;
+    }
+    public String getDepartmentCode(){
+        return departmentCode;
+    }
+    @Override
+    public String toString(){
+        return String.format("%s (%d) - %s", name, ID, email);
+    }
+}
+
