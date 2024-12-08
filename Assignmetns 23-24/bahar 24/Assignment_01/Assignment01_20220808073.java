@@ -306,3 +306,8 @@ class GradStudent extends Student{
     }
 }
 
+class Error{
+    public static void runTimeError(){
+       System.out.println(0/0);
+    }
+}
