@@ -81,3 +81,125 @@ class Department{
     }
 }
 
+class Course{
+    private Department department;
+    private Teacher teacher;
+    private int courseNumber;
+    private String title;
+    private String description;
+    private int AKTS;
+    private double grade;
+    private String gradeLetter;
+    private double GPA;
+    private String gradeResult;
+    
+    public boolean isDepartmentCodeVaild(String department) throws 
+                                             GeneralErrorException{
+        return (department.length()==3||department.length()==4);
+    }
+    public boolean isCourseNumberValid(int courseNumber){
+        if     (courseNumber>=100&& courseNumber<1000) return true ;
+        else if(courseNumber>=5000&&courseNumber<6000) return true ;
+        else if(courseNumber>=7000&&courseNumber<8000) return true ;
+        else 
+        throw new 
+        GeneralErrorException("department code is invalid");
+    }
+    public boolean isAKTSValid(int AKTS) throws GeneralErrorException{
+        if (AKTS>0)
+            return true;
+        else throw new GeneralErrorException("AKTS is invalid.");
+    }
+    Course(Department department,int courseNumber,
+           String title, String description, 
+           int AKTS, Teacher teacher){
+        setDepartment(department);
+        setCourseNumber(courseNumber);
+        setTitle(title);
+        setDescription(description);
+        setAKTS(AKTS);
+        if((teacher.getDepartment()!=department))
+            throw new DepartmentMismatchException(department, teacher);
+        else 
+            setTeacher(teacher);
+    }
+    public double getGPA() {
+        return GPA;
+    }
+    public String getGradeResult() {
+        return gradeResult;
+    }
+    public void setGPA(double GPA) {
+        this.GPA = GPA;
+    }
+    public void setGradeResult(String gradeResult) {
+        this.gradeResult = gradeResult;
+    }
+    public String getGradeLetter() {
+        return gradeLetter;
+    }
+    public void setGradeLetter(String gradeLetter) {
+        this.gradeLetter = gradeLetter;
+    }
+    public double getGrade() {
+        return grade;
+    }
+    public void setGrade(double grade) {
+        this.grade = grade;
+    }
+    public Teacher getTeacher() {
+        return teacher;
+    }
+    public Department getDepartment() {
+        return department;
+    }
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+    public void setTeacher(Teacher teacher){
+        if(teacher.getDepartment()==department)
+            this.teacher = teacher;
+        else    
+        throw new DepartmentMismatchException(department, teacher);          
+    }
+    public void setDepartmentCode(String departmentCode){
+        if(isDepartmentCodeVaild(departmentCode))
+            setDepartmentCode(departmentCode);
+    } 
+    public int getCourseNumber(){
+        return courseNumber;
+    }
+    public void setCourseNumber(int courseNumber){
+        if(isCourseNumberValid(courseNumber))
+            this.courseNumber=courseNumber;
+    }
+    public String getTitle(){
+        return title;
+    }
+    public void setTitle(String title){
+        this.title=title;
+    }
+    public String getDescription(){
+        return description;
+    }
+    public void setDescription(String description){
+        this.description=description;
+    }
+    public int getAKTS(){
+        return AKTS;
+    }
+    public void setAKTS(int AKTS){
+        if(isAKTSValid(AKTS))
+            this.AKTS=AKTS;    
+    }
+    public String courseCode(){
+        return department.getCode()+Integer.toString(courseNumber);
+    }
+    @Override
+    public String toString(){
+        return String.format
+    ("%s%d - %s (%d)", department.getCode(), courseNumber, 
+                              title, AKTS);
+    }
+}
+
