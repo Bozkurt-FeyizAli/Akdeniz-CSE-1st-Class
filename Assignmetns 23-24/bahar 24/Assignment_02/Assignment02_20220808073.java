@@ -377,3 +377,51 @@ class Student extends Person{
         }
         return false; 
     }
+    public void calculateAKTS(){
+        int passedAKTS=0;
+        int calculateAKTS=0;
+        for (int i = 0; i < courses.size(); i++){
+            calculateAKTS+=courses.get(i).getAKTS();
+            if(courses.get(i).getGrade()>59.5)
+                passedAKTS+=courses.get(i).getAKTS();}
+        this.passedAKTS=passedAKTS;        
+        this.AKTS=calculateAKTS;
+    }
+    public void removeCourse(Course course){
+        courses.remove(course);
+    }
+    public void addCourse(Course course, double grade)
+                        throws CourseNotFoundException{
+        //////////////* */
+        isGradeInvalid(grade);
+        if(!isCourseTaken(course)){
+        course.setGrade(grade);
+        addCourses(course);
+        course.setGradeLetter(courseGradeLetter(course)); 
+        calculateAKTS(); 
+        calculateGPA();  
+        }
+        else {
+            throw new CourseNotFoundException(course, this);
+        }
+    }
+    public ArrayList<Course> getCourses() {
+        return courses;
+    }
+    public void calculateGPA(){
+        int totalAKTS=0;
+        double calculateGPA=0;
+        for (int index = 0; index < courses.size(); index++) {
+            // System.out.println(courses.get(index).getGrade());
+            calculateGPA+=(courses.get(index).getAKTS()*
+                           courseGPAPoints(courses.get(index)));
+            totalAKTS+=courses.get(index).getAKTS();
+        }
+        calculateGPA=calculateGPA/totalAKTS;
+        calculateGPA=virgüldenSonra2Basamak(calculateGPA);
+        this.GPA=calculateGPA;
+    }
+    public void isGradeInvalid(double grade) throws InvalidGradeException{
+        if(grade>100&&grade<0)
+            throw new InvalidGradeException(grade);   
+    }
