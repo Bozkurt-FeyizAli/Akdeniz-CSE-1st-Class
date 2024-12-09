@@ -275,3 +275,56 @@ abstract class Person{
     }
 }
 
+class Teacher extends Person{
+    private int rank;
+
+    public Teacher(String name, String email, long ID, 
+                   Department department, int rank){
+        super(name, email, ID, department);
+        if(isRankValid(rank))
+            this.rank=rank;
+    }
+    public boolean isRankValid(int rank){
+        if(rank>0&&rank<=5)
+            return true;
+        else throw new GeneralErrorException("rank is invalid." );
+    }
+    public int getRank() {
+        return rank;
+    }
+    public String getTitle() throws GeneralErrorException{
+             if(rank==1) return "Teaching  Assistant";
+        else if(rank==2) return "Lecturer"           ;
+        else if(rank==3) return "Assistant Professor";
+        else if(rank==4) return "Associate Professor";
+        else if(rank==5) return "Professor"          ;    
+        else throw new  GeneralErrorException("rank is invalid")             ;
+    }
+    public void promote(){
+        if(rank<0&&rank>3)
+            throw new 
+            GeneralErrorException("GeneralErrorException: ..."); 
+        rank++;
+    }
+    public void demote(){
+        if(rank<1&&rank>4)
+            throw new 
+            GeneralErrorException("GeneralErrorException: ...");
+        rank--;
+    }
+    @Override
+public void setDepartment(Department department) {
+    if (department == null) {
+        throw new GeneralErrorException("Department is null");
+    } else {
+        Department currentDepartment = getDepartment();
+        if (currentDepartment != null && currentDepartment.getChair() == this){
+            try {
+                currentDepartment.setChair(null);
+            } catch (GeneralErrorException e) {
+                System.out.println("Failed to set chair: " + e.getMessage());
+            }
+        }
+        super.setDepartment(department);
+    }
+}
