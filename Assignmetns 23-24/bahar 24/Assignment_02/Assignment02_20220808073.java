@@ -474,3 +474,60 @@ class Student extends Person{
     }
 }
 
+class GradStudent extends Student{
+    private int rank;
+    private String thesisTopic;
+    GradStudent(String name, String email, Long number, Department department,
+                int rank, String thesisTopic) throws InvalidRankException{
+        super(name, email, number, department);
+        setRank(rank);
+        setThesisTopic(thesisTopic);
+    }
+    public void setRank(int rank) throws InvalidRankException{
+        if(rank>0&&rank<4)
+            this.rank=rank;
+        else 
+            throw new InvalidRankException(rank);
+    }
+    public void passedAKTS(Course course){
+            if(course.getGrade()>69.5)
+        super.setPassedAKTS(course.getAKTS());
+    }
+    @Override
+    public void addCourse(Course course, double grade) 
+                        throws CourseNotFoundException{  
+        isGradeInvalid(grade);
+        if(!isCourseTaken(course)){
+            course.setGrade(grade); 
+            course.setGradeLetter(courseGradeLetter(course));
+            course.setGradeResult(courseResult(course));
+            course.setGPA(courseGPAPoints(course)); 
+            super.addCourses(course);
+            this.calculateAKTS(); 
+            this.calculateGPA(); 
+        }
+        else
+            throw new CourseNotFoundException(course, this); 
+    }
+    @Override
+    public void calculateGPA(){ 
+        double calculateGPA=0;
+        for (int index = 0; index < getCourses().size(); index++) {
+            Course c= getCourses().get(index);
+            calculateGPA+=c.getAKTS()*courseGPAPoints(c);
+        }
+        calculateGPA=virgüldenSonra2Basamak(calculateGPA/getAKTS());
+        setGPA(calculateGPA);
+    }
+    @Override
+    public double courseGPAPoints(Course course){
+        /////////
+        isGradeInvalid(grade);
+        double result=course.getGrade();
+             if (result>89.5) return 4.0;
+        else if (result>84.5) return 3.5;    
+        else if (result>79.5) return 3.0;
+        else if (result>74.5) return 2.5; 
+        else if (result>69.5) return 2.0;    
+        else                  return 0.0;
+    }
