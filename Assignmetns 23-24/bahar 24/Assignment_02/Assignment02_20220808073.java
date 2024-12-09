@@ -642,3 +642,29 @@ class DepartmentMismatchException extends RuntimeException{
     }
 }
 
+class GeneralErrorException extends RuntimeException{
+    Student student;
+    Course course ;
+    Teacher teacher;
+    Person person ;
+    GradStudent gradStudent;
+    Department department;
+    String message;
+    GeneralErrorException(String message){
+        this.message=message;
+    }
+    GeneralErrorException(Object o){
+             if(o instanceof Student    ) this.student    =(Student    )o;
+        else if(o instanceof Course     ) this.course     =(Course     )o;
+        else if(o instanceof Teacher    ) this.teacher    =(Teacher    )o;
+        else if(o instanceof Person     ) this.person     =(Person     )o;
+        else if(o instanceof GradStudent) this.gradStudent=(GradStudent)o;
+        else if(o instanceof Department ) this.department =(Department )o;
+    }
+    
+    @Override
+    public String toString(){
+        return "GeneralErrorException: " + message + getMessage();
+    }
+}
+
