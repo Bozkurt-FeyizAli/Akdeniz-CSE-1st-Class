@@ -328,3 +328,52 @@ public void setDepartment(Department department) {
         super.setDepartment(department);
     }
 }
+    @Override
+    public String toString(){
+        return String.format
+        ("%s + %s", getTitle(), super.toString());
+    }
+}
+
+class Student extends Person{
+    private double GPA;
+    private int AKTS;
+    private int passedAKTS;
+    private ArrayList<Course> courses;
+    
+
+    public Student(String name, String email, long ID, Department department){
+        super(name, email, ID, department);
+        courses=new ArrayList<>();
+    }
+    public double virgüldenSonra2Basamak(double number){
+        return ((double)((int)(number*100)))/100;
+    }
+    public boolean isAKTSValid(int AKTS){
+        return AKTS>0;
+    }
+    public void addCourses(Course courses) {
+        this.courses.add(courses);
+    }
+    public int getAKTS(){
+        calculateAKTS(); 
+        return passedAKTS;
+    }
+    public int getAttemptedAKTS(){
+        calculateAKTS();
+        return AKTS;
+    }
+    public double getGPA() {
+        calculateGPA();  
+        return GPA;
+    }
+    public void setGPA(double GPA) {
+        this.GPA = GPA;
+    }
+    public boolean isCourseTaken(Course course){
+        for (int i = 0; i < courses.size(); i++) {
+            if(courses.get(i) == course) 
+                return true;  
+        }
+        return false; 
+    }
