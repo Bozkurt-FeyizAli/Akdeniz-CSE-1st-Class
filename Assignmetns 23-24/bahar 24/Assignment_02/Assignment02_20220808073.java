@@ -425,3 +425,52 @@ class Student extends Person{
         if(grade>100&&grade<0)
             throw new InvalidGradeException(grade);   
     }
+    public double courseGPAPoints(Course course) {
+        isGradeInvalid(course.getGrade());
+        if(!isCourseTaken(course))
+            throw new CourseNotFoundException(course, this);    
+        double result=course.getGrade();
+                 if (result>87.5) return 4.0;
+            else if (result>80.5) return 3.5;    
+            else if (result>73.5) return 3.0;
+            else if (result>66.5) return 2.5; 
+            else if (result>59.5) return 2.0;     
+            else if (result>52.5) return 1.5;          
+            else if (result>45.5) return 1.0;
+            else if (result>34.5) return 0.5;    
+            else                  return 0.0;  
+        }
+    public String courseGradeLetter(Course course) {
+        isGradeInvalid(course.getGrade());
+        if(!isCourseTaken(course))
+            throw new CourseNotFoundException(course, this);    
+        double result =course.getGrade();
+             if (result>87.5) return "AA";
+        else if (result>80.5) return "BA";    
+        else if (result>73.5) return "BB";
+        else if (result>66.5) return "CB"; 
+        else if (result>59.5) return "CC";     
+        else if (result>52.5) return "DC";          
+        else if (result>45.5) return "DD";
+        else if (result>34.5) return "FD";    
+        else                  return "FF";
+    }
+    public String courseResult(Course course) {
+        isGradeInvalid(grade);
+        if(!isCourseTaken(course))
+            throw new CourseNotFoundException(course, this); 
+             if (course.getGrade()>=59.5) return               "Passed";              
+        else if (course.getGrade()>=45.5) return "Conditionally Passed";  
+        else                              return               "Failed";
+    }
+    @Override
+    public String toString() throws GeneralErrorException{
+        calculateGPA();  
+        if(GPA<=4.00&&GPA>=0.00){
+        // calculateGrade();
+        return  super.toString() + " – GPA: " + getGPA(); 
+        }
+        else throw new GeneralErrorException("GPA is invalid");
+    }
+}
+
