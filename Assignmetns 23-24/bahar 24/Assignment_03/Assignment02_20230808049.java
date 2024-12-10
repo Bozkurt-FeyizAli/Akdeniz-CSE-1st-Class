@@ -40,3 +40,79 @@ public class Assignment02_20230808049{
     }
 }
 
+class Course{
+    private Department department;
+    private Teacher teacher;
+    private double grade;
+    //private String departmentCode;//must be 3 or 4 characters
+    private int courseNumber;//must be 100-999 or 5000-5999 or 7000-7999
+    private String title;
+    private String description;
+    private int AKTS;//must be positive
+    Course(Department department,int courseNumber,
+    String title,String description,int AKTS,Teacher teacher) throws DepartmentMismatchException{
+        if(department!=teacher.getDepartment()){
+            throw new DepartmentMismatchException(this, teacher);
+        }else{
+        setAKTS(AKTS);
+        setCourseNumber(courseNumber);
+        this.department=department;
+        this.teacher=teacher;
+        //setDepartmentCode(departmentCode);
+        setDescription(description);
+        setTitle(title);
+        }
+    }
+
+    public void setGrade(double grade) {
+        this.grade = grade;
+    }
+
+    public double getGrade() {
+        return grade;
+    }
+
+    public int getAKTS() {
+        return AKTS;
+    }
+
+    public int getCourseNumber() {
+        return courseNumber;
+    }
+    
+    public Department getDepartment() {
+        return department;
+    }
+
+    public Teacher getTeacher() {
+        return teacher;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+    public void setTeacher(Teacher teacher)throws DepartmentMismatchException {
+        if(department!=teacher.getDepartment()){
+            throw new DepartmentMismatchException(this, teacher);
+        }else{
+            this.teacher=teacher;
+        }
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setAKTS(int AKTS) {
+        if(AKTS>0){
+        this.AKTS = AKTS;
+        }else{
+            throw new myException();
+        }
+    }
+
