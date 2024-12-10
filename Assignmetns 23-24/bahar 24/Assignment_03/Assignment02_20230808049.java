@@ -278,3 +278,55 @@ class Teacher extends Person{
         }
     }
 
+    public String getTitle(){
+        switch (rank) {
+            case 1:return "Teaching Assistant";
+                
+            case 2:return "Lecturer";
+
+            case 3:return "Assistant Professor";
+
+            case 4:return "Associate Professor";
+
+            case 5: return "Professor";
+            default: return "professor";
+        }
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s "+super.toString(),getTitle());
+    }
+}
+
+class Student extends Person{
+    private int AKTS;
+    private int passedAKTS;
+    private ArrayList<Course> courses;
+    Student(String name,String email,long number,Department department){
+        super(name, email, number, department);
+        AKTS=0;
+        courses=new ArrayList<>(); 
+    }
+
+    public void setPassedAKTS(Course course){
+        if(course.getGrade()>=60){
+        passedAKTS+=course.getAKTS();
+        }
+    }
+
+    public void addCourse(Course course,double grade)throws InvalidGradeException{
+        if(grade>=0&&grade<=100){
+            if(doesExists(courses, course)){
+                courses.get(indexExists(courses, course)).setGrade(grade);
+            }else{
+                courses.add(course);
+                courses.get(indexExists(courses, course)).setGrade(grade);
+                AKTS+=course.getAKTS();
+                setPassedAKTS(course);
+            }
+        }else{
+            throw new InvalidGradeException(grade);
+        }
+    }
+
