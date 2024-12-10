@@ -657,3 +657,35 @@ class InvalidRankException extends RuntimeException{
     }
 }
 
+class DepartmentMismatchException extends RuntimeException{
+    Department department;
+    Teacher person;
+    Course course;
+    Teacher chair;
+    DepartmentMismatchException(Course course,Teacher person){
+        this.department=null;
+        this.person=person;
+        this.course=course;
+    }
+    DepartmentMismatchException(Department department, Teacher person) throws myException{
+        this.course=null;
+        this.department=department;
+        this.person=person;
+    }
+
+    @Override
+    public String toString(){
+        if(course==null)
+            return "DepartmentMismatchException: " + person.getName() +
+            "(" + person.getID() + ") cannot be chair of " +  
+            department.getCode() + " because he/she is currently assigned to "
+            + person.getDepartment().getCode() ;
+        else if(course!=null)
+            return "DepartmentMismatchException: " + 
+            person.getName() + "(" + person.getID() + 
+            ") cannot teach " + course.getDepartment().getCode() +
+            " because he/she is currently assigned to "+
+            person.getDepartment().getCode();
+        else throw new myException();
+    }
+}
