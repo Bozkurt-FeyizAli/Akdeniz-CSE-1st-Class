@@ -412,3 +412,58 @@ class Student extends Person{
         }
     }
 
+    public String courseResult(Course course)throws CourseNotFoundException{
+        if(!doesExists(courses, course)){
+            throw new CourseNotFoundException(course,this);
+        }else{
+        if(course.getGrade()>=88)
+        return "Passed";
+        else if(course.getGrade()<88&&course.getGrade()>=81)
+        return "Passed";
+        else if(course.getGrade()<81&&course.getGrade()>=74)
+        return "Passed";
+        else if(course.getGrade()<74&&course.getGrade()>=67)
+        return "Passed";
+        else if(course.getGrade()<67&&course.getGrade()>=60)
+        return "Passed";
+        else if(course.getGrade()<60&&course.getGrade()>=53)
+        return "Conditionally Passed";
+        else if(course.getGrade()<53&&course.getGrade()>=46)
+        return "Conditionally Passed";
+        else if(course.getGrade()<46&&course.getGrade()>=35)
+        return "Failed";
+        else
+        return "Failed";
+        }
+    }
+
+    public double getGPA(){
+        double getGPA=0;
+        for (int i = 0; i < courses.size(); i++) {
+            if(courseGPAPoints(courses.get(i))>45)
+            getGPA+=courseGPAPoints(courses.get(i))*courses.get(i).getAKTS();
+        }
+        return getGPA/passedAKTS;
+        //feyize nasıl hesapladındiye sor
+    }
+
+    // public void passCourse(Course course){
+    //     AKTS+=course.getAKTS();
+    // }
+
+    @Override
+    public String toString() {
+        return super.toString()+"-GPA: "+this.getGPA();
+    }
+}
+
+class GradStudent extends Student{
+    private int rank;
+    private String thesisTopic;
+    GradStudent(String name,String email,long number,
+    Department department,int rank,String thesisTopic){
+        super(name, email, number, department);
+        this.rank=rank;
+        this.thesisTopic=thesisTopic;
+    }
+
