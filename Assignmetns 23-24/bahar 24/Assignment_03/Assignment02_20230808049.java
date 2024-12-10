@@ -553,3 +553,67 @@ class GradStudent extends Student{
         }
     }
 
+    @Override//bunu da düzenle
+    public String toString() {
+        return super.toString();
+    }
+}
+
+class myException extends RuntimeException{
+    @Override
+    public String toString(){
+        return "myException : "+ getMessage();
+    }
+}
+
+class Department{
+    private String code;//must be 3 or 4 characters
+    private String name;
+    private Teacher chair;
+
+    Department(String code,String name){
+        this.name=name;
+        setCode(code);
+    }
+
+    public Teacher getChair() {
+        // Return the chair if it belongs to this department
+        if (chair != null && chair.getDepartment() == this) {
+            return chair;
+        } else {
+            return null; // Return null if the chair does not belong to this department
+        }
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setChair(Teacher chair) throws DepartmentMismatchException{
+        if (chair == null) {
+            this.chair = null; 
+        } else {
+            if (chair.getDepartment() != this) {
+                throw new DepartmentMismatchException(this, chair);
+            }
+            this.chair = chair;
+        }
+    }
+
+    public void setCode(String code) {
+        if(code.length()==3||code.length()==4){
+        this.code = code;
+        }else{
+            throw new myException();
+        }
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+}
+
