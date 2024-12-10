@@ -116,3 +116,45 @@ class Course{
         }
     }
 
+    public void setCourseNumber(int courseNumber) {
+        if((courseNumber>=100&&courseNumber<=999)||
+        (courseNumber>=5000&&courseNumber<=5999)||
+        (courseNumber>=7000&&courseNumber<=7999)){
+        this.courseNumber = courseNumber;
+        }else{
+            throw new myException();
+        }
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String courseCode(){
+        return String.format("%s%d-%s(%d)",department.getCode(),courseNumber,title,AKTS);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s%d - %s (%d)",
+        department.getCode(),courseNumber,title,AKTS);
+    }
+}
+
+abstract class Person{
+    private String name;
+    private String email;
+    private long ID;
+    private Department department;
+    Person(String name,String email,long ID,Department department){
+        this.department=department;
+        //setDepartmentCode(departmentCode);
+        setEmail(email);
+        setID(ID);
+        setName(name);
+    }
+
