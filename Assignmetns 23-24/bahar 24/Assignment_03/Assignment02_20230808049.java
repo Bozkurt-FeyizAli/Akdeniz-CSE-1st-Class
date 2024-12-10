@@ -330,3 +330,85 @@ class Student extends Person{
         }
     }
 
+    public int getAttemptedAKTS(){
+        return AKTS;
+    }
+
+    public int getAKTS() {
+        return passedAKTS;
+    }
+
+    public boolean doesExists(ArrayList<Course> courses,Course course){
+        for(int i=0;i<courses.size();i++){
+            if(courses.get(i).getCourseNumber()==course.getCourseNumber()){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public int indexExists(ArrayList<Course> courses,Course course){
+        for(int i=0;i<courses.size();i++){
+            if(courses.get(i).getCourseNumber()==course.getCourseNumber()){
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
+    public ArrayList<Course> getCourses() {
+        return courses;
+    }
+
+    // sonra alınan ders yoksa meselesini düzelt!!!
+    public double courseGPAPoints(Course course)throws CourseNotFoundException{
+        if(!doesExists(courses, course)){
+            throw new CourseNotFoundException(course,this);
+        }else{
+        if(course.getGrade()>=88)
+        return 4.0;
+        else if(course.getGrade()<88&&course.getGrade()>=81)
+        return 3.5;
+        else if(course.getGrade()<81&&course.getGrade()>=74)
+        return 3.0;
+        else if(course.getGrade()<74&&course.getGrade()>=67)
+        return 2.5;
+        else if(course.getGrade()<67&&course.getGrade()>=60)
+        return 2.0;
+        else if(course.getGrade()<60&&course.getGrade()>=53)
+        return 1.5;
+        else if(course.getGrade()<53&&course.getGrade()>=46)
+        return 1.0;
+        else if(course.getGrade()<46&&course.getGrade()>=35)
+        return 0.5;
+        else
+        return 0.0;
+        }
+    }
+
+    public String courseGradeLetter(Course course)throws CourseNotFoundException{
+        if(!doesExists(courses, course)){
+            throw new CourseNotFoundException(course,this);
+        }else{
+        if(course.getGrade()>=88)
+        return "AA";
+        else if(course.getGrade()<88&&course.getGrade()>=81)
+        return "BA";
+        else if(course.getGrade()<81&&course.getGrade()>=74)
+        return "BB";
+        else if(course.getGrade()<74&&course.getGrade()>=67)
+        return "CB";
+        else if(course.getGrade()<67&&course.getGrade()>=60)
+        return "CC";
+        else if(course.getGrade()<60&&course.getGrade()>=53)
+        return "DC";
+        else if(course.getGrade()<53&&course.getGrade()>=46)
+        return "DD";
+        else if(course.getGrade()<46&&course.getGrade()>=35)
+        return "FD";
+        else
+        return "FF";
+        }
+    }
+
