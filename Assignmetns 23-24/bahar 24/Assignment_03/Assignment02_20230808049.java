@@ -158,3 +158,66 @@ abstract class Person{
         setName(name);
     }
 
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+    
+    public void setID(long iD) {
+        ID = iD;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public long getID() {
+        return ID;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setEmail(String email) {
+        if(email.contains("@")&&email.contains(".")){
+
+            int i =email.indexOf("@");
+
+            String sub1=email.substring(0, i);
+
+            if(sub1.equals(email)){
+                throw new myException();
+            }else{
+
+            if(sub1.equals("@")){
+                throw new myException();
+            }else{
+
+            String sub2=email.substring(i+1);
+
+            if(sub2.contains(".")){
+
+                if(sub2.contains("@")){
+
+                throw new myException();
+                
+                }else{
+                    this.email=email;
+                }
+            }else{
+                throw new myException();
+             } }
+            }
+        }else{
+            throw new myException();
+        }
+    }
+
