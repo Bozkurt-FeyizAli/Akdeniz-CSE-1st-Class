@@ -467,3 +467,89 @@ class GradStudent extends Student{
         this.thesisTopic=thesisTopic;
     }
 
+    public void setRank(int rank)throws InvalidRankException {
+        if(rank>=1&&rank<=3){
+            this.rank=rank;
+        }else{
+            throw new myException();
+        }
+    }
+
+    public String getLevel(){
+        if(rank==1){
+            return "Master's Student";
+        }else if(rank==2){
+            return "Doctoral Student";
+        }else{
+            return "Doctoral Candidate";
+        }
+    }
+
+    public String getThesisTopic() {
+        return thesisTopic;
+    }
+
+    public void setThesisTopic(String thesisTopic) {
+        this.thesisTopic = thesisTopic;
+    }
+
+    @Override
+    public double courseGPAPoints(Course course) throws CourseNotFoundException {
+        if(!doesExists(getCourses(), course)){
+            throw new CourseNotFoundException(course,this);
+        }else{
+        if(course.getGrade()>=90)
+        return 4.0;
+        else if(course.getGrade()<90&&course.getGrade()>=85)
+        return 3.5;
+        else if(course.getGrade()<85&&course.getGrade()>=80)
+        return 3.0;
+        else if(course.getGrade()<80&&course.getGrade()>=75)
+        return 2.5;
+        else if(course.getGrade()<75&&course.getGrade()>=70)
+        return 2.0;
+        else 
+        return 0.0;
+        }
+    }
+
+    @Override
+    public String courseGradeLetter(Course course) throws CourseNotFoundException {
+        if(!doesExists(getCourses(), course)){
+            throw new CourseNotFoundException(course,this);
+        }else{
+        if(course.getGrade()>=90)
+        return "AA";
+        else if(course.getGrade()<90&&course.getGrade()>=85)
+        return "BA";
+        else if(course.getGrade()<85&&course.getGrade()>=80)
+        return "BB";
+        else if(course.getGrade()<80&&course.getGrade()>=75)
+        return "CB";
+        else if(course.getGrade()<75&&course.getGrade()>=70)
+        return "CC";
+        else 
+        return "FF";
+        }   
+    }
+
+    @Override
+    public String courseResult(Course course) throws CourseNotFoundException {
+        if(!doesExists(getCourses(), course)){
+            throw new CourseNotFoundException(course,this);
+        }else{
+        if(course.getGrade()>=90)
+        return "Passed";
+        else if(course.getGrade()<90&&course.getGrade()>=85)
+        return "Passed";
+        else if(course.getGrade()<85&&course.getGrade()>=80)
+        return "Passed";
+        else if(course.getGrade()<80&&course.getGrade()>=75)
+        return "Passed";
+        else if(course.getGrade()<75&&course.getGrade()>=70)
+        return "Passed";
+        else 
+        return "Failed";
+        }
+    }
+
