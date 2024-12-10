@@ -221,3 +221,60 @@ abstract class Person{
         }
     }
 
+    @Override
+    public String toString() {
+        return String.format("%s (%d) - %s",name,ID,email );
+    }
+}
+
+class Teacher extends Person{
+    private int rank;
+    /*if the teacher has a department first make the current chair 
+     * null then assign the teacher to new department
+     */
+
+    Teacher(String name,String email,long number,Department department,int rank)throws myException{
+        super(name, email, number, department);
+        if(rank>5||rank<1){
+            throw new InvalidRankException(rank);
+        }
+        this.rank=rank;
+    }
+
+    @Override
+    public void setDepartment(Department department) throws myException{
+        if (department == null) {
+            throw new myException();
+        } else {
+            Department currentDepartment = getDepartment();
+            if (currentDepartment != null && currentDepartment.getChair() == this) {
+                try {
+                    currentDepartment.setChair(null);
+                } catch (MatchException e) {
+                    System.out.println("Failed to set chair: " + e.getMessage());
+                }
+            }
+            super.setDepartment(department);
+        }
+    }
+
+    public int getRank() {
+        return rank;
+    }
+
+    public void promote()throws InvalidRankException{//?
+        if(rank>=1&&rank<5){
+            rank++;
+        }else{
+            throw new InvalidRankException(rank);
+        }
+    }
+
+    public void demote()throws InvalidRankException{//?
+        if(rank>1&&rank<=5){
+            rank--;
+        }else{
+            throw new InvalidRankException(rank);
+        }
+    }
+
