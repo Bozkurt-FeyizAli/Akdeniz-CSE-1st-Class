@@ -156,3 +156,69 @@ public class Assignment03Tests_20220808073 {
         }
         assert(false);
     }
+    @Test
+    public void tc027_Course_constructor_3(){
+        try {
+            Department d= new Department("alii", "alii");
+            Teacher t= new Teacher("alii", "a@a.q", 1L, d, 1);
+            new Course(null, 100, null, null, 1, t);
+        }
+        catch(DepartmentMismatchException e){
+            assert(true);
+            return;
+        }
+        assert(false);
+    }
+    @Test
+    public void tc028_Course_constructor_4(){
+        Department d= new Department("alii", null);
+        Teacher t= new Teacher(null, "a@a.q", 1L, d, 1);
+        Course c =new Course(d, 100, null, null, 1, t);
+        assert(c.getDepartment()== d);
+    }
+    @Test
+    public void tc029_Course_constructor_5(){
+        Department d= new Department("alii", null);
+        Teacher t= new Teacher(null, "a@a.q", 1L, d, 1);
+        int invalidValue=99;
+        try{
+            new Course(d, invalidValue, null, null, 1, t);
+        }
+        catch(Exception e){
+            assert(true);
+            
+            return;
+        }
+        assert(false);
+    }
+    @Test
+    public void tc030_Course_constructor_6(){
+        Department d= new Department("alii", null);
+        Teacher t= new Teacher(null, "a@a.q", 1L, d, 1);
+        new Course(d, 100, null, null, 1, t); 
+    }
+    @Test
+    public void tc031_Course_constructor_7(){
+        Department d= new Department("alii", null);
+        Teacher t= new Teacher(null, "a@a.q", 1L, d, 1);
+        new Course(d, 999, null, null, 1, t);
+    }
+    @Test
+    public void tc032_Course_constructor_8(){
+        Department d= new Department("alii", null);
+        Teacher t= new Teacher(null, "a@a.q", 1L, d, 1);
+        try{
+            new Course(d, 1000, null, null, 1, t);
+        }
+        catch(Exception e){
+            assert(true);
+            return;
+        }
+        assert(false);
+    }
+    @Test
+    public void tc033_Course_constructor_9(){
+        Department d= new Department("alii", null);
+        Teacher t= new Teacher(null, "a@a.q", 1L, d, 1);
+        new Course(d, 5000, null, null, 1, t);
+    }
