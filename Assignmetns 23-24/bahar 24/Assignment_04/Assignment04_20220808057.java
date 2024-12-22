@@ -57,3 +57,111 @@ class Department{
     public String getName() {
         return name;
     }
+    
+    // public void setChair(Teacher chair) throws DepartmentMismatchException {
+    //     if (chair == null) {
+    //         this.chair = null;
+    //     } else {
+    //         if (chair.getDepartment() != this) {
+    //             throw new DepartmentMismatchException(this, chair);
+    //         }
+    //         this.chair = chair;
+    //     }
+    // }
+    public void setChair(Teacher chair) throws DepartmentMismatchException {
+        if (chair == null) {
+            this.chair = null;
+        } else {
+            if (chair.getDepartment() != this) {
+                throw new DepartmentMismatchException(this, chair);
+            }
+            this.chair = chair;
+        }
+    }
+
+    
+    public void setCode(String code) {
+        if(code.length()==3||code.length()==4){
+        this.code = code;
+        }else{
+            throw new ErrorException();
+        }
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+}
+
+class Course{
+    private Department department;
+    private Teacher teacher;
+    private double grade;
+    private int courseNumber;
+    private String title;
+    private String description;
+    private int AKTS;
+
+    
+    // Course(Department department, int courseNumber, String title, 
+    // String description, int AKTS, Teacher teacher) throws DepartmentMismatchException {
+    //     if (department != teacher.getDepartment()) {
+    //         throw new DepartmentMismatchException(this, teacher);
+    //     } else {
+    //         setAKTS(AKTS);
+    //         setCourseNumber(courseNumber);
+    //         this.department = department;
+    //         this.teacher = teacher;
+    //         setDescription(description);
+    //         setTitle(title);
+    //     }
+    // }
+
+    Course(Department department, int courseNumber, String title, 
+    String description, int AKTS, Teacher teacher) throws DepartmentMismatchException {
+    if (department != teacher.getDepartment()) {
+        throw new DepartmentMismatchException(this, teacher);
+    } else {
+        setAKTS(AKTS);
+        setCourseNumber(courseNumber);
+        this.department = department;
+        this.teacher = teacher;
+        setDescription(description);
+        setTitle(title);
+    }
+}
+
+    public void setGrade(double grade) {
+        this.grade = grade;
+    }
+    public double getGrade() {
+        return grade;
+    }
+    public int getAKTS() {
+        return AKTS;
+    }
+    public int getCourseNumber() {
+        return courseNumber;
+    }
+    public Department getDepartment() {
+        return department;
+    }
+    public Teacher getTeacher() {
+        return teacher;
+    }
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+    
+    public void setTeacher(Teacher teacher) throws DepartmentMismatchException {
+        if (department != teacher.getDepartment()) {
+            throw new DepartmentMismatchException(this, teacher);
+        } else {
+            this.teacher = teacher;
+        }
+    }
+    public String getDescription() {
+        return description;
+    }
+    public String getTitle() {
+        return title;
+    }
