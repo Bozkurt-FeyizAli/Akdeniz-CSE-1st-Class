@@ -294,3 +294,69 @@ public class Assignment03Tests_20220808073 {
         }
         assert(false);
     }
+    @Test
+    public void tc041_Course_constructor_17(){
+        Department d= new Department("alii", null);
+        Teacher t= new Teacher(null, "a@a.q", 1L, d, 1);
+        try {
+        new Course(d, 7999, null, null, -1, t);
+        } catch (Exception e) {
+            assert(true);
+            return;
+        }
+        assert(false);
+    }
+    @Test
+    public void tc042_Course_constructor_18(){
+        Department d= new Department("alii", null);
+        Teacher t= new Teacher(null, "a@a.q", 1L, d, 1);
+        try {
+        new Course(d, 7999, null, null, 0, t);
+        } catch (Exception e) {
+            assert(true);
+            return;
+        }
+        assert(false);
+    }
+    @Test
+    public void tc043_Course_constructor_19(){
+        Department d= new Department("alii", null);
+        Teacher t= new Teacher(null, "a@a.q", 1L, d, 1);
+        Course c=new Course(d, 7999, null, null, 1, t);
+        assert(c.getAKTS()==1);
+    }
+    @Test
+    public void tc044_Course_constructor_20(){
+        Department d= new Department("aaa", "b");
+        Department d2= new Department("ccc", "d");
+        Teacher t= new Teacher("f", "a@a.q", 1L, d2, 1);
+        try {
+            new Course(d, 7999, null, null, 1, t);       
+        } catch (DepartmentMismatchException e) {
+            assert(true);
+            return;
+        }
+        assert(false);
+    }
+
+    @Test
+    public void tc045_Course_constructor_21(){
+        Department d= new Department("alii", null);
+        Teacher t= new Teacher(null, "a@a.q", 1L, d, 1);
+        Course c= new Course(d, 7999, null, null, 1, t);
+        assert(c.getTeacher()==t);
+    }
+    @Test
+    public void tc046_Course_constructor_22(){
+        Department d= new Department("alii", null);
+        Teacher t= new Teacher(null, "a@a.q", 1L, d, 1);
+        Course c =new Course(d, 100, "alii", null, 1, t);
+        assert(c.getTitle().equals("alii"));
+    }
+    @Test
+    public void tc047_Course_constructor_23(){
+        Department d= new Department("alii", null);
+        Teacher t= new Teacher(null, "a@a.q", 1L, d, 1);
+        Course c =new Course(d, 100, null, "alii", 1, t);
+        assert(c.getDescription().equals("alii"));
+    }
