@@ -103,3 +103,56 @@ public class Assignment03Tests_20220808073 {
         d.setName("CSE102T");
         assert(d.getName().equals("CSE102T"));
     }
+    @Test
+    public void tc021_Department_Constructor(){
+        Department d= new Department("alii", "Tech");
+        assert(d.getName().equals("Tech"));
+    }
+    @Test
+    public void tc011_Department_GetChair_1(){
+        Department d= new Department("alii", "alii");
+        Teacher t=new Teacher(null, "a@a.a", 1L, d, 1);
+        d.setChair(t);
+        assert(d.getChair()==t);
+    }
+    @Test
+    public void tc012_Department_GetChair_2(){
+        Department d= new Department("alii", "alii");
+        Department d2= new Department("alii", "alii");
+        Teacher t=new Teacher(null, "a@a.a", 1L, d2, 1);
+        try {
+        d.setChair(t);
+    } catch (DepartmentMismatchException e) {
+        assert(true);
+            return;
+    }
+        assert(false);
+    }
+    @Test
+    public void tc019_Department_SetChair_2(){
+        Department d= new Department("alii", "alii");
+        Teacher t=new Teacher(null, "a@a.a", 1L, d, 1);
+        Teacher t2=new Teacher(null, "a@a.a", 1L, d, 1);
+        d.setChair(t);
+        d.setChair(t2);
+        assert(d.getChair()==t2);
+    }
+    //////////// class Course ///////////
+
+    @Test
+    public void tc025_Course_constructor_1(){
+        Department d= new Department("alii", null);
+        Teacher t= new Teacher(null, "a@a.q", 1L, d, 1);
+        new Course(d, 100, null, null, 1, t);
+    }
+    @Test
+    public void tc026_Course_constructor_2(){
+        try {
+            Department d= new Department("alii", null);
+            new Course(d, 100, null, null, 1, null);
+        } catch (Exception e) {
+            assert(true);
+            return;
+        }
+        assert(false);
+    }
