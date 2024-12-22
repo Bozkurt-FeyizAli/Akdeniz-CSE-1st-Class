@@ -222,3 +222,75 @@ public class Assignment03Tests_20220808073 {
         Teacher t= new Teacher(null, "a@a.q", 1L, d, 1);
         new Course(d, 5000, null, null, 1, t);
     }
+    @Test
+    public void tc034_Course_constructor_10(){
+        Department d= new Department("alii", null);
+        Teacher t= new Teacher(null, "a@a.q", 1L, d, 1);
+        try{
+            new Course(d, 4999, null, null, 1, t);
+        }
+        catch(Exception e){
+            assert(true);
+            return;
+            
+        }
+        assert(false);
+    }
+    @Test
+    public void tc035_Course_constructor_11(){
+        Department d= new Department("alii", null);
+        Teacher t= new Teacher(null, "a@a.q", 1L, d, 1);
+        new Course(d, 5999, null, null, 1, t);
+    }
+    @Test
+    public void tc036_Course_constructor_12(){
+        Department d= new Department("alii", null);
+        Teacher t= new Teacher(null, "a@a.q", 1L, d, 1);
+        try{
+            new Course(d, 6000, null, null, 1, t);
+        }
+        catch(Exception e){
+            assert(true);
+            return;
+        }
+        assert(false);
+    }
+    @Test
+    public void tc037_Course_constructor_13(){
+        Department d= new Department("alii", null);
+        Teacher t= new Teacher(null, "a@a.q", 1L, d, 1);
+        new Course(d, 7000, null, null, 1, t);
+
+    }
+    @Test
+    public void tc038_Course_constructor_14(){
+        Department d= new Department("alii", null);
+        Teacher t= new Teacher(null, "a@a.q", 1L, d, 1);
+        try{
+            new Course(d, 6999, null, null, 1, t);
+        }
+        catch(Exception e){
+            assert(true);
+            return;
+        }
+        assert(false);
+    }
+    @Test
+    public void tc039_Course_constructor_15(){
+        Department d= new Department("alii", null);
+        Teacher t= new Teacher(null, "a@a.q", 1L, d, 1);
+        new Course(d, 7999, null, null, 1, t);
+    }
+    @Test
+    public void tc040_Course_constructor_16(){
+        Department d= new Department("alii", null);
+        Teacher t= new Teacher(null, "a@a.q", 1L, d, 1);
+        try{
+            new Course(d, 8000, null, null, 1, t);
+        }
+        catch(Exception e){
+            assert(true);
+            return;
+        }
+        assert(false);
+    }
