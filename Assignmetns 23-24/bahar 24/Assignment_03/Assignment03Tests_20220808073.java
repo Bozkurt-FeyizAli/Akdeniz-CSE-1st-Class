@@ -1100,3 +1100,74 @@ public class Assignment03Tests_20220808073 {
         s.addCourse(c, 66);
         assert(s.courseGPAPoints(c)==2.0);
     }
+    @Test
+    public void tc146_Student_courseGPAPoints_11(){
+        Department d= new Department("alii", null);
+        Teacher t = new Teacher(null, "a@a.a", 1L, d, 1);
+        Course c= new Course(d, 102, "T", null, 1, t);
+        Student s=new Student(null, "username@universityname.domain",1L , d);
+        s.addCourse(c, 66.5);
+        assert(s.courseGPAPoints(c)==2.5);
+        // My code allow if only garde is bigger than 66.5 not equal to itself
+        // I could change to equal or bigger
+    }
+    @Test
+    public void tc147_Student_courseGPAPoints_12(){
+        Department d= new Department("alii", null);
+        Teacher t = new Teacher(null, "a@a.a", 1L, d, 1);
+        Course c= new Course(d, 102, "T", null, 1, t);
+        Student s=new Student(null, "username@universityname.domain",1L , d);
+        s.addCourse(c, 73);
+        assert(s.courseGPAPoints(c)==2.5);
+    }
+    @Test
+    public void tc146_Student_courseGPAPoints_13(){
+        Department d= new Department("alii", null);
+        Teacher t = new Teacher(null, "a@a.a", 1L, d, 1);
+        Course c= new Course(d, 102, "T", null, 1, t);
+        Student s=new Student(null, "username@universityname.domain",1L , d);
+        s.addCourse(c, 73.5);
+        assert(s.courseGPAPoints(c)==3.0);
+        // My code allow if only garde is bigger than 73.5 not equal to itself
+        // I could change to equal or bigger
+    }
+    @Test
+    public void tc147_Student_courseGPAPoints_14(){
+        Department d= new Department("alii", null);
+        Teacher t = new Teacher(null, "a@a.a", 1L, d, 1);
+        Course c= new Course(d, 102, "T", null, 1, t);
+        Student s=new Student(null, "username@universityname.domain",1L , d);
+        s.addCourse(c, 80);
+        assert(s.courseGPAPoints(c)==3.0);
+    }
+    @Test
+    public void tc146_Student_courseGPAPoints_15(){
+        Department d= new Department("alii", null);
+        Teacher t = new Teacher(null, "a@a.a", 1L, d, 1);
+        Course c= new Course(d, 102, "T", null, 1, t);
+        Student s=new Student(null, "username@universityname.domain",1L , d);
+        s.addCourse(c, 80.5);
+        assert(s.courseGPAPoints(c)==3.5);
+        // My code allow if only garde is bigger than 80.5 not equal to itself
+        // I could change to equal or bigger
+    }
+    @Test
+    public void tc147_Student_courseGPAPoints_16(){
+        Department d= new Department("alii", null);
+        Teacher t = new Teacher(null, "a@a.a", 1L, d, 1);
+        Course c= new Course(d, 102, "T", null, 1, t);
+        Student s=new Student(null, "username@universityname.domain",1L , d);
+        s.addCourse(c, 87);
+        assert(s.courseGPAPoints(c)==3.5);
+    }
+    @Test
+    public void tc147_Student_courseGPAPoints_17(){
+        Department d= new Department("alii", null);
+        Teacher t = new Teacher(null, "a@a.a", 1L, d, 1);
+        Course c= new Course(d, 102, "T", null, 1, t);
+        Student s=new Student(null, "username@universityname.domain",1L , d);
+        s.addCourse(c, 87.5);
+        assert(s.courseGPAPoints(c)==4.0);
+        // My code allow if only garde is bigger than 87.5 not equal to itself
+        // I could change to equal or bigger
+    }
