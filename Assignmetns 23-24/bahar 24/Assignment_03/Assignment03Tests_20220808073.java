@@ -646,3 +646,106 @@ public class Assignment03Tests_20220808073 {
         }
         assert(false);
     }
+    @Test
+    public void tc097_Teacher_constructor_6(){
+        Department d= new Department("alii", null);
+        Teacher t=new Teacher("FeyizAli", "username@universityname.domain", 1L, d, 1);
+        assert(t.getEmail().equals("username@universityname.domain"));
+    } 
+    @Test
+    public void tc098_Teacher_constructor_7(){
+        Department d= new Department("alii", null);
+        Teacher t= new Teacher("FeyizAli", "a@a.a", 1L, d, 1);
+        assert(t.getID()==1L);
+    }
+    @Test
+    public void tc099_Teacher_constructor_8(){
+        Department d= new Department("alii", null);
+        Teacher t= new Teacher(null, "a@a.a", 1L, d, 1);
+        assert(t.getDepartment()==d);
+    }
+    @Test
+    public void tc101_Teacher_constructor_10(){
+        Department d= new Department("alii", null);
+        try {
+            new Teacher(null, "a@a.a", 1L, d, 0);       
+        } catch (InvalidRankException e) {
+            assert(true);
+            return;
+        }
+        assert(false);
+        /* As my code throw wrong exception this test fails
+         * I would write throw InvalidRankException instead of custom Exception
+         *  and throw it  */
+    }
+    @Test
+    public void tc102_Teacher_constructor_11(){
+        Department d= new Department("alii", null);
+        Teacher t=new Teacher(null, "a@a.a", 1L, d, 1);
+        assert(t.getTitle().equals("Teaching Assistant"));
+        // As a wrote wrong test fails
+        // i could write as Teaching Assistant instead of Teaching  Assistant
+    }
+    @Test
+    public void tc102_Teacher_constructor_12(){
+        Department d= new Department("alii", null);
+        Teacher t=new Teacher(null, "a@a.a", 1L, d, 2);
+        assert(t.getTitle().equals("Lecturer"));
+    }
+    @Test
+    public void tc102_Teacher_constructor_13(){
+        Department d= new Department("alii", null);
+        Teacher t=new Teacher(null, "a@a.a", 1L, d, 3);
+        assert(t.getTitle().equals("Assistant Professor"));
+    }
+    @Test
+    public void tc102_Teacher_constructor_14(){
+        Department d= new Department("alii", null);
+        Teacher t=new Teacher(null, "a@a.a", 1L, d, 4);
+        assert(t.getTitle().equals("Associate Professor"));
+    }
+    @Test
+    public void tc103_Teacher_constructor_12(){
+        Department d= new Department("alii", null);
+        Teacher t=new Teacher(null, "a@a.a", 1L, d, 5);
+        assert(t.getTitle().equals("Professor"));
+    }
+    @Test
+    public void tc104_Teacher_constructor_13(){
+        Department d= new Department("alii", null);
+        try {
+            new Teacher(null, "a@a.a", 1L, d, 6);       
+        } catch (InvalidRankException e) {
+            assert(true);
+            return;
+        }
+        assert(false);
+        /* As my code throw wrong exception this test fails
+         * I should write throw InvalidRankException instead of Exception*/
+    }
+    @Test
+    public void tc107_Teacher_setName(){
+        Department d= new Department("alii", null);
+        Teacher t= new Teacher(null, "a@a.a", 1L, d, 1);
+        t.setName("FeyizAli");
+        assert(t.getName().equals("FeyizAli"));
+    }
+    @Test
+    public void tc109_Teacher_setEmail_1(){
+        Department d= new Department("alii", null);
+        Teacher t= new Teacher(null, "a@a.a", 1L, d, 1);
+        t.setEmail("username@universityname.domain");
+        assert(t.getEmail().equals("username@universityname.domain"));
+    }
+    @Test
+    public void tc109_Teacher_setEmail_2(){
+        Department d= new Department("alii", null);
+        Teacher t= new Teacher(null, "a@a.a", 1L, d, 1);
+        try {
+            t.setEmail("a@aa");
+        } catch (Exception e) {
+           assert(true);
+           return;
+        }
+        assert(false);
+    }
