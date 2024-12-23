@@ -831,3 +831,77 @@ public class Assignment03Tests_20220808073 {
         // As a person, teacher do not have to have a department
         // I could as an if statement in setDepartment mh. to assign it null
     }
+    @Test
+    public void tc124_Teacher_setDepartment_2(){
+        Department d= new Department("alii", null);
+        Department d2= new Department("alii", null);
+        Teacher t= new Teacher(null, "a@a.a", 1L, d, 5);
+        d.setChair(t);
+        t.setDepartment(d2);
+        assert(d.getChair()==null);
+    }
+    @Test
+    public void tc124_Teacher_setDepartment_2_1(){
+        Department d= new Department("alii", null);
+        Department d2= new Department("alii", null);
+        Teacher t= new Teacher("q", "a@a.a", 1L, d, 5);
+        d.setChair(t);
+        t.setDepartment(d2);
+        assert(t.getDepartment()==d2);
+    }
+    ////////////// class Student ///////////
+    @Test
+    public void tc132_Student_Constructor_1(){
+        Department d= new Department("null", null);
+        new Student(null, "a@a.a",1L , d);
+    }
+    @Test
+    public void tc133_Student_Constructor_2(){
+        Department d= new Department("null", null);
+        try {
+            new Student(null, "a@",1L, d);
+        } catch (Exception e) {
+            assert(true);
+            return;
+        }
+        assert(false);
+    }
+    @Test
+    public void tc134_Student_Constructor_3(){
+            new Student(null, "a@a.a",1L , null);
+        // As a person, student do not have to have a department
+        // I could as an if statement in setDepartment mh. to assign it null
+    }
+    @Test
+    public void tc135_Student_Constructor_4(){
+        new Student(null, "username@universityname.domain",1L , null);
+    }
+    @Test
+    public void tc136_Student_Constructor_5(){
+        new Student(null, "username@universityname.domain",20220808073L , null);
+    }
+    @Test
+    public void tc137_Student_Constructor_6(){
+        Department d= new Department("alii", null);
+        Student s=new Student(null, "username@universityname.domain",1L , d);
+        assert(s.getDepartment()==d);
+    }
+    @Test
+    public void tc138_Student_addCourse_7(){
+        Department d= new Department("alii", null);
+        Teacher t= new Teacher(null, "a@a.a", 1L, d, 1);
+        Course c= new Course(d, 102, "T", null, 1, t);
+        Student s=new Student(null, "username@universityname.domain",1L , d);
+        s.addCourse(c, 10);
+    }
+    @Test
+    public void tc139_Student_getAKTS_1(){
+        Department d= new Department("alii", null);
+        Teacher t= new Teacher(null, "a@a.a", 1L, d, 1);
+        Course c= new Course(d, 102, "T", null, 1, t);
+        Course c2= new Course(d, 101, null, null, 2, t);
+        Student s=new Student(null, "username@universityname.domain",1L , d);
+        s.addCourse(c, 10);
+        s.addCourse(c2, 90);
+        assert(s.getAKTS()==2);
+    }
