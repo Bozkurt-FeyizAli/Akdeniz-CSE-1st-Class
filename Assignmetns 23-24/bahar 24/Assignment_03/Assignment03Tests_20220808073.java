@@ -592,3 +592,57 @@ public class Assignment03Tests_20220808073 {
         c.setAKTS(5);
         assert(c.getAKTS()==5);
     }
+    @Test
+    public void tc085_Course_CourseCode(){
+        Department d= new Department("alii", null);
+        Teacher t= new Teacher(null, "a@a.q", 1L, d, 1);
+        Course c=new Course(d, 7999, null, null, 1, t); 
+        assert(c.courseCode().equals("alii7999"));
+    }
+    ///////////// Class Teacher //////////
+    @Test
+    public void tc092_Teacher_constructor_1(){
+        new Teacher(null, "a@a.a", 1L, null, 1);
+        assert(true);
+        // As a person, teacher do not have to have a department
+        // I could as an if statement in setDepartment mh. to assign it null
+    } 
+    @Test
+    public void tc094_Teacher_constructor_3(){
+        Department d= new Department("alii", null);
+        Teacher t= new Teacher("FeyizAli", "a@a.a", 1L, d, 1);
+        assert(t.getName().equals("FeyizAli"));
+    }
+    @Test
+    public void tc095_Teacher_constructor_4(){
+        Department d= new Department("alii", null);
+        try {
+            new Teacher("FeyizAli", "a", 1L, d, 1);
+        } catch (Exception e) {
+            assert(true);
+            return;
+        }
+        assert(false);
+    }
+    @Test
+    public void tc095_Teacher_constructor_4K(){
+        Department d= new Department("alii", null);
+        try {
+            new Teacher("FeyizAli", "a.a.a", 1L, d, 1);
+        } catch (Exception e) {
+           assert(true);
+            return;
+        }
+        assert(false);
+    }
+    @Test
+    public void tc096_Teacher_constructor_5(){
+        Department d= new Department("alii", null);
+        try {
+            new Teacher("FeyizAli", "a@", 1L, d, 1);
+        } catch (Exception e) {
+            assert(true);
+            return;
+        }
+        assert(false);
+    }
