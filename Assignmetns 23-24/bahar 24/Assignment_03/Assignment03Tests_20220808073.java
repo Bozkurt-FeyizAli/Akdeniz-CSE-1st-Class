@@ -360,3 +360,73 @@ public class Assignment03Tests_20220808073 {
         Course c =new Course(d, 100, null, "alii", 1, t);
         assert(c.getDescription().equals("alii"));
     }
+    @Test
+    public void tc051_Course_constructor_27(){
+        Department d= new Department("alii", null);
+        Teacher t1 = new Teacher("fab", "a@a.a", 1L, d, 1);
+        Teacher t2= new Teacher(null, "a@a.q", 1L, d, 1);
+        Course c=new Course(d, 7999, null, null, 1, t1);  
+        c.setTeacher(t2);
+        assert(c.getTeacher()==t2);
+    }
+    @Test
+    public void tc052_Course_constructor_28(){
+        Department d= new Department("alii", null);
+        Teacher t2= new Teacher(null, "a@a.q", 1L, d, 1);
+        Course c2=null;
+        new Course(d, 7999, null, null, 1, t2);  
+        c2 =new Course(d, 7999, null, null, 1, t2);  
+        assert(c2.getTeacher()==t2);
+    }
+    @Test
+    public void tc053_Course_GetTitle_1(){
+        Department d= new Department("alii", null);
+        Teacher t= new Teacher(null, "a@a.q", 1L, d, 1);
+        Course c=new Course(d, 7999, "FeyizAli", null, 1, t);      
+        assert(c.getTitle().equals("FeyizAli"));
+    }
+    @Test
+    public void tc054_Course_SetTitle_2(){
+        Department d= new Department("alii", null);
+        Teacher t= new Teacher(null, "a@a.q", 1L, d, 1);
+        Course c=new Course(d, 7999, null, null, 1, t);       
+        c.setTitle("Artificial Intelligence");
+        assert(c.getTitle().equals("Artificial Intelligence"));
+    }
+    @Test
+    public void tc057_Course_SetTeacher_2(){
+        Department d= new Department("aaa", null);
+        Department d2= new Department("bbb", null);
+        Teacher t= new Teacher(null, "a@a.q", 1L, d, 1);
+        Teacher t2= new Teacher(null, "a@a.q", 1L, d2, 1);
+        Course c= null;
+        try {
+            c =new Course(d, 7999, null, null, 1, t);  
+            c.setTeacher(t2);
+        } catch (DepartmentMismatchException e) {
+            assert(true);
+            return;
+        }
+        assert(false);
+    }
+    @Test
+    public void tc058_Course_SetTeacher_3(){
+        Department d= new Department("alii", null);
+        Department d2= new Department("alii", null);
+        Teacher t= new Teacher(null, "a@a.q", 1L, d, 1);
+        Course c;
+        c =new Course(d, 7999, null, null, 1, t);  
+        c.setDepartment(d2); 
+        assert(c.getDepartment()==d2);    
+    }
+    @Test
+    public void tc060_Course_GetTeacher_1(){
+        Department d= new Department("alii", null);
+        Department d2= new Department("alii", null);
+        Teacher t= new Teacher(null, "a@a.q", 1L, d, 1);
+        Teacher t2= new Teacher(null, "a@a.q", 1L, d2, 1);
+        Course c=new Course(d, 7999, null, null, 1, t);  
+        c.setDepartment(d2);
+        c.setTeacher(t2);
+        assert(c.getTeacher()==t2);    
+    }
