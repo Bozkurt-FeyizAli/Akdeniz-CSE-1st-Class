@@ -503,3 +503,92 @@ public class Assignment03Tests_20220808073 {
         }
         assert(false);
     }
+    @Test
+    public void tc073_Course_SetCourseNumber_9(){
+        Department d= new Department("alii", null);
+        Teacher t= new Teacher(null, "a@a.q", 1L, d, 1);
+        Course c;
+        c =new Course(d, 7999, null, null, 1, t);  
+        try {
+            c.setCourseNumber(6999); 
+        } catch (Exception e) {
+            assert(true);
+            return;
+        }
+        assert(false);
+    }
+    @Test
+    public void tc076_Course_SetCourseNumber_12(){
+        Department d= new Department("alii", null);
+        Teacher t= new Teacher(null, "a@a.q", 1L, d, 1);
+        Course c;
+        c =new Course(d, 7999, null, null, 1, t);  
+        try {
+            c.setCourseNumber(8000); 
+        } catch (Exception e) {
+            assert(true);
+            return;
+        }
+        assert(false);
+    }
+    @Test
+    public void tc078_Course_setTitle(){
+        Department d= new Department("alii", null);
+        Teacher t= new Teacher(null, "a@a.q", 1L, d, 1);
+        Course c;
+        c =new Course(d, 7999, null, null, 1, t);  
+        c.setTitle("alii");
+        assert(c.getTitle().equals("alii"));
+    }
+    @Test
+    public void tcf079_Course_setDescription(){
+        Department d= new Department("alii", null);
+        Teacher t= new Teacher(null, "a@a.q", 1L, d, 1);
+        Course c;
+        c =new Course(d, 7999, null, null, 1, t);  
+        c.setDescription("alii");
+        assert(c.getDescription().equals("alii"));
+    }
+    @Test
+    public void tc080_Course_getAKTS_1(){
+        Department d= new Department("alii", null);
+        Teacher t= new Teacher(null, "a@a.q", 1L, d, 1);
+        try {
+            new Course(d, 7999, null, null, -5, t); 
+        } catch (Exception e) {
+            assert(true);
+            return;
+        }
+        assert(false);
+    }
+    @Test
+    public void tc081_Course_getAKTS_2(){
+        Department d= new Department("alii", null);
+        Teacher t= new Teacher(null, "a@a.q", 1L, d, 1);
+        Course c;
+        c =new Course(d, 7999, null, null, 5, t); 
+        assert(c.getAKTS()==5);
+    }
+    @Test
+    public void tc082_Course_SetAKTS_1(){
+        Department d= new Department("alii", null);
+        Teacher t= new Teacher(null, "a@a.q", 1L, d, 1);
+        Course c=null;
+        try {
+            c =new Course(d, 7999, null, null, 1, t); 
+            c.setAKTS(0);
+        } catch (Exception e) {
+            assert(true);
+            return;
+        }
+        assert(false);
+    }
+    @Test
+    public void tc084_Course_SetAKTS_3(){
+        Department d= new Department("alii", null);
+        Teacher t= new Teacher(null, "a@a.q", 1L, d, 1);
+        Course c;
+        c =new Course(d, 7999, null, null, 1, t); 
+        c.setAKTS(5);
+        assert(c.getAKTS()==5);
+    }
