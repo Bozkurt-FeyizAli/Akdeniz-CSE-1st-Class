@@ -430,3 +430,76 @@ public class Assignment03Tests_20220808073 {
         c.setTeacher(t2);
         assert(c.getTeacher()==t2);    
     }
+    @Test
+    public void tc063_Course_setDepartment_2(){
+        Department d= new Department("aaa", "b");
+        Department d2= new Department("ccc", "d");
+        Teacher t= new Teacher("f", "a@a.q", 1L, d, 1);
+        Course c=new Course(d, 7999, null, null, 1, t); 
+        c.setDepartment(d2); 
+        assert(c.getDepartment()==d2);
+    }
+    @Test
+    public void tc065_Course_SetCourseNumber_1(){
+        Department d= new Department("alii", null);
+        Teacher t= new Teacher(null, "a@a.q", 1L, d, 1);
+        Course c;
+        c =new Course(d, 7999, null, null, 1, t);  
+        try {
+            c.setCourseNumber(99); 
+        } catch (Exception e) {
+            assert(true);
+            return;
+        }
+        assert(false);
+    }
+    @Test
+    public void tc066_Course_SetCourseNumber_2(){
+        Department d= new Department("alii", null);
+        Teacher t= new Teacher(null, "a@a.q", 1L, d, 1);
+        Course c=null;
+        c =new Course(d, 7999, null, null, 1, t);  
+        assert(c.getCourseNumber()==7999);
+    }
+    @Test
+    public void tc068_Course_SetCourseNumber_4(){
+        Department d= new Department("alii", null);
+        Teacher t= new Teacher(null, "a@a.q", 1L, d, 1);
+        Course c;
+        c =new Course(d, 7999, null, null, 1, t);  
+        try {
+            c.setCourseNumber(1000); 
+        } catch (Exception e) {
+            assert(true);
+            return;
+        }
+        assert(false);
+    }
+    @Test
+    public void tc069_Course_SetCourseNumber_5(){
+        Department d= new Department("alii", null);
+        Teacher t= new Teacher(null, "a@a.q", 1L, d, 1);
+        Course c;
+        c =new Course(d, 7999, null, null, 1, t);  
+        try {
+            c.setCourseNumber(4999); 
+        } catch (Exception e) {
+            assert(true);
+            return;
+        }
+        assert(false);
+    }
+    @Test
+    public void tc072_Course_SetCourseNumber_8(){
+        Department d= new Department("alii", null);
+        Teacher t= new Teacher(null, "a@a.q", 1L, d, 1);
+        Course c;
+        c =new Course(d, 7999, null, null, 1, t);  
+        try {
+            c.setCourseNumber(6000); 
+        } catch (Exception e) {
+            assert(true);
+            return;
+        }
+        assert(false);
+    }
