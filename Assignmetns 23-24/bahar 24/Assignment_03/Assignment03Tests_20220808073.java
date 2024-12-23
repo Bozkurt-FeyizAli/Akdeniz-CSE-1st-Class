@@ -1012,3 +1012,91 @@ public class Assignment03Tests_20220808073 {
         assert(s.courseGPAPoints(c)==0.0);
     }
     @Test
+    public void tc147_Student_courseGPAPoints_2(){
+        Department d= new Department("alii", null);
+        Teacher t = new Teacher(null, "a@a.a", 1L, d, 1);
+        Course c= new Course(d, 102, "T", null, 1, t);
+        Student s=new Student(null, "username@universityname.domain",1L , d);
+        s.addCourse(c, 34);
+        assert(s.courseGPAPoints(c)==0);
+    }
+    @Test
+    public void tc146_Student_courseGPAPoints_3(){
+        Department d= new Department("alii", null);
+        Teacher t = new Teacher(null, "a@a.a", 1L, d, 1);
+        Course c= new Course(d, 102, "T", null, 1, t);
+        Student s=new Student(null, "username@universityname.domain",1L , d);
+        s.addCourse(c, 34.5);
+        assert(s.courseGPAPoints(c)==0.5);
+        // My code allow if only garde is bigger than 34.5 not equal to itself
+        // I could change to equal or bigger
+    }
+    @Test
+    public void tc147_Student_courseGPAPoints_4(){
+        Department d= new Department("alii", null);
+        Teacher t = new Teacher(null, "a@a.a", 1L, d, 1);
+        Course c= new Course(d, 102, "T", null, 1, t);
+        Student s=new Student(null, "username@universityname.domain",1L , d);
+        s.addCourse(c, 45);
+        assert(s.courseGPAPoints(c)==0.5);
+    }
+    @Test
+    public void tc146_Student_courseGPAPoints_5(){
+        Department d= new Department("alii", null);
+        Teacher t = new Teacher(null, "a@a.a", 1L, d, 1);
+        Course c= new Course(d, 102, "T", null, 1, t);
+        Student s=new Student(null, "username@universityname.domain",1L , d);
+        s.addCourse(c, 45.5);
+        assert(s.courseGPAPoints(c)==1.0);
+        // My code allow if only garde is bigger than 45.5 not equal to itself
+        // I could change to equal or bigger
+    }
+    @Test
+    public void tc147_Student_courseGPAPoints_6(){
+        Department d= new Department("alii", null);
+        Teacher t = new Teacher(null, "a@a.a", 1L, d, 1);
+        Course c= new Course(d, 102, "T", null, 1, t);
+        Student s=new Student(null, "username@universityname.domain",1L , d);
+        s.addCourse(c, 52);
+        assert(s.courseGPAPoints(c)==1.0);
+    }
+    @Test
+    public void tc146_Student_courseGPAPoints_7(){
+        Department d= new Department("alii", null);
+        Teacher t = new Teacher(null, "a@a.a", 1L, d, 1);
+        Course c= new Course(d, 102, "T", null, 1, t);
+        Student s=new Student(null, "username@universityname.domain",1L , d);
+        s.addCourse(c, 52.5);
+        assert(s.courseGPAPoints(c)==1.5);
+        // My code allow if only garde is bigger than 52.5 not equal to itself
+        // I could change to equal or bigger
+    }
+    @Test
+    public void tc147_Student_courseGPAPoints_8(){
+        Department d= new Department("alii", null);
+        Teacher t = new Teacher(null, "a@a.a", 1L, d, 1);
+        Course c= new Course(d, 102, "T", null, 1, t);
+        Student s=new Student(null, "username@universityname.domain",1L , d);
+        s.addCourse(c, 59);
+        assert(s.courseGPAPoints(c)==1.5);
+    }
+    @Test
+    public void tc146_Student_courseGPAPoints_9(){
+        Department d= new Department("alii", null);
+        Teacher t = new Teacher(null, "a@a.a", 1L, d, 1);
+        Course c= new Course(d, 102, "T", null, 1, t);
+        Student s=new Student(null, "username@universityname.domain",1L , d);
+        s.addCourse(c, 59.5);
+        assert(s.courseGPAPoints(c)==2.0);
+        // My code allow if only garde is bigger than 59.5 not equal to itself
+        // I could change to equal or bigger
+    }
+    @Test
+    public void tc147_Student_courseGPAPoints_10(){
+        Department d= new Department("alii", null);
+        Teacher t = new Teacher(null, "a@a.a", 1L, d, 1);
+        Course c= new Course(d, 102, "T", null, 1, t);
+        Student s=new Student(null, "username@universityname.domain",1L , d);
+        s.addCourse(c, 66);
+        assert(s.courseGPAPoints(c)==2.0);
+    }
