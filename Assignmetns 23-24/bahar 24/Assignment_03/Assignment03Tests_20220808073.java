@@ -749,3 +749,85 @@ public class Assignment03Tests_20220808073 {
         }
         assert(false);
     }
+    @Test
+    public void tc109_Teacher_setEmail_3(){
+        Department d= new Department("alii", null);
+        Teacher t= new Teacher(null, "a@a.a", 1L, d, 1);
+        try {
+            t.setEmail("a.aa");
+        } catch (Exception e) {
+           assert(true);
+           return;
+        }
+        assert(false);
+    }
+    @Test
+    public void tc111_Teacher_setID(){
+        Department d= new Department("alii", null);
+        Teacher t= new Teacher(null, "a@a.a", 1L, d, 1);
+        t.setID(20220808073L);
+        assert(t.getID()==20220808073L);
+    }
+    @Test
+    public void tc117_Teacher_promote_1(){
+        Department d= new Department("alii", null);
+        Teacher t= new Teacher(null, "a@a.a", 1L, d, 1);
+        t.promote();
+    }
+    @Test
+    public void tc118_Teacher_promote_2(){
+        Department d= new Department("alii", null);
+        Teacher t= new Teacher(null, "a@a.a", 1L, d, 4);
+        t.promote();
+    }
+    @Test
+    public void tc119_Teacher_promote_3(){
+        Department d= new Department("alii", null);
+        Teacher t= new Teacher(null, "a@a.a", 1L, d, 5);
+        try {
+            t.promote();
+        } catch (InvalidRankException e) {
+            assert(true);
+            return;
+        }
+        assert(false);
+        // As i used && my if case is everytime false and never runs
+        // I should write rank<0||rank>4 instead of rank<0&&rank>3
+    }
+
+    @Test
+    public void tc120_Teacher_demote_1(){
+        Department d= new Department("alii", null);
+        Teacher t= new Teacher(null, "a@a.a", 1L, d, 1);
+        try {
+            t.demote();
+        } catch (Exception e) {
+           assert(true);
+           return;
+        }
+        assert(false);
+        // As i used && my if case is everytime false and never runs
+        // I should write rank<0||rank>4 instead of rank<0&&rank>3
+    }
+
+    @Test
+    public void tc121_Teacher_demote_2(){
+        Department d= new Department("alii", null);
+        Teacher t= new Teacher(null, "a@a.a", 1L, d, 2);
+        t.demote();
+    }
+    @Test
+    public void tc122_Teacher_demote_3(){
+        Department d= new Department("alii", null);
+        Teacher t= new Teacher(null, "a@a.a", 1L, d, 5);
+        t.demote();
+    }
+    @Test
+    public void tc123_Teacher_setDepartment_1(){
+        Department d= new Department("alii", null);
+        Teacher t= new Teacher(null, "a@a.a", 1L, d, 5);
+        t.setDepartment(null);
+        assert(t.getDepartment()==null);
+        // As a person, teacher do not have to have a department
+        // I could as an if statement in setDepartment mh. to assign it null
+    }
