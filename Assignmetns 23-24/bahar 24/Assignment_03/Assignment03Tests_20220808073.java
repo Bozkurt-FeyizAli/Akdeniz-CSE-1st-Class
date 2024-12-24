@@ -1713,3 +1713,87 @@ public class Assignment03Tests_20220808073 {
         // i forgot check if grade value is valid or not
         // I could add an if statement to check throw the right exception
     }
+
+    @Test
+    public void tc170_GradStudent_addCourse_8(){
+        Department d= new Department("alii", null);
+        Teacher t = new Teacher(null, "a@a.a", 1L, d, 1);
+        Course c= new Course(d, 102, "T", null, 1, t);
+        GradStudent s=new GradStudent(null, "username@universityname.domain",1L , d, 1, null);
+        s.addCourse(c, 10);
+        try {
+            s.addCourse(c, 101);
+        } catch (InvalidGradeException e) {
+            assert(true);
+            return;
+        }
+        assert(false);
+        // i forgot check if grade value is valid or not
+        // I could add an if statement to check throw the right exception    
+    }
+    @Test
+    public void tc170_GradStudent_setRank_1(){
+        Department d= new Department("alii", null);
+        GradStudent s=new GradStudent(null, "username@universityname.domain",1L , d, 1, null);
+        try {
+            s.setRank(0);
+        } catch (InvalidRankException e) {
+            assert(true);
+            return;
+        }
+        assert(false);
+    }
+    @Test
+    public void tc170_GradStudent_setRank_2(){
+        Department d= new Department("alii", null);
+        GradStudent s=new GradStudent(null, "username@universityname.domain",1L , d, 1, null);
+        try {
+            s.setRank(4);
+        } catch (InvalidRankException e) {
+            assert(true);
+            return;
+        }
+        assert(false);
+    }
+    @Test
+    public void tc170_GradStudent_setRank_3(){
+        Department d= new Department("alii", null);
+        GradStudent s=new GradStudent(null, "username@universityname.domain",1L , d, 1, null);
+        s.setRank(2);
+    }    
+    @Test
+    public void tc170_GradStudent_getAKTS_1(){
+        Department d= new Department("alii", null);
+        Teacher t= new Teacher(null, "a@a.a", 1L, d, 1);
+        Course c= new Course(d, 102, "T", null, 1, t);
+        Course c2= new Course(d, 101, null, null, 2, t);
+        GradStudent s=new GradStudent(null, "username@universityname.domain",1L , d, 1, null);
+        s.addCourse(c, 10);
+        s.addCourse(c2, 90);
+        assert(s.getAKTS()==2);
+    }
+    @Test
+    public void tc170_GradStudent_getAKTS_1L(){
+        Department d= new Department("alii", null);
+        Teacher t= new Teacher(null, "a@a.a", 1L, d, 1);
+        Course c= new Course(d, 102, "T", null, 1, t);
+        Course c2= new Course(d, 101, null, null, 2, t);
+        GradStudent s=new GradStudent(null, "username@universityname.domain",1L , d, 1, null);
+        s.addCourse(c, 10);
+        s.addCourse(c2, 90);
+        assert(s.getAttemptedAKTS()==3);
+    }
+    @Test
+    public void tc170_GradStudent_getAKTS_2(){
+        Department d= new Department("alii", null);
+        Teacher t= new Teacher(null, "a@a.a", 1L, d, 1);
+        Course c= new Course(d, 102, "T", null, 1, t);
+        Course c2= new Course(d, 101, null, null, 2, t);
+        GradStudent s=new GradStudent(null, "username@universityname.domain",1L , d, 1, null);
+        s.addCourse(c, 10);
+        s.addCourse(c2, 90);
+        assert(s.getGPA()==(8.0/3)||s.getGPA()==virgüldenSonraİkiBasamak(8.0/3));
+        // As my code divide total GPA to passed AKTS 
+        // not total i get bigger result mot osf the time
+        // I could use attemted AKTS while calculating AKTS
+    }
