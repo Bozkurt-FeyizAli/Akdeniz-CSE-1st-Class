@@ -2071,3 +2071,99 @@ public class Assignment03Tests_20220808073 {
         // I could add if statement to chech whether it is taken or not 
         // and throw right exception
     }
+    @Test
+    public void tc170_GradStudent_courseResult_1(){
+        Department d= new Department("alii", null);
+        Teacher t = new Teacher(null, "a@a.a", 1L, d, 1);
+        Course c= new Course(d, 102, "T", null, 1, t);
+        GradStudent s=new GradStudent(null, "username@universityname.domain",1L , d, 1, null);
+        s.addCourse(c, 0);
+        assert(s.courseResult(c).equals("Failed"));
+    }
+    @Test
+    public void tc170_GradStudent_courseResult_2(){
+        Department d= new Department("alii", null);
+        Teacher t = new Teacher(null, "a@a.a", 1L, d, 1);
+        Course c= new Course(d, 102, "T", null, 1, t);
+        GradStudent s=new GradStudent(null, "username@universityname.domain",1L , d, 1, null);
+        s.addCourse(c, 69);
+        assert(s.courseResult(c).equals("Failed"));
+    }
+    @Test
+    public void tc170_GradStudent_courseResult_3(){
+        Department d= new Department("alii", null);
+        Teacher t = new Teacher(null, "a@a.a", 1L, d, 1);
+        Course c= new Course(d, 102, "T", null, 1, t);
+        GradStudent s=new GradStudent(null, "username@universityname.domain",1L , d, 1, null);
+        s.addCourse(c, 69.5);
+        assert(s.courseResult(c).equals("Passed"));
+        // My code allow if only garde is bigger than 69.5 not equal to itself
+        // I could change to equal or bigger
+    }
+    @Test
+    public void tc170_GradStudent_courseResult_4(){
+        Department d= new Department("alii", null);
+        Teacher t = new Teacher(null, "a@a.a", 1L, d, 1);
+        Course c= new Course(d, 102, "T", null, 1, t);
+        GradStudent s=new GradStudent(null, "username@universityname.domain",1L , d, 1, null);
+        s.addCourse(c, 100);
+        assert(s.courseResult(c).equals("Passed"));
+    }
+    @Test
+    public void tc170_GradStudent_courseResult_6(){
+        Department d= new Department("alii", null);
+        Teacher t = new Teacher(null, "a@a.a", 1L, d, 1);
+        Course c= new Course(d, 102, null, null, 2, t);
+        GradStudent s=new GradStudent(null, "username@universityname.domain",1L , d, 1, null);
+        try {
+            s.courseResult(c);
+        } catch (CourseNotFoundException e) {
+            assert(true);
+            return;
+        }
+        assert(false);
+        // I forgot add exception in case of unadded course
+        // I could add if statement to chech whether it is taken or not 
+        // and throw right exception     
+    }
+    @Test
+    public void tc170_GradStudent_studentGPATest(){
+        Department cse = new Department("CSE", "Computer Engineering");
+        Teacher t = new Teacher("Joseph Ledet", "j@akdeniz.edu.tr", 123L, cse, 1);
+        Course c101 = new Course(cse, 101, "Programing 1", "İntroduction to Programing", 6, t);
+        Course c102 = new Course(cse, 102, "Programing 2", "Object oriented programing", 4, t);
+        GradStudent s = new GradStudent("Test Student", "me@gmail.com", 123L, cse, 1, null);
+        s.addCourse(c101, 80);
+        s.addCourse(c102, 70);
+        assert(s.getGPA()==2.6);
+    }
+    ////////////// general tests////////////
+    @Test
+    public void tc302_generalTests(){
+        Department cse = new Department("CSE", "Computer Engineering");
+        Department el = new Department("CSE", "Computer Engineering");
+        Teacher t2 = new Teacher("Joseph Ledet", "j@akdeniz.edu.tr", 123L, el, 1);
+        Course c102 = new Course(el, 102, "Programing 2", "Object oriented programing", 4, t2);
+        GradStudent s = new GradStudent("Test Student", "me@gmail.com", 123L, cse, 1, "s");
+        try{
+            s.addCourse(c102, 12);
+        }
+        catch(Exception e){
+            assert(true);
+        }
+        assert(false);
+        // I forgot check course department when add it to a student
+        // I could add an if statement to check and throw right exc.
+    }
+    @Test
+    public void tc303_generalTests(){
+        Department d= new Department("null", null); 
+        Teacher t= new Teacher(null, "a@a.a", 1L, d, 1);
+        assert(t instanceof Person);
+    }
+    @Test
+    public void tc304_generalTests(){
+        Department d= new Department("null", null); 
+        Student t= new Student(null, "a@a.a", 1L, d);
+        assert(t instanceof Person);
+    }
