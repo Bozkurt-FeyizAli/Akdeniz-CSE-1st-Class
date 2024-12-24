@@ -1171,3 +1171,110 @@ public class Assignment03Tests_20220808073 {
         // My code allow if only garde is bigger than 87.5 not equal to itself
         // I could change to equal or bigger
     }
+    @Test
+    public void tc146_Student_courseGPAPoints_18(){
+        Department d= new Department("alii", null);
+        Teacher t = new Teacher(null, "a@a.a", 1L, d, 1);
+        Course c= new Course(d, 102, "T", null, 1, t);
+        Student s=new Student(null, "username@universityname.domain",1L , d);
+        s.addCourse(c, 100);
+        assert(s.courseGPAPoints(c)==4.0);
+    }
+    @Test
+    public void tc148_Student_courseGPAPoints_19(){
+        Department d= new Department("alii", null);
+        Teacher t = new Teacher(null, "a@a.a", 1L, d, 1);
+        Course c= new Course(d, 102, "T", null, 1, t);
+        Student s=new Student(null, "username@universityname.domain",1L , d);
+        s.addCourse(c, 10);
+        s.addCourse(c, 87.5);
+        assert(s.courseGPAPoints(c)==4.0);
+        // My code allow if only garde is bigger than 87.5 not equal to itself
+        // I could change to equal or bigger
+        // Also my code does not allw you add the same course again
+        // I should change the mechanism and add statement to 
+        //change value if it has been taken again
+    }
+    @Test
+    public void tc149_Student_courseGPAPoints_4(){
+        Department d= new Department("alii", null);
+        Teacher t = new Teacher(null, "a@a.a", 1L, d, 1);
+        Course c= new Course(d, 102, null, null, 2, t);
+        Student s=new Student(null, "username@universityname.domain",2L , d);
+        try {
+            s.courseGPAPoints(c);
+        } catch (CourseNotFoundException e) {
+            assert(true);
+            return;
+        }
+        assert(false);
+    }
+    @Test
+    public void tc150_Student_courseGradeLetter_1(){
+        Department d= new Department("alii", null);
+        Teacher t = new Teacher(null, "a@a.a", 1L, d, 1);
+        Course c= new Course(d, 102, "T", null, 1, t);
+        Student s=new Student(null, "username@universityname.domain",1L , d);
+        s.addCourse(c, 0);
+        assert(s.courseGradeLetter(c).equals("FF"));
+    }
+    @Test
+    public void tc150_Student_courseGradeLetter_2(){
+        Department d= new Department("alii", null);
+        Teacher t = new Teacher(null, "a@a.a", 1L, d, 1);
+        Course c= new Course(d, 102, "T", null, 1, t);
+        Student s=new Student(null, "username@universityname.domain",1L , d);
+        s.addCourse(c, 34);
+        assert(s.courseGradeLetter(c).equals("FF"));
+    }
+    @Test
+    public void tc150_Student_courseGradeLetter_3(){
+        Department d= new Department("alii", null);
+        Teacher t = new Teacher(null, "a@a.a", 1L, d, 1);
+        Course c= new Course(d, 102, "T", null, 1, t);
+        Student s=new Student(null, "username@universityname.domain",1L , d);
+        s.addCourse(c, 34.5);
+        assert(s.courseGradeLetter(c).equals("FD"));
+        // My code allow if only garde is bigger than 34.5 not equal to itself
+        // I could change to equal or bigger
+    }
+    @Test
+    public void tc150_Student_courseGradeLetter_4(){
+        Department d= new Department("alii", null);
+        Teacher t = new Teacher(null, "a@a.a", 1L, d, 1);
+        Course c= new Course(d, 102, "T", null, 1, t);
+        Student s=new Student(null, "username@universityname.domain",1L , d);
+        s.addCourse(c, 45);
+        assert(s.courseGradeLetter(c).equals("FD"));
+    }
+    @Test
+    public void tc150_Student_courseGradeLetter_5(){
+        Department d= new Department("alii", null);
+        Teacher t = new Teacher(null, "a@a.a", 1L, d, 1);
+        Course c= new Course(d, 102, "T", null, 1, t);
+        Student s=new Student(null, "username@universityname.domain",1L , d);
+        s.addCourse(c, 45.5);
+        assert(s.courseGradeLetter(c).equals("DD"));
+        // My code allow if only garde is bigger than 45.5 equal to itself
+        // I could change to equal or bigger
+    }
+    @Test
+    public void tc150_Student_courseGradeLetter_6(){
+        Department d= new Department("alii", null);
+        Teacher t = new Teacher(null, "a@a.a", 1L, d, 1);
+        Course c= new Course(d, 102, "T", null, 1, t);
+        Student s=new Student(null, "username@universityname.domain",1L , d);
+        s.addCourse(c, 52);
+        assert(s.courseGradeLetter(c).equals("DD"));
+    }
+    @Test
+    public void tc150_Student_courseGradeLetter_7(){
+        Department d= new Department("alii", null);
+        Teacher t = new Teacher(null, "a@a.a", 1L, d, 1);
+        Course c= new Course(d, 102, "T", null, 1, t);
+        Student s=new Student(null, "username@universityname.domain",1L , d);
+        s.addCourse(c, 52.5);
+        assert(s.courseGradeLetter(c).equals("DC"));
+        // My code allow if only garde is bigger than 52.5 not equal to itself
+        // I could change to equal or bigger
+    }
