@@ -2167,3 +2167,11 @@ public class Assignment03Tests_20220808073 {
         Student t= new Student(null, "a@a.a", 1L, d);
         assert(t instanceof Person);
     }
+    @Test
+    public void tc305_generalTests(){
+        Department d= new Department("null", null); 
+        GradStudent t= new GradStudent(null, "a@a.a", 1L, d, 1, "null");
+        assert(t instanceof Person);
+    }
+
+}
