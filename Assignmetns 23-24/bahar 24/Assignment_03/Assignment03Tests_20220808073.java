@@ -1603,3 +1603,113 @@ public class Assignment03Tests_20220808073 {
         }
         assert(false);
     }
+
+    @Test
+    public void tc170_GradStudent_Constructor_12(){
+        GradStudent s=new GradStudent(null, "a@a.a",1L , null, 3, "AI");
+        assert(s.getThesisTopic().equals("AI"));
+    }
+    @Test
+    public void tc170_GradStudent_Constructor_12L(){
+        GradStudent s=new GradStudent(null, "a@a.a",1L , null, 3, "I");
+        s.setThesisTopic("AI");
+        assert(s.getThesisTopic().equals("AI"));
+    }
+    @Test
+    public void tc170_GradStudent_addCourse_1(){
+        Department d= new Department("alii", null);
+        Teacher t= new Teacher(null, "a@a.a", 1L, d, 1);
+        Course c= new Course(d, 102, "T", null, 1, t);
+        GradStudent s=new GradStudent(null, "username@universityname.domain",1L , d, 1, null);
+        s.addCourse(c, 10);
+    }
+    @Test
+    public void tc170_GradStudent_addCourse_2(){
+        Department d= new Department("alii", null);
+        Teacher t= new Teacher(null, "a@a.a", 1L, d, 1);
+        Course c= new Course(d, 102, "T", null, 1, t);
+        Course c2= new Course(d, 101, null, null, 2, t);
+        GradStudent s=new GradStudent(null, "username@universityname.domain",1L , d, 1, null);
+        s.addCourse(c, 10);
+        s.addCourse(c2, 90);
+        assert(s.getGPA()==virgüldenSonraİkiBasamak(8/3.0)||(s.getGPA()==8/3.0));
+    }
+    @Test
+    public void tc170_GradStudent_addCourse_3(){
+        Department d= new Department("alii", null);
+        Teacher t= new Teacher(null, "a@a.a", 1L, d, 1);
+        Course c= new Course(d, 102, "T", null, 1, t);
+        GradStudent s=new GradStudent(null, "username@universityname.domain",1L , d, 1, null);
+        s.addCourse(c, 10);
+        s.addCourse(c, 90);   
+        assert(s.getGPA()==4.0);
+        // Also my code does not allw you add the same course again
+        // I should change the mechanism and add statement to 
+        //change value if it has been taken again
+    }
+    @Test
+    public void tc170_GradStudent_addCourse_4(){
+        Department d= new Department("alii", null);
+        Teacher t = new Teacher(null, "a@a.a", 1L, d, 1);
+        Course c= new Course(d, 102, "T", null, 1, t);
+        GradStudent s=new GradStudent(null, "username@universityname.domain",1L , d, 1, null);
+        try {
+            s.addCourse(c, -1);
+        } catch (InvalidGradeException e) {
+            assert(true);
+            return;
+        }
+        assert(false);
+        // i forgot check if grade value is valid or not
+        // I could add an if statement to check ant throw the right exception
+    }
+    @Test
+    public void tc170_GradStudent_addCourse_5(){
+        Department d= new Department("alii", null);
+        Teacher t = new Teacher(null, "a@a.a", 1L, d, 1);
+        Course c= new Course(d, 102, "T", null, 1, t);
+        GradStudent s=new GradStudent(null, "username@universityname.domain",1L , d, 1, null);
+        try {
+            s.addCourse(c, 101);
+        } catch (InvalidGradeException e) {
+            assert(true);
+            return;
+        }
+        assert(false);
+        // i forgot check if grade value is valid or not
+        // I could add an if statement to check throw the right exception
+    }
+    @Test
+    public void tc170_GradStudent_addCourse_6(){
+        Department d= new Department("alii", null);
+        Teacher t = new Teacher(null, "a@a.a", 1L, d, 1);
+        Course c= new Course(d, 102, "T", null, 1, t);
+        Course c2= new Course(d, 102, "T", null, 1, t);
+        Course c3= new Course(d, 102, "T", null, 1, t);
+        GradStudent s=new GradStudent(null, "username@universityname.domain",1L , d, 1, null);
+            s.addCourse(c, 10);
+            s.addCourse(c, 90);
+            s.addCourse(c2, 70);
+            s.addCourse(c3, 50);
+        assert(s.getGPA()==2.0);
+        // Also my code does not allw you add the same course again
+        // I should change the mechanism and add statement to 
+        //change value if it has been taken again     
+    }
+    @Test
+    public void tc170_GradStudent_addCourse_7(){
+        Department d= new Department("alii", null);
+        Teacher t = new Teacher(null, "a@a.a", 1L, d, 1);
+        Course c= new Course(d, 102, "T", null, 1, t);
+        GradStudent s=new GradStudent(null, "username@universityname.domain",1L , d, 1, null);
+        s.addCourse(c, 10);
+        try {
+            s.addCourse(c, -1);
+        } catch (InvalidGradeException e) {
+            assert(true);
+            return;
+        }
+        assert(false);
+        // i forgot check if grade value is valid or not
+        // I could add an if statement to check throw the right exception
+    }
