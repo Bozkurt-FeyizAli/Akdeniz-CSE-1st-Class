@@ -1440,3 +1440,77 @@ public class Assignment03Tests_20220808073 {
         s.addCourse(c, 0);
         assert(s.courseResult(c).equals("Failed"));
     }
+    @Test
+    public void tc154_Student_courseResult_2(){
+        Department d= new Department("alii", null);
+        Teacher t = new Teacher(null, "a@a.a", 1L, d, 1);
+        Course c= new Course(d, 102, "T", null, 1, t);
+        Student s=new Student(null, "username@universityname.domain",1L , d);
+        s.addCourse(c, 45);
+        assert(s.courseResult(c).equals("Failed"));
+    }
+    @Test
+    public void tc155_Student_courseResult_3(){
+        Department d= new Department("alii", null);
+        Teacher t = new Teacher(null, "a@a.a", 1L, d, 1);
+        Course c= new Course(d, 102, "T", null, 1, t);
+        Student s=new Student(null, "username@universityname.domain",1L , d);
+        s.addCourse(c, 45.5);
+        assert(s.courseResult(c).equals("Conditionally Passed"));
+    }
+    @Test
+    public void tc155_Student_courseResult_4(){
+        Department d= new Department("alii", null);
+        Teacher t = new Teacher(null, "a@a.a", 1L, d, 1);
+        Course c= new Course(d, 102, "T", null, 1, t);
+        Student s=new Student(null, "username@universityname.domain",1L , d);
+        s.addCourse(c, 59);
+        assert(s.courseResult(c).equals("Conditionally Passed"));
+    }
+    @Test
+    public void tc155_Student_courseResult_5(){
+        Department d= new Department("alii", null);
+        Teacher t = new Teacher(null, "a@a.a", 1L, d, 1);
+        Course c= new Course(d, 102, "T", null, 1, t);
+        Student s=new Student(null, "username@universityname.domain",1L , d);
+        s.addCourse(c, 59.5);
+        assert(s.courseResult(c).equals("Passed"));
+    }
+    @Test
+    public void tc155_Student_courseResult_6(){
+        Department d= new Department("alii", null);
+        Teacher t = new Teacher(null, "a@a.a", 1L, d, 1);
+        Course c= new Course(d, 102, "T", null, 1, t);
+        Student s=new Student(null, "username@universityname.domain",1L , d);
+        s.addCourse(c, 100);
+        assert(s.courseResult(c).equals("Passed"));
+    }
+    @Test
+    public void tc156_Student_courseResult_3(){
+        Department d= new Department("alii", null);
+        Teacher t = new Teacher(null, "a@a.a", 1L, d, 1);
+        Course c= new Course(d, 102, "T", null, 1, t);
+        Student s=new Student(null, "username@universityname.domain",1L , d);
+        s.addCourse(c, 10);
+        s.addCourse(c, 59.5);
+        assert(s.courseResult(c).equals("Passed"));
+        // My code allow if only garde is bigger than 59.5 not equal to itself
+        // I could change to equal ol bigger
+        // Also my code does not allw you add the same course again
+        // I should change the mechanism and add statement to 
+        //change value if it has been taken again 
+    }
+    @Test
+    public void tc157_Student_courseResult_4(){
+        Department d= new Department("alii", null);
+        Teacher t = new Teacher(null, "a@a.a", 1L, d, 1);
+        Course c= new Course(d, 102, null, null, 2, t);
+        Student s=new Student(null, "username@universityname.domain",2L , d);
+        try {
+            s.courseResult(c);
+        } catch (CourseNotFoundException e) {
+            assert(true);
+            return;
+        }
+        assert(false);
+    }
