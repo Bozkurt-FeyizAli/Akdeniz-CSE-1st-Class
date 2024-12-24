@@ -1514,3 +1514,92 @@ public class Assignment03Tests_20220808073 {
         }
         assert(false);
     }
+    @Test
+    public void tc158_Student_studentGPATest(){
+        Department cse = new Department("CSE", "Computer Engineering");
+        Teacher t = new Teacher("Joseph Ledet", "j@akdeniz.edu.tr", 123L, cse, 1);
+        Course c101 = new Course(cse, 101, "Programing 1", "İntroduction to Programing", 6, t);
+        Course c102 = new Course(cse, 102, "Programing 2", "Object oriented programing", 4, t);
+        Student s = new Student("Test Student", "me@gmail.com", 123L, cse);
+        s.addCourse(c101, 80);
+        s.addCourse(c102, 30);
+        assert(s.getGPA()==1.8);
+    }
+    ////////////// class GradStudent /////////////
+    @Test
+    public void tc170_GradStudent_Constructor_1(){
+        new GradStudent(null, "a@a.a",1L , null, 1, null);
+    }
+    @Test
+    public void tc170_GradStudent_Constructor_2(){
+        try {
+            new GradStudent(null, "a@",1L , null, 1, null);
+        } catch (Exception e) {
+            assert(true);
+            return;
+        }
+        assert(false);
+    }
+    @Test
+    public void tc170_GradStudent_Constructor_2_1(){
+        try {
+            new GradStudent(null, "a.a.a",1L , null, 1, null);
+        } catch (Exception e) {
+            assert(true);
+            return;
+        }
+        assert(false);
+    }
+    @Test
+    public void tc170_GradStudent_Constructor_4(){
+        GradStudent s=new GradStudent(null, "username@universityname.domain",1L , null, 1, null);
+        assert(s.getEmail().equals("username@universityname.domain"));
+    }
+    @Test
+    public void tc170_GradStudent_Constructor_5(){
+        GradStudent s=new GradStudent(null, "a@a.a",20220808073L , null, 1, null);
+        assert(s.getID()==20220808073L);
+    }
+    @Test
+    public void tc170_GradStudent_Constructor_6(){
+        Department d= new Department("alii", null);
+        GradStudent s=new GradStudent(null, "a@a.a",1L , d, 1, null);
+        assert(s.getDepartment()==d);
+    }
+    @Test
+    public void tc170_GradStudent_Constructor_7(){
+        try {
+            new GradStudent(null, "a@a.a",1L , null, -1, null);
+        } catch (InvalidRankException e) {
+            assert(true);
+            return;
+        }
+        assert(false);
+    }
+    @Test
+    public void tc170_GradStudent_Constructor_8(){
+        GradStudent s=new GradStudent(null, "a@a.a",1L , null, 1, null);
+        assert(s.getLevel().equals("Master’s Student"));
+        // actually there is no differnece between pdf and that writing
+        // solution is not to use a keyboard type which java does not use
+    }
+    @Test
+    public void tc170_GradStudent_Constructor_9(){
+        GradStudent s=new GradStudent(null, "a@a.a",1L , null, 2, null);
+        assert(s.getLevel().equals("Doctoral Student"));
+    }
+    @Test
+    public void tc170_GradStudent_Constructor_10(){
+        GradStudent s=new GradStudent(null, "a@a.a",1L , null, 3, null);
+        assert(s.getLevel().equals("Doctoral Candidate"));
+    }
+    @Test
+    public void tc170_GradStudent_Constructor_11(){
+        try {
+            new GradStudent(null, "a@a.a",1L , null, 4, null);
+        } catch (InvalidRankException e) {
+            assert(true);
+            return;
+        }
+        assert(false);
+    }
