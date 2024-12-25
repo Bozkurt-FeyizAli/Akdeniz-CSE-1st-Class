@@ -968,3 +968,70 @@ class InvalidGradeException extends RuntimeException{
     }
 }
 
+class CourseNotFoundException extends RuntimeException{
+    private Course course;
+    private Student student;
+    CourseNotFoundException(){
+
+    }
+    CourseNotFoundException(Course course, Student student){
+        this.student=student;
+        this.course=course;
+    }
+    @Override
+    public String toString() {
+        
+        return "CourseNotFoundException: " + student.getID() + 
+        " has not yet taken " + course.courseCode();
+    }
+}
+class DepartmentMismatchException extends RuntimeException{
+    private Department department;
+    private Teacher person;
+    private Course course;
+    DepartmentMismatchException(Course course,Teacher person){
+        this.course = course;
+        this.person = person;
+        department = null;
+    }
+    DepartmentMismatchException(Department department,Teacher person){
+        this.department = department;
+        this.person = person;
+        course = null;
+    }
+    @Override
+    public String toString() {
+        if(course == null){
+            return "DepartmentMismatchException: " + person.getName()+
+            " ("+ person.getID()+") cannot be chair of " + department.getCode()+" because he"+
+            "/she is currently assigned to "+ person.getDepartment().getCode();
+        }
+        else{
+            return "DepartmentMismatchException: " + person.getName()+
+            " ("+ person.getID()+") cannot teach " + course.courseCode()+" because he"+
+            "/she is currently assigned to "+ person.getDepartment();
+        }
+
+    }
+}
+
+// class DepartmentMismatchException extends Exception {
+//     public DepartmentMismatchException(Department d, Teacher t) {
+//         super("Department mismatch: " + d.getName() + " and " + t.getDepartment().getName());
+//     }
+
+//     public DepartmentMismatchException(Course c, Teacher t) {
+//         super("Department mismatch: " + c.getDepartment().getName() + " and " + t.getDepartment().getName());
+//     }
+// }
+
+// class InvalidGradeException extends RuntimeException {
+//     public InvalidGradeException(double grade) {
+//         super("Invalid grade: " + grade);
+//     }
+// }
+// class ErrorException extends RuntimeException {
+//     public ErrorException() {
+//         super("Error");
+//     }
+// }
