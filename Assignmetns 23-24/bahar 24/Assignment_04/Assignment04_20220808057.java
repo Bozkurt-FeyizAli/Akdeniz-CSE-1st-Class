@@ -393,3 +393,100 @@ class Student extends Person {
             throw new InvalidGradeException(grade);
         }
     }
+    
+    
+    
+
+    public int getAttemptedAKTS() {
+        return AKTS;
+    }
+
+    public int getAKTS() {
+        return passedAKTS;
+    }
+
+    // public boolean exists(ArrayList<Course> courses, Course course) {
+    //     for (int i = 0; i < courses.size(); i++) {
+    //         if (courses.get(i).getCourseNumber() == course.getCourseNumber()) {
+    //             return true;
+    //         }
+    //     }
+    //     return false;
+    // }
+    public boolean exists(ArrayList<Course> list, Course x) {
+        for (Course element : list) {
+            if (element.getCourseNumber() == x.getCourseNumber())
+                return true;
+        }
+        return false;
+    }
+
+    // public int existsindx(ArrayList<Course> courses, Course course) {
+    //     for (int i = 0; i < courses.size(); i++) {
+    //         if (courses.get(i).getCourseNumber() == course.getCourseNumber()) {
+    //             return i;
+    //         }
+    //     }
+    //     return -1;
+    // }
+    public int existsindx(ArrayList<Course> list, Course x) {
+    for (int i = 0; i < list.size(); i++) {
+        if (list.get(i).getCourseNumber() == x.getCourseNumber())
+            return i;
+    }
+    return -1;
+}
+
+    public ArrayList<Course> getCourses() {
+        return courses;
+    }
+
+    public double courseGPAPoints(Course course) throws CourseNotFoundException {
+        if (!exists(courses, course)) {
+            throw new CourseNotFoundException();
+        } else {
+            if (course.getGrade() > 87)
+                return 4.0;
+            else if (course.getGrade() > 80)
+                return 3.5;
+            else if (course.getGrade() > 73)
+                return 3.0;
+            else if (course.getGrade() > 66)
+                return 2.5;
+            else if (course.getGrade() > 59)
+                return 2.0;
+            else if (course.getGrade() > 52)
+                return 1.5;
+            else if (course.getGrade() > 45)
+                return 1.0;
+            else if (course.getGrade() > 34)
+                return 0.5;
+            else
+                return 0.0;
+        }
+    }
+
+    public String courseGradeLetter(Course course) throws CourseNotFoundException {
+        if (!exists(courses, course)) {
+            throw new CourseNotFoundException();
+        } else {
+            if (course.getGrade() > 87)
+                return "AA";
+            else if (course.getGrade() > 80)
+                return "BA";
+            else if (course.getGrade() > 73)
+                return "BB";
+            else if (course.getGrade() > 66)
+                return "CB";
+            else if (course.getGrade() > 59)
+                return "CC";
+            else if (course.getGrade() > 52)
+                return "DC";
+            else if (course.getGrade() > 45)
+                return "DD";
+            else if (course.getGrade() > 34)
+                return "FD";
+            else
+                return "FF";
+        }
+    }
