@@ -821,3 +821,105 @@ public int existsindx(ArrayList<Course> list, Course x) {
     return -1;
 }
 
+public double getGPA() {
+    if (this.grade > 87)
+        return 4.0;
+    else if (this.grade > 80)
+        return 3.5;
+    else if (this.grade > 73)
+        return 3.0;
+    else if (this.grade > 66)
+        return 2.5;
+    else if (this.grade > 59)
+        return 2.0;
+    else if (this.grade > 52)
+        return 1.5;
+    else if (this.grade > 45)
+        return 1.0;
+    else if (this.grade > 34)
+        return 0.5;
+    else
+        return 0.0;
+}
+
+public double courseGPAPoints() {
+    if (this.grade > 87)
+        return 4.0;
+    else if (this.grade > 80)
+        return 3.5;
+    else if (this.grade > 73)
+        return 3.0;
+    else if (this.grade > 66)
+        return 2.5;
+    else if (this.grade > 59)
+        return 2.0;
+    else if (this.grade > 52)
+        return 1.5;
+    else if (this.grade > 45)
+        return 1.0;
+    else if (this.grade > 34)
+        return 0.5;
+    else
+        return 0.0;
+}
+
+public String courseGradeLetter() {
+    if (this.grade > 87)
+        return "AA";
+    else if (this.grade > 80)
+        return "BA";
+    else if (this.grade > 73)
+        return "BB";
+    else if (this.grade > 66)
+        return "CB";
+    else if (this.grade > 59)
+        return "CC";
+    else if (this.grade > 52)
+        return "DC";
+    else if (this.grade > 45)
+        return "DD";
+    else if (this.grade > 34)
+        return "FD";
+    else
+        return "FF";
+}
+
+public String courseResult() {
+    if (this.grade > 87)
+        return "Passed";
+    else if (this.grade > 80)
+        return "Passed";
+    else if (this.grade > 73)
+        return "Passed";
+    else if (this.grade > 66)
+        return "Passed";
+    else if (this.grade > 59)
+        return "Passed";
+    else if (this.grade > 52)
+        return "Conditionally Passed";
+    else if (this.grade > 45)
+        return "Conditionally Passed";
+    else if (this.grade > 34)
+        return "Failed";
+    else
+        return "Failed";
+}
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public Semester getSemester() {
+        return semester;
+    }
+
+    public double getGrade() {
+        return grade;
+    }
+    @Override
+public String toString() {
+    return course.courseCode() + " - " + course.getTitle() + " (" + course.getAKTS() + ")" + ": " + grade;
+}
+}
+
+// SemesterNotFoundException
