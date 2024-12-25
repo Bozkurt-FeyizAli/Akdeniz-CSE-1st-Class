@@ -165,3 +165,91 @@ class Course{
     public String getTitle() {
         return title;
     }
+    public void setAKTS(int AKTS) {
+        if(AKTS>0){
+        this.AKTS = AKTS;
+        }
+        else{
+            throw new ErrorException();
+        }
+    }
+    public void setCourseNumber(int courseNumber) {
+        if((courseNumber>=100&&courseNumber<=999)||
+        (courseNumber>=5000&&courseNumber<=5999)||
+        (courseNumber>=7000&&courseNumber<=7999)){
+        this.courseNumber = courseNumber;
+        }
+        else{
+            throw new ErrorException();
+        }
+    }
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    public void setTitle(String title) {
+        this.title = title;
+    }
+    @Override
+    public String toString() {
+        return courseCode()+" - "+title+" ("+AKTS+")";
+    }
+    public String courseCode(){
+        return department.getCode()+courseNumber;
+    }
+}
+
+abstract class Person{
+    private String name;
+    private String email;
+    private long ID;
+    private Department department;
+    Person(String name,String email,long ID,Department department){
+        this.department=department;
+        setEmail(email);
+        setID(ID);
+        setName(name);
+    }
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+    public Department getDepartment() {
+        return department;
+    }
+    public void setID(long id) {
+        ID = id;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public String getEmail() {
+        return email;
+    }
+    public long getID() {
+        return ID;
+    }
+    public String getName() {
+        return name;
+    }
+    public boolean isEmailValid(String email){
+        if     (!email.contains("@"))
+                {return false;}
+        else if(!email.contains("."))
+                {return false;}
+        else if((email.indexOf("@", 2)-
+                email.indexOf(".",email.indexOf("@")))>-2)
+                {return false;}           
+        else 
+                {return true;}
+        }
+        public void setEmail(String email){
+            if(isEmailValid(email))
+                this.email=email;
+            else {
+                throw new ErrorException();
+            }
+        }
+        @Override
+        public String toString() {
+            return name+ " "+" ("+ ID+")" +" - "+ email;
+    }
+}
