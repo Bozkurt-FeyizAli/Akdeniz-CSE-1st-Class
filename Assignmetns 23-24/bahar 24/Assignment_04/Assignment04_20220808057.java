@@ -923,3 +923,48 @@ public String toString() {
 }
 
 // SemesterNotFoundException
+class SemesterNotFoundException extends RuntimeException {
+    private final Student student;
+    private final Semester semester;
+
+    public SemesterNotFoundException(Student student, Semester semester) {
+        this.student = student;
+        this.semester = semester;
+    }
+    
+    @Override
+    public String toString() {
+        return "SemesterNotFoundException: " + student.getID() + " has not taken any courses in " + semester;
+    }
+}
+
+class ErrorException extends RuntimeException{
+    @Override
+    public String toString(){
+        return "ErrorException : "+ getMessage();
+    }
+}
+class InvalidRankException extends RuntimeException{
+    int rank;
+    InvalidRankException(int rank){
+        this.rank=rank;
+    }
+    @Override
+    public String toString(){
+        return "InvalidRankException: " + rank ;
+    }
+}
+class InvalidGradeException extends RuntimeException{
+    double grade;
+    InvalidGradeException(double grade){
+       setGrade(grade);
+    }
+    public void setGrade(double grade) {
+        this.grade = grade;
+    }
+    @Override
+    public String toString(){
+        return String.format("InvalidGradeException:  %f",  grade);
+    }
+}
+
