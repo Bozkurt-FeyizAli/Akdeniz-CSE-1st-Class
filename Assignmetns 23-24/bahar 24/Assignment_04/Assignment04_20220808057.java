@@ -755,3 +755,69 @@ class GradStudent extends Student{
     }
 }
 
+class Semester {
+    private final int season;
+    private final int year;
+
+    public Semester(int season, int year) {
+        if (season < 1 || season > 3) {
+            throw new IllegalArgumentException("Invalid season");
+        }
+        this.season = season;
+        this.year = year;
+    }
+
+    public String getSeason() {
+        switch (season) {
+            case 1:
+                return "Fall";
+            case 2:
+                return "Spring";
+            case 3:
+                return "Summer";
+            default:
+                return "Unknown";
+        }
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    @Override
+    public String toString() {
+        return getSeason() + " - " + year;
+    }
+}
+
+class Enrollment {
+    private ArrayList<Course> courses;
+    private Student student;
+    private Course course;
+    private Semester semester;
+    private double grade;
+    
+
+    Enrollment(Student student, Course course, Semester semester, double grade) {
+        this.student = student;
+        this.course = course;
+        this.semester = semester;
+        this.grade = grade;
+    }
+
+    public boolean exists(ArrayList<Course> list, Course x) {
+        for (Course element : list) {
+            if (element.getCourseNumber() == x.getCourseNumber())
+                return true;
+        }
+        return false;
+    }
+
+public int existsindx(ArrayList<Course> list, Course x) {
+    for (int i = 0; i < list.size(); i++) {
+        if (list.get(i).getCourseNumber() == x.getCourseNumber())
+            return i;
+    }
+    return -1;
+}
+
