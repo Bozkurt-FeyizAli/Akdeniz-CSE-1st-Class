@@ -676,3 +676,82 @@ class GradStudent extends Student{
         else
         throw new CourseNotFoundException(course, this);
     }
+    
+    
+    // public String getTeachingAssistant() {
+    //     Course e = teachingAssistant;
+    //     e.courseCode();
+    //     return e.courseCode() + " - " + e.getTitle()+"("+e.getAKTS()+")";
+    // }
+    public Course getTeachingAssistant() {
+        return teachingAssistant;
+    }
+    
+    
+    
+
+    @Override
+   public double courseGPAPoints(Course course) throws CourseNotFoundException{
+        if(!exists(getCourses(), course)){
+            throw new CourseNotFoundException();
+        }else{
+        if(course.getGrade()>89)
+        return 4.0;
+        else if(course.getGrade()>84)
+        return 3.5;
+        else if(course.getGrade()>79)
+        return 3.0;
+        else if(course.getGrade()>74)
+        return 2.5;
+        else if(course.getGrade()>69)
+        return 2.0;
+        else 
+        return 0.0;
+        }
+    }
+
+    @Override
+    public String courseGradeLetter(Course course)
+              throws CourseNotFoundException {
+        if(!exists(getCourses(), course)){
+            throw new CourseNotFoundException();
+        }else{
+        if(course.getGrade()>89)
+        return "AA";
+        else if(course.getGrade()>84)
+        return "BA";
+        else if(course.getGrade()>79)
+        return "BB";
+        else if(course.getGrade()>74)
+        return "CB";
+        else if(course.getGrade()>69)
+        return "CC";
+        else 
+        return "FF";
+        }   
+    }
+    @Override
+    public String courseResult(Course course) throws CourseNotFoundException{
+        if(!exists(getCourses(), course)){
+            throw new CourseNotFoundException();
+        }else{
+        if(course.getGrade()>89)
+        return "Passed";
+        else if(course.getGrade()>84)
+        return "Passed";
+        else if(course.getGrade()>79)
+        return "Passed";
+        else if(course.getGrade()>74)
+        return "Passed";
+        else if(course.getGrade()>69)
+        return "Passed";
+        else 
+        return "Failed";
+        }
+    }
+    @Override
+    public String toString() {
+        return super.toString();
+    }
+}
+
