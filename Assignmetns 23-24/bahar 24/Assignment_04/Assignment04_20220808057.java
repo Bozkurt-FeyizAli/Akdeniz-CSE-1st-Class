@@ -253,3 +253,65 @@ abstract class Person{
             return name+ " "+" ("+ ID+")" +" - "+ email;
     }
 }
+
+class Teacher extends Person{
+
+    private int rank;
+
+
+    Teacher(String name,String email,long ID,Department department,int rank){
+        super(name, email, ID, department);
+        setDepartment(department);
+        setRank(rank);
+    }
+
+    @Override
+    public void setDepartment(Department department) {
+        if(this.getDepartment()!=null){
+        if(this.getDepartment().getChair()==this)
+        this.getDepartment().setChair(null);}
+        super.setDepartment(department);
+    }
+    private void setRank(int rank) {
+        if(rank<6&&rank>0){
+            this.rank = rank;
+            }
+        else{
+            throw new InvalidRankException(rank);
+            }
+    }
+    public int getRank() {
+        return rank;
+    }
+    public String getTitle(){
+        switch (rank) {
+            case 1:
+            return "Lecturer";
+            case 2:
+            return "Adjunct Instructor";  
+            case 3:
+                return "Assistant Professor";
+            case 4:
+                return "Associate Professor";
+            default:
+            return "Professor";
+        }
+    }
+    public void promote(){
+        if(rank!=5)
+        rank++;
+        else
+        throw new InvalidRankException(rank);
+    }
+    public void demote(){
+        if(rank!=1)
+        rank--;
+        else
+        throw new InvalidRankException(rank);
+    }
+    @Override
+    public String toString() {
+        return getTitle()+" "+super.toString();
+    }
+}
+
