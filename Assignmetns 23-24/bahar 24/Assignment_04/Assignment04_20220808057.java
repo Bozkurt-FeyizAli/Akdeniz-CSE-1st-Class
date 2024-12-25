@@ -614,3 +614,65 @@ public String transcript() {
 
     return sb.toString();
 }
+
+
+}
+
+
+class GradStudent extends Student{
+    private int rank;
+    private String thesisTopic;
+    private Course teachingAssistant;
+    private long studentID;
+    private HashSet<String> coursesTaken;
+
+    public void addCourseTaken(String courseCode) {
+        coursesTaken.add(courseCode);
+    }
+    //added
+    GradStudent(String name, String email, long number, Department department,
+                int rank, String thesisTopic) throws InvalidRankException{
+        super(name, email, number, department);
+        setRank(rank);
+        setThesisTopic(thesisTopic);
+    }
+    public void setRank(int rank)throws InvalidRankException {
+        if(rank>=1&&rank<=3){
+            this.rank=rank;
+        }else{
+            throw new InvalidRankException(rank);
+        }
+    }
+    public String getLevel(){
+        switch(rank){
+            case 1: 
+                return "Master's Student";
+            case 2:
+                return "Doctoral Student";
+            default:
+                return "Doctoral Candidate";
+        }
+    }
+    public String getThesisTopic() {
+        return thesisTopic;
+    }
+    public void setThesisTopic(String thesisTopic) {
+        this.thesisTopic = thesisTopic;
+    }
+
+        public List<Course> getCoursesTaken() {
+            List<Course> coursesTaken = new ArrayList<>();
+            return coursesTaken;
+        }
+    
+    //added
+    public void setTeachingAssistant(Course course) {
+        if(getCourseWithMaxGrade().containsKey(course)){
+            if(getCourseWithMaxGrade().get(course)>=80)
+                teachingAssistant=course;
+            else
+            throw new CourseNotFoundException(course, this);    
+        }
+        else
+        throw new CourseNotFoundException(course, this);
+    }
