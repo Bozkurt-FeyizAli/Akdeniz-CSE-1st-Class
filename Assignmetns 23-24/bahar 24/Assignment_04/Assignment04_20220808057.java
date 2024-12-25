@@ -315,3 +315,81 @@ class Teacher extends Person{
     }
 }
 
+
+class Student extends Person {
+    private int AKTS;
+    private int passedAKTS;
+    private ArrayList<Course> courses;
+    private ArrayList<Enrollment> enrollments = new ArrayList<Enrollment>();
+    //added
+    private HashMap<Course, Double> courseWithMaxGrade= new HashMap<>();
+
+
+    Student(String name, String email, long number, Department department) {
+        super(name, email, number, department);
+        AKTS = 0;
+        courses = new ArrayList<>();
+    }
+    //added
+    public HashMap<Course, Double> getCourseWithMaxGrade() {
+        return courseWithMaxGrade;
+    }
+
+    public void setPassedAKTS(Course course) {
+        if (course.getGrade() >= 60) {
+            passedAKTS += course.getAKTS();
+        }
+    }
+
+    
+    // public void addCourse(Course course, Semester semester, double grade) throws InvalidGradeException {
+    //     enrollments.add(new Enrollment(this, course, semester, grade));
+    //     if (grade >= 0 && grade <= 100) {
+    //         if (exists(courses, course)) {
+    //             courses.get(existsindx(courses, course)).setGrade(grade);
+    //         } else {
+    //             courses.add(course);
+    //             courses.get(existsindx(courses, course)).setGrade(grade);
+    //         }
+    //         AKTS += course.getAKTS();
+    //     } 
+    //     else {
+    //         throw new InvalidGradeException(grade);
+    //     }
+    // }
+
+    // public void addCourse(Course course, Semester semester, double grade) throws InvalidGradeException {
+    //     enrollments.add(new Enrollment(this, course, semester, grade));
+    //     if (grade >= 0 && grade <= 100) {
+    //         if (exists(courses, course)) {
+    //             courses.get(existsindx(courses, course)).setGrade(grade);
+    //         } else {
+    //             courses.add(course);
+    //             courses.get(courses.size() - 1).setGrade(grade);
+    //         }
+    //         AKTS += course.getAKTS();
+    //     } else {
+    //         throw new InvalidGradeException(grade);
+    //     }
+    // }
+
+    public void addCourse(Course course, Semester semester, double grade) throws InvalidGradeException {
+        enrollments.add(new Enrollment(this, course, semester, grade));
+        if (grade >= 0 && grade <= 100) {
+            if (exists(courses, course)) {
+                courses.get(existsindx(courses, course)).setGrade(grade);
+            } else {
+                courses.add(course);
+                courses.get(courses.size() - 1).setGrade(grade);
+            }
+            AKTS += course.getAKTS();
+
+            //added
+            courseWithMaxGrade.putIfAbsent(course, grade);
+            if(grade>courseWithMaxGrade.get(course))
+                courseWithMaxGrade.put(course, grade);
+
+        } else {
+            throw new InvalidGradeException(grade);
+        }
+    }
