@@ -490,3 +490,127 @@ class Student extends Person {
                 return "FF";
         }
     }
+
+    public String courseResult(Course course) throws CourseNotFoundException {
+        if (!exists(courses, course)) {
+            throw new CourseNotFoundException();
+        } else {
+            if (course.getGrade() > 87)
+                return "Passed";
+            else if (course.getGrade() > 80)
+                return "Passed";
+            else if (course.getGrade() > 73)
+                return "Passed";
+            else if (course.getGrade() > 66)
+                return "Passed";
+            else if (course.getGrade() > 59)
+                return "Passed";
+            else if (course.getGrade() > 52)
+                return "Conditionally Passed";
+            else if (course.getGrade() > 45)
+                return "Conditionally Passed";
+            else if (course.getGrade() > 34)
+                return "Failed";
+            else
+                return "Failed";
+        }
+    }
+
+    public double getGPA() {
+        double getGPA = 0;
+        for (int i = 0; i < courses.size(); i++) {
+            getGPA += courseGPAPoints(courses.get(i)) * courses.get(i).getAKTS();
+        }
+        return getGPA / AKTS;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + "-GPA:" + getGPA();
+    }
+
+        
+    public String listGrades(Course course) {
+        StringBuilder sb = new StringBuilder();
+        for (Enrollment e : enrollments) {
+            if (e.getCourse().equals(course)) {
+                sb.append(e.getSemester()).append(" - ").append(e.courseGradeLetter()).append("\n");
+            }
+        }
+        return sb.toString();
+    }
+
+    public String listGrades(Semester semester) {
+        StringBuilder sb = new StringBuilder();
+        for (Enrollment e : enrollments) {
+            if (e.getSemester().equals(semester)) {
+                // sb.append(e.getCourse()).append(" - "+e.courseGradeLetter()).append("\n");
+                sb.append(e.getCourse().courseCode()).append(" - "+e.courseGradeLetter()).append("\n");
+            }
+        }
+        return sb.toString();
+    }
+
+// public String transcript() {
+//     StringBuilder sb = new StringBuilder();
+//     double totalGPA = 0.0;
+//     int totalCourses = 0;
+
+//     for (Enrollment e : enrollments) {
+//         sb.append(e.getSemester()).append("  \n\t")
+//                 .append(e.getCourse().courseCode())
+//                 .append(" - ")
+//                 .append(e.courseGradeLetter()).append("\n");
+
+//         totalGPA += e.getGPA() * e.getCourse().getAKTS();
+//         totalCourses += e.getCourse().getAKTS();
+
+//         sb.append("GPA: ").append(e.getGPA()).append("\n\n");
+//     }
+
+//     double overallGPA = totalGPA / totalCourses;
+//     sb.append("Overall GPA: ").append(overallGPA).append("\n");
+
+//     return sb.toString();
+// }
+
+public String transcript() {
+    StringBuilder sb = new StringBuilder();
+    double totalGPA = 0.0;
+    int totalCourses = 0;
+
+    // Dönemlerin listesini tutmak için bir HashSet oluşturuyoruz
+    HashSet<Semester> semesters = new HashSet<>();
+    for (Enrollment e : enrollments) {
+        semesters.add(e.getSemester());
+    }
+
+    // Her dönem için ayrı ayrı notları listeliyoruz
+    for (Semester semester : semesters) {
+        sb.append(semester).append("\n");
+
+        double semesterGPA = 0.0;
+        int semesterCourses = 0;
+
+        for (Enrollment e : enrollments) {
+            if (e.getSemester().equals(semester)) {
+                sb.append("\t").append(e.getCourse().courseCode())
+                  .append(" - ").append(e.courseGradeLetter()).append("\n");
+
+                semesterGPA += e.getGPA() * e.getCourse().getAKTS();
+                semesterCourses += e.getCourse().getAKTS();
+            }
+        }
+
+        double semesterOverallGPA = semesterGPA / semesterCourses;
+        sb.append("GPA: ").append(semesterOverallGPA).append("\n\n");
+
+        totalGPA += semesterGPA;
+        totalCourses += semesterCourses;
+    }
+
+    double overallGPA = totalGPA / totalCourses;
+    sb.append("Overall GPA: ").append(overallGPA).append("\n");
+
+    return sb.toString();
+}
