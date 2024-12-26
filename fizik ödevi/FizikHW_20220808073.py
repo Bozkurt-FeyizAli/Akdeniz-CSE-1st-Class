@@ -150,3 +150,139 @@ from matplotlib.colors import LinearSegmentedColormap
 # # Assume V is a 2D list (array) with values
 # V = [[i + j for j in range(10)] for i in range(10)]  # Example 2D list initialization, replace with actual data
 
+# # Fill v_map with values from V
+# for i in range(10):
+#     for j in range(10):
+#         key = f"{i}.{j}"
+#         v_map[key] = [V[i][j]]
+
+# # Extract the values from v_map to create a 2D array for plotting
+# data = np.zeros((10, 10))
+# for i in range(10):
+#     for j in range(10):
+#         key = f"{i}.{j}"
+#         data[i, j] = v_map[key][0]
+
+# # Plotting the heatmap
+# plt.imshow(data, cmap='viridis', interpolation='nearest')
+# plt.colorbar(label='Value')
+# plt.title('Heatmap of V for same potential points')
+# plt.xlabel('i for x m away')
+# plt.ylabel('j foe x m above')
+# plt.xticks(np.arange(10))
+# plt.yticks(np.arange(10))
+# plt.show()
+
+
+# #//////
+# EPSILON = input("enter volt value of power as a volt:")
+# EPSILON=float(EPSILON)
+
+# # Get the last digit of the charge as a string
+# C = input("enter capasite of capasitor as farad:")
+# C= float(C)
+# R = input("enter resistance of circuit as ohm:")
+# R= float(R)
+# TIMECONSTANT=R*C 
+# # second
+# t = np.linspace(0,  5*TIMECONSTANT, 1000)
+# Q=EPSILON * C * (1 - np.e**(-t / TIMECONSTANT))
+
+# plt.plot(t, Q)
+
+# # Add labels and a title
+# plt.xlabel('Time (s)')
+# plt.ylabel('Q in capasitor (Coulomb)')
+# plt.title('Charging of Capacitor in an RC Circuit')
+
+# # Show the plot
+# plt.grid(True)
+# plt.show()
+
+# I=(EPSILON/R)*np.e**(-t/TIMECONSTANT)
+
+# plt.plot(t, I)
+
+# # Add labels and a title
+# plt.xlabel('Time (s)')
+# plt.ylabel('I in Circuit (Amper)')
+# plt.title('Changing I in the rime')
+
+# # Show the plot
+# plt.grid(True)
+# plt.show()
+
+# V=EPSILON*np.e**(-t/TIMECONSTANT)
+# plt.plot(t, V)
+
+# # Add labels and a title
+# plt.xlabel('Time (second)')
+# plt.ylabel('V in the circuit (volt)')
+# plt.title('Changing V in the rime')
+
+# # Show the plot
+# plt.grid(True)
+# plt.show()
+
+
+# # Function to calculate electric potential at a point due to a point charge
+# import numpy as np
+# import matplotlib.pyplot as plt
+
+# # Function to calculate electric potential at a point due to a point charge
+# def electric_potential(charge, distance):
+#     k = 8.9875 * 10**9  # Coulomb's constant in Nm^2/C^2
+#     return k * charge / distance
+
+# # Calculate charge based on ID number
+# id_number = 2012345673  # Replace this with your actual ID number
+# charge = 3 * 10**-9  # Extract last digit
+
+# # Create a 10x10 matrix
+# matrix_size = 10
+# matrix = np.zeros((matrix_size, matrix_size))
+
+# # Calculate potential at each point in the matrix
+# for i in range(matrix_size):
+#     for j in range(matrix_size):
+#         if i != 0 or j != 0:  # Exclude the point charge itself
+#             distance = np.sqrt((i/10)**2 + (j/10)**2)   # Distance in meters
+#             matrix[i][j] = electric_potential(charge, distance)
+
+# # Plot 2D image of the matrix
+# plt.imshow(matrix, cmap='viridis', origin='lower', extent=[0, 1, 0, 1])
+# plt.colorbar(label='Electric Potential (V)')
+# plt.title('Electric Potential Matrix')
+# plt.xlabel('X-axis (m)')
+# plt.ylabel('Y-axis (m)')
+# plt.xticks(np.arange(0, 1.1, 0.1))  # Adjust x-axis ticks
+# plt.yticks(np.arange(0, 1.1, 0.1))  # Adjust y-axis ticks
+# plt.show()
+
+C = 0.00009529
+R = 9860
+EPSILON = 0.26
+
+# Calculate time constant
+TIMECONSTANT = R * C
+
+# Generate time values
+t = np.linspace(0, 5* TIMECONSTANT, 10000)
+
+# Calculate voltage over time
+V = EPSILON * np.exp(-t / TIMECONSTANT)
+
+# Plot voltage over time
+plt.plot(t, V)
+
+# Add a vertical line at 0.00065 seconds with value 0.13 volts
+plt.axvline(x=0.65, color='r', linestyle='--', label='V = 0.13 V')
+
+# Add annotations for the value
+plt.text(0.00065, 0.13, "(0.00065 s, 0.13 V)", fontsize=9, ha='right', va='bottom')
+
+# Add labels and a title
+plt.xlabel('Time (second)')
+plt.ylabel('V in the circuit (volt)')
+plt.title('Changing V over time')
+
