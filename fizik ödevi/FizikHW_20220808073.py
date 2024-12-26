@@ -286,3 +286,9 @@ plt.xlabel('Time (second)')
 plt.ylabel('V in the circuit (volt)')
 plt.title('Changing V over time')
 
+# Show legend
+plt.legend()
+
+# Show the plot
+plt.grid(True)
+plt.show()
