@@ -84,3 +84,69 @@ from matplotlib.colors import LinearSegmentedColormap
 # # Show the plot
 # plt.show()
 
+
+# # PlotV2
+# diagonal_indices = list(range(1, 10))  # Indices from 1 to 9
+# diagonal_potentials = [electric_potential[i][i] for i in range(1, 10)]  # Diagonal potentials excluding the origin
+
+# # Create the plot
+# plt.figure(figsize=(10, 6))
+# plt.plot(diagonal_indices, diagonal_potentials, marker='o', linestyle='-', color='b', label='Electric Potential')
+
+# # Label the plot
+# plt.title('Electric Potential Plot (Diagonal Points)')
+# plt.xlabel('Index for x and y')
+# plt.ylabel('Electric Potential (V)')
+# plt.legend()
+# plt.grid(True)
+
+# # Show the plot
+# plt.show()
+
+# # f
+
+
+# # # Define the electric potential function
+# grid_size = 10  # Size of the grid (from 0 to 10, inclusive)
+
+# # Generate a grid of coordinates
+# x = np.linspace(0, 1, grid_size)
+# y = np.linspace(0, 1, grid_size)
+# X, Y = np.meshgrid(x, y)
+
+# # Calculate the distance R from the origin (0,0)
+# R = np.sqrt(X**2 + Y**2)
+
+# # Initialize the potential array
+# V = np.zeros_like(R)
+
+# # Calculate the electric potential V
+# for i in range(grid_size):
+#     for j in range(grid_size):
+#         distance = R[i, j]
+#         if distance == 0:
+#             V[i, j] = np.nan  # Avoid division by zero
+#         else:
+#             V[i, j] = k * Q / distance
+
+# # Create a contour plot
+# plt.contour(X, Y, V, levels=41, cmap='viridis')  # Adjust the number of levels as needed
+
+# # Add labels and a title
+# plt.xlabel('X')
+# plt.ylabel('Y')
+# plt.title('Equipotential Lines')
+
+# # Add a color bar to show the potential values
+# plt.colorbar(label='Electric Potential (V)')
+
+# # Show the plot
+# plt.grid(True)
+# plt.show()
+
+
+# v_map = {}
+
+# # Assume V is a 2D list (array) with values
+# V = [[i + j for j in range(10)] for i in range(10)]  # Example 2D list initialization, replace with actual data
+
