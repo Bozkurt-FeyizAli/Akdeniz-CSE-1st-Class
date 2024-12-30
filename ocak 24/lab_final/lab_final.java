@@ -350,3 +350,85 @@ public static int count(char[] chars, char ch){
         }
         return numberOfCategories;
     }
+
+    public static int countWordInRow(String fileNmae) throws Exception{
+        File file = new File(fileNmae);
+        Scanner input= new Scanner(file);
+        int countWordInRow=0;
+        while(input.hasNext()){
+            String[] line= input.nextLine().split(" ");
+            if(line.length>countWordInRow)
+            countWordInRow=line.length;
+        }
+        return countWordInRow;
+
+    }
+
+
+
+    public static void removeSpecifiedWord(String fileName, String deleteWord) throws Exception{
+        File file = new File(fileName);
+        String[][] allWords= new String[countCategory(fileName)][countWordInRow(fileName)];
+        try(Scanner input= new Scanner(file);){
+            int i=0;
+            while(input.hasNextLine()){
+                int j=0;
+                while(input.hasNext()){
+                    if(input.next().equals(deleteWord)){
+                allWords[i][j]=input.next();
+                j++;
+                    }
+                }
+                i++;
+            }
+        }
+        catch(FileNotFoundException e){
+
+        }
+        catch(Exception e){
+        }
+
+         
+        try(FileWriter writer = new FileWriter(file, true);){
+        for(int i=0;i<allWords.length;i++){
+            for(int j=0;j<allWords[i].length;j++){
+                if(allWords[i][j]!=null)
+                writer.write(allWords[i][j]);
+                writer.write(" ");
+            }
+            writer.write("\n");
+        }
+    }
+        catch(IOException e){}
+}
+
+    public static char randomChar(){
+        return (char)((int)('A')+ Math.random()*(int)('Z'));
+    }    
+    public static String randomWord(int i){
+        String word="";
+        for(int j=0;j<i;j++){
+            word+=randomChar();
+        }
+        return word;
+    }
+    
+    public static String randomPalindrome(int n){
+        String result="";
+        while(!isPalindrome(result)){
+            result=randomWord(n);
+        }
+        return result;
+    }
+
+    public static boolean isPalindrome(String word){
+        if(word.length()==1||word.equals("")){
+            return true;
+        }
+        else if(word.charAt(0)!=word.charAt(word.length()-1)){
+            return false;
+        }
+        else{
+            return isPalindrome(word.substring(1, word.length()-1));
+        }
+    }
