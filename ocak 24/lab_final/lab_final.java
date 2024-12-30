@@ -66,3 +66,72 @@ public static int binarySearch(int[] list, int key, int high, int low){
 // }
 
 
+public static int[] decimalToBinary(int number){
+    int[] binaryRepresentation= new int[9];
+    for (int i = 1; number!=0; i++) {
+        binaryRepresentation[binaryRepresentation.length-i]=number%2;
+        number/=2;
+    }
+    return binaryRepresentation;
+
+}
+
+// public static static String asdsdffgdString(int n){
+//     if(n >0){
+//     String  a= Character.toString(randomChar());
+//     String result="";
+//     if(n!=1){
+//         result=a+asdsdffgdString(n-2)+a;}
+//     else{
+//         result= result;
+//     }
+//     return result;
+//     }
+// }
+
+// public static int[] decimalToBinaryas(int n){
+//     int[] result= new int[9];
+//     for (int index = 1; n!=0; index++) {
+//         result[result.length-index]=n%2;
+//         n/=2;
+//     }
+//     return result;
+// }
+
+public static void pyramidsRow(int i){
+    for (int n = 1; n<i ; n++) {
+        System.out.printf("%d", n);
+    }
+    for (int index =i; index >0; index--) {
+        System.out.printf("%d", index);
+    }
+    System.out.println();
+}
+public static void piramit(int i){
+    for (int index = 1; index <i+1; index++) {
+        pyramidsRow(index);
+    }
+}
+
+public static boolean plakaKontrol(String plaka){
+    if(plaka.length()!=7){
+        return false;
+    }
+    else{
+        if((int)plaka.charAt(0)>(int)'9'||(int)plaka.charAt(0)<(int)'0'
+        ||(int)plaka.charAt(1)>(int)'9'||(int)plaka.charAt(1)<(int)'0'){
+            return false;
+        }
+        if((int)plaka.charAt(2)>(int)'Z'||(int)plaka.charAt(2)<(int)'A'||
+           (int)plaka.charAt(3)>(int)'Z'||(int)plaka.charAt(3)<(int)'A'||
+           (int)plaka.charAt(4)>(int)'Z'||(int)plaka.charAt(4)<(int)'A'){
+            return false;
+        }
+        if((int)plaka.charAt(5)>(int)'9'||(int)plaka.charAt(5)<(int)'0'
+        ||(int)plaka.charAt(6)>(int)'9'||(int)plaka.charAt(6)<(int)'0'){
+            return false;
+        }
+        return true;
+    }
+}
+
