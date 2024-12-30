@@ -502,3 +502,53 @@ public static int count(char[] chars, char ch){
         }
         return false;
     }
+
+    public static void FAB(String F, String A, String B, String study)throws Exception{
+        File folder= new File(F);
+        folder.mkdirs();
+        File aFile= new File(folder.getAbsolutePath()+"\\"+A);
+        aFile.createNewFile();
+        File bFile= new File(folder.getAbsolutePath()+"\\"+B);
+        bFile.mkdirs();
+        File sFile= new File(folder.getAbsolutePath()+"\\"+B+"\\"+study);
+        sFile.createNewFile();
+        FileWriter sFileW= new FileWriter(sFile);
+        sFileW.write("zaman akıyor.");
+        sFileW.close();
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// private static int recursiveBinarySearch(int[] list, int key,
+// int low, int high) {
+// if (low > high) // The list has been exhausted without a match
+// return -low - 1;
+
+// int mid = (low + high) / 2;
+// if (key < list[mid])
+// return recursiveBinarySearch(list, key, low, mid - 1);
+// else if (key == list[mid])
+// return mid; 
+// else
+// return recursiveBinarySearch(list, key, mid + 1, high);
+// }
+
+
