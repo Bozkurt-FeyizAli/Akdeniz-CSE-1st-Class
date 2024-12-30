@@ -235,3 +235,118 @@ public static void yarımPiramit(int n){
         yarımPiramit(n-1);}
     //}
 }
+public static void tamPiramit(int n){
+    if(n!=1&&n>0){
+        for(int i=n;i!=0;i--){
+            System.out.print(i+" ");
+        }
+        for(int i=2;i<=n; i++){
+            System.out.print(i+" ");
+        }
+        System.out.println();
+        tamPiramit(n-1);
+    }
+    else
+    for(int i=n;i!=0;i--){
+        System.out.print("  ");
+    }
+    System.out.println(1);
+}
+
+public static int[] decimalToBinary1(int number){
+    int arrayLength=0;
+    while(number!=0){
+        number/=2;
+        arrayLength++;
+    }
+    int[] decimalToBinary= new int[arrayLength];
+    int a=1;
+    while(number!=0){
+        decimalToBinary[decimalToBinary.length-a]=number%2;
+        number/=2;
+        a++;
+    }
+    return decimalToBinary;
+}
+
+public static int recursiveGCD(int m, int n){
+    if(m%n==0){
+        return n;
+    }
+    else{
+        return recursiveGCD(n, m%n);
+    }
+}
+
+public static double sumSeries(int i){
+    if(i==1){
+        return 1/3.0;
+    }
+    else{
+        return (i*1.0/2*i+1)+sumSeries(i-1);
+    }
+}
+
+public static void reverseDisplay(int number){
+    if(number/10==0){
+        System.out.print(number%10);
+    }
+    else{
+        System.out.print(number%10);
+        reverseDisplay(number/10);
+    }
+}
+
+public static void reverseDisplayString(String n){
+    if(n.length()==1){
+        System.out.print(n.charAt(0));
+    }
+    else{
+        System.out.print(n.charAt(n.length()-1));
+        reverseDisplayString(n.substring(0, n.length()-1));
+    }
+}
+
+public static int count(char[] chars, char ch, int high){
+   if(high==-1){
+    return 0;
+   }
+   else{
+    if(chars[high]==ch){
+    return 1+count(chars, ch, high-1);
+    }
+    else{
+        return count(chars, ch, high-1);
+    }
+   }
+}
+
+public static int count(char[] chars, char ch){
+    int result=0;
+    int high= chars.length;
+       result+=count(chars, ch, (high-1));
+    return result;
+}
+
+    public static int countCategory(String studentScoresFile)  {
+        int numberOfCategories=0;
+        File file = new File(studentScoresFile);
+        if(!file.exists()){
+            System.out.printf("ERROR: %s file does not exist!",
+                                      studentScoresFile);
+            System.out.println();
+        }
+        else{
+            try (Scanner input = new Scanner(new File(studentScoresFile)); ){
+                while (input.hasNext()) {
+                    String line = input.nextLine();
+                    numberOfCategories++;
+                } 
+                input.close();
+            }
+            catch (FileNotFoundException e) {
+                System.out.println("ERROR: Belirtilen dosya bulunamadı.");
+            }
+        }
+        return numberOfCategories;
+    }
