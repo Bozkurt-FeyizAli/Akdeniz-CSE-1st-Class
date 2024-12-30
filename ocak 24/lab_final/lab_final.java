@@ -432,3 +432,73 @@ public static int count(char[] chars, char ch){
             return isPalindrome(word.substring(1, word.length()-1));
         }
     }
+
+    public static boolean isPalindrome(String str, int start, int end){
+        // start=0;
+        // end=str.length()-1;
+        if(str.equals("")||str.length()==1||str.length()==0||str.length()<2){
+            return true;
+        }
+        else if(str.charAt(end)!=str.charAt(start)){
+            return false;
+        }
+        else{
+            if(start+1==end||start+1>end){
+                return true;
+            }
+            return isPalindrome(str, start+1, end-1);
+        }
+ 
+    }
+
+    public static void file(String path, String fileName, String txtName) throws Exception{
+        File txt = new File(txtName);
+        
+        
+        String randomPath="";
+        for(int i=0;i<Math.random()*5;i++){
+             randomPath+="\\"+randomWord(5);
+        }
+        File folder= new File(path+"\\"+randomPath);
+        folder.mkdirs();
+        File file = new File(folder.getAbsolutePath()+"\\"+fileName);
+       
+
+
+        boolean devam=false;
+        String[][] txtWords= new String[countCategory(txtName)][countWordInRow(txtName)];
+        String[][] fileWords= new String[countCategory(txtName)][countWordInRow(txtName)];
+        FileWriter writer= new FileWriter(file, true);
+        int k=1;
+        for(int i=0;i<txtWords.length;i++){
+            for(int j=0; j<txtWords[i].length;j++){
+                do{
+                    String candidate= randomWord(k);
+                    
+                    devam= isWordInArray(txtWords, txtName);
+                    if(devam){
+                        fileWords[i][j]=candidate;
+                    }
+                    k++;
+                }while(devam);
+            }
+        }
+        for(int i=0;i<fileWords.length;i++){
+            for(int j=0;j<fileWords[i].length;j++){
+                writer.write(fileWords[i][j]);
+            }
+        } 
+        writer.close();
+
+    }
+    public static boolean isWordInArray(String[][] array, String word){
+        for(int i=0;i<array.length;i++){
+            for(int j=0;j<array[i].length;j++){
+                if(array[i][j]==null)
+                continue;
+                if(array[i][j].equals(word))
+                return true;
+            }
+        }
+        return false;
+    }
