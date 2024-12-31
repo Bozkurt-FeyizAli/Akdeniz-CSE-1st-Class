@@ -63,3 +63,67 @@ class GPU extends Product {
     
 }
 
+class CPU extends Product{
+    private int VRAM;
+    private double operatingFrequency;
+    public CPU(String modelNames, double initialDurability, int vRAM, double operatingFrequency) {
+        super(modelNames, initialDurability);
+        VRAM = vRAM;
+        this.operatingFrequency = operatingFrequency;
+    } 
+    public double getOperatingFrequency() {
+        return operatingFrequency;
+    }
+    public int getVRAM() {
+        return VRAM;
+    }
+    @Override
+    double productLine() {
+        return VRAM+operatingFrequency-durability;
+        
+    }
+    public void setVRAM(int vRAM) {
+        VRAM = vRAM;
+    }
+    public void setOperatingFrequency(double operatingFrequency) {
+        this.operatingFrequency = operatingFrequency;
+    }
+    
+}
+
+abstract class Employee{
+    private String nameTags;
+
+    public Employee(String nameTags) {
+        this.nameTags = nameTags;
+    }
+    public String getNameTags() {
+        return nameTags;
+    }
+    
+}
+
+class Engineer extends Employee{
+    private int levelOfExperience;
+
+    public Engineer(String nameTags, int levelOfExperience) {
+        super(nameTags);
+        this.levelOfExperience = levelOfExperience;
+    }
+    public int getLevelOfExperience() {
+        return levelOfExperience;
+    }
+    
+}
+
+class ChiefEngineer extends Engineer{
+    private ArrayList<Engineer> engineers;
+    ChiefEngineer(String nameTags, int levelOfExperience) {
+        super(nameTags, levelOfExperience);
+        engineers= new ArrayList<>();
+    }
+    public void addEngineers(Engineer engineer) {
+        engineers.add(engineer);
+    }
+}
+
