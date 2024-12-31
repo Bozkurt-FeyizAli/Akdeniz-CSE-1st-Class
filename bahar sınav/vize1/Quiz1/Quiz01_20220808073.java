@@ -231,3 +231,32 @@ class  Customer{
     }
 
 }
+
+class InvalidPriceException extends RuntimeException{
+    private double price;
+    InvalidPriceException(double price){
+        super( "ERROR: Invalid price: " + 
+        price);
+    }
+    public double getPrice() {
+        return price;
+    }
+
+
+}
+class CreditCardException extends Exception{
+    private Long cardNumber;
+    private int cvv;
+    CreditCardException(int cvv){
+        this.cvv=cvv;
+    }
+    CreditCardException(Long cardNumber){
+        this.cardNumber=cardNumber;
+    }
+    public int getCvv() {
+        return cvv;
+    }
+    public Long getCardNumber() {
+        return cardNumber;
+    }
+}
