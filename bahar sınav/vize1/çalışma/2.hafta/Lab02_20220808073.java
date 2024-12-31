@@ -56,3 +56,58 @@ class Rectangle{
         return String.format("Rectangle, length is: %.2f m^2, width is: %.2f.", length, width);
     }
 }
+class Car{
+    // firstl write form of the skeleton/ body of the class 
+    private String model;
+    private String color;
+    private int speed;
+    private boolean isOn;
+    private int acceleration;
+    Car(String  model, String color){
+        this.model=model;
+        this.color=color;
+        setAcceleration(5);
+    }
+    Car(String  model, String color, int acceleration){
+        this.acceleration=acceleration;
+        this.model=model;
+        this.color=color;
+    }
+    public void setAcceleration(int acceleration){
+        this.acceleration=acceleration;
+    }
+    public void start(){
+        if(!isOn){
+        isOn=!isOn;
+        accelerate();
+        System.out.printf("%s %s is starting.../n",model, color);
+        }
+        else 
+        System.out.println("car is already running!");
+    }
+    public void stop(){
+        if(isOn){
+            isOn=!isOn;
+            speed-=speed;
+            System.out.printf("%s %s is stopped.../n",model, color);
+        }
+        else
+        System.out.println("car has already stopped!");
+    }
+    public void accelerate(){
+        if(isOn){
+            speed+=acceleration;
+            System.out.printf("%s %s have the speed %d", model, color, speed);
+        }
+    }
+    public void accelerate(int acceleration){
+        setAcceleration(acceleration);
+        accelerate();
+    }
+    @Override
+    public String toString(){
+        String s1=String.format("Car, %s%s,", model, color);
+        String s2= s1+String.format("is running and has speed of %d/N", speed);
+        return isOn? s2: s1;
+    }
+}
