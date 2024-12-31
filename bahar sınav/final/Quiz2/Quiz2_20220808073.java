@@ -187,3 +187,50 @@ class Facility{
         customer.order(product);
     }
 
+    public void Shipment(){
+        orders= new HashMap<>();
+        products = new ConcurrentLinkedQueue<>();
+        customers= new ArrayList<>();
+        
+    }
+
+    public void analyyzing(){
+        HashMap<String, HashSet<String>> reverse= new HashMap<>();
+        for (var pS : orders.entrySet()) {
+            String nameP=pS.getKey().getModelNames();
+            for (String s : pS.getValue()) {
+                reverse.putIfAbsent(s, new HashSet<>());
+                reverse.get(s).add(nameP);
+            }
+        }
+        int result=0;
+        String modeName="";
+        for (var v : reverse.entrySet()) {
+            if(v.getValue().size()>result){
+                result=v.getValue().size();
+                modeName=v.getKey();
+            }
+                
+        }
+        trend=modeName;
+    }
+    public String getTrend() {
+        return trend;
+    }
+    public ArrayList<Customer> getCustomers() {
+        return customers;
+    }
+    public Map<Product, ArrayList<String>> getOrders() {
+        return orders;
+    }
+    public Queue<Product> getProducts() {
+        return products;
+    }
+    public QualityAssurance getQualityAssurance() {
+        return qualityAssurance;
+    }
+    
+    
+
+
+}
