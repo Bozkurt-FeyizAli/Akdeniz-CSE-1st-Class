@@ -43,3 +43,68 @@ abstract class Product implements Item{
 
 } 
 
+class Tax implements Item{
+    private double taxRate;
+    private Item item;
+    Tax(int taxRate, Item item){
+        setTaxRate(taxRate);
+        setItem(item);
+    }
+    public void setItem(Item item) {
+        this.item = item;
+    }
+    public void setTaxRate(double taxRate) {
+        this.taxRate = taxRate/100;
+    }
+
+    
+    @Override
+    public int compareTo(Item o) {
+        return (int)(this.taxRate-o.getPrice());
+    }
+
+    @Override
+    public double getPrice() {
+        return item.getPrice()+item.getPrice()*taxRate;
+    }
+
+    @Override
+    public String getName() {
+        return item.getName();
+    }
+   
+}
+
+class  Discount implements Item{
+    double percent;
+    Item item;
+
+    @Override
+    public int compareTo(Item o) {
+        return (int)(this.item.getPrice()-o.getPrice());
+    }
+
+    @Override
+    public double getPrice() {
+        return item.getPrice()+item.getPrice()*percent;
+    }
+
+    @Override
+    public String getName() {
+        return item.getName();
+    }
+
+    Discount(int percent, Item item){
+        setItem(item);
+        setPercent(percent);
+    }
+    public void setItem(Item item) {
+        this.item = item;
+    }
+    public void setPercent(double percent) {
+        this.percent = percent/100;
+    }
+
+    
+
+}
