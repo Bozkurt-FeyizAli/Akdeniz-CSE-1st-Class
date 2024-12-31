@@ -133,3 +133,51 @@ class CreditCard implements PaymentMethod{
     }
 }
 
+class PayPal implements PaymentMethod{
+    private String username;
+    private String password;
+    
+    public PayPal(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+    @Override
+    public boolean pay(List<Item> cart) {
+        double total=0;
+        for (Item item : cart) {
+            Item item2= new Discount(6, item);
+            total+=item2.getPrice();
+        }
+        cart.clear();
+        System.out.println("Paid: " + total + " with " + this.getClass().getSimpleName() + username);
+        return true;
+    }   
+}
+
+class Customer{
+    private String name;
+    private PaymentMethod paymentMethod;
+    private List<Item> card;
+    
+    public Customer(String name) {
+        this.name = name;
+        card= new ArrayList<>();
+    }
+    public String getName() {
+        return name;
+    }
+    public void setPaymentMethod(PaymentMethod paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
+    public boolean addItem(Item item){
+        Item item2= item;
+        if(item instanceof Colorable)
+            item2= new Discount(8, item2);
+        if(item2.getPrice()>500)
+            item2= new Tax(20, item2);
+        item2= new Tax(12, item2);
+        return card.add(item2);
+    }
+    public boolean removeItem(Item item){
+        return card.remove(item);
+    }
