@@ -111,3 +111,37 @@ class Car{
         return isOn? s2: s1;
     }
 }
+class Person{
+    private String name;
+    // aggregetion being ndepend , composition a part of sth and there is a relation, indiate there is no relation
+    // property= setter and getters
+    
+    private class Car {                                                                                                                                                             
+    }
+    private class Wallet{
+        private String color;
+        private int amount;
+        Wallet(String color){
+            this.color=color;
+            this.amount=50;
+        }
+        Wallet(String color, int amount){
+            this.amount=amount;
+            this.color=color;
+        }
+        public void getColor(String color){
+            this.color=color;
+        }
+        public void getAmount(int amount){
+            this.amount=amount;
+        }
+        public void addMoney(int money){
+            if(money>0)
+            getAmount(money);
+            // else
+            // throw Exception IllegalArgumentException("ahgsk");
+        }
+    }
+    private class Brain {
+    }
+} 
