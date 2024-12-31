@@ -157,3 +157,77 @@ class CreditCard implements PaymentMethod{
         this.cvv = cvv;
     }   
 }
+
+class PayPal {
+    private String username;
+    private String password;
+    PayPal(String username, String password){
+        this.username=username;
+        this.password=password;
+    }
+
+    public boolean pay(List<Item> cart){
+        double sumPrice=0;
+        for (Item item : cart) {
+            sumPrice+=item.getPrice();
+        }
+        cart.clear();
+        System.out.println( "Paid: " + sumPrice + " with " + super.getClass().getSimpleName() + username );
+        return true;
+    }
+} 
+
+class  Customer{
+    private String name;
+    private PaymentMethod paymentMethod;
+    private ArrayList<Item> cart;
+    Customer(String name){
+        this.name=name;
+        this.cart= new ArrayList<>();
+    }
+    public String getName() {
+        return name;
+    }
+    public void setPaymentMethod(PaymentMethod paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
+    public boolean addItem(Item item){
+        if(item instanceof Colorable){
+            cart.add(Product(item.getName(), (item.getPrice()+item.getPrice()*0.008)));
+            cart.remove(item);
+        
+
+            return true;
+        }
+        if(item.getPrice()>500){
+            cart.add(Product(item.getName(), (item.getPrice()+item.getPrice()*0.20)));
+            cart.remove(item);
+        }
+        
+            cart.add(Product(item.getName(), (item.getPrice()+item.getPrice()*0.12)));
+            cart.remove(item);
+        
+         return true;
+        // return false;
+    }
+
+    private Item Product(String name2, double d) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'Product'");
+    }
+    public boolean removeItem(Item item){
+        this.cart.remove(item);
+        return true;
+    }
+    public boolean purchase(){
+        paymentMethod.pay(cart);
+        return true;
+    }
+    public void display(){
+        cart.sort(Comparable<Item>::compareTo);
+        for (Item item : cart) {
+            System.out.println(item.getPrice()+" - "+item.getName());;
+        }
+    }
+
+}
