@@ -97,3 +97,39 @@ class Discount implements Item{
         return item.getName();
     }
 }
+
+class CreditCard implements PaymentMethod{
+    private long cardNumber;
+    private String holderName;
+    private Date expirationDate;
+    private int cvv;
+    
+    public CreditCard(long cardNumber, String holderName, int cvv) throws CreditCardException {
+        setCardNumber(cardNumber);
+        this.holderName = holderName;
+        setCvv(cvv);
+        this.expirationDate= new Date(System.currentTimeMillis());
+    }
+    public void setCardNumber(Long cardNumber) throws CreditCardException{
+        if(String.valueOf(cardNumber).length()!=16)
+            throw new CreditCardException(cardNumber);
+        this.cardNumber=cardNumber;
+    }
+    public void setCvv(int cvv) throws CreditCardException{
+        if(String.valueOf(cvv).length()!=3)
+            throw new CreditCardException(cvv);
+        this.cvv=cvv;
+    }
+    @Override
+    public boolean pay(List<Item> cart) {
+        double total=0;
+        for (Item item : cart) {
+            Item item2= new Tax(4, item);
+            total+=item2.getPrice();
+        }
+        System.out.println("Paid: " + total + " with " + this.getClass().getSimpleName() + holderName);
+        cart.clear();
+        return true;
+    }
+}
+
