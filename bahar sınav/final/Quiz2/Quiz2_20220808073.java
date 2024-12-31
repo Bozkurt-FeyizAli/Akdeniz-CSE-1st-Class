@@ -127,3 +127,63 @@ class ChiefEngineer extends Engineer{
     }
 }
 
+class QualityAssurance extends Engineer{
+    private ArrayList<Product> products= new ArrayList<>();
+    private Queue<Product> pOrders= new LinkedList<>();
+    
+    
+    QualityAssurance(String nameTags, int levelOfExperience) {
+        super(nameTags, levelOfExperience);
+        
+    }
+
+    public void test(Product product){
+        Random random= new Random();
+        if(product instanceof GPU){
+            ((GPU)product).setInitialDurability(random.nextInt(100));
+            ((GPU)product).setVRAM(random.nextInt(100));
+            
+        }
+        if(product instanceof CPU){
+            ((CPU)product).setVRAM(random.nextInt(100));
+            ((CPU)product).setOperatingFrequency(random.nextInt(100));
+        }
+        // product.productLine();
+        products.add(product);
+        // best product will be added
+        
+        pOrders.add(product);
+        
+    }
+}
+    
+// assuarene güvence  exemine denetelemek eşik= treshold
+class Customer{
+    ArrayList<Product> products;
+    public void order(Product product){
+        products.add(product);
+
+    }
+}
+
+class Facility{
+    private ArrayList<Customer> customers= new ArrayList<>();
+    private Queue<Product> products;
+    private QualityAssurance qualityAssurance;
+    private Map<Product, ArrayList<String>> orders;
+    private String trend;
+    
+    public Facility(QualityAssurance qualityAssurance) {
+        this.qualityAssurance=qualityAssurance;
+        orders = new HashMap<>();
+        products= new ConcurrentLinkedQueue<>();
+    }
+
+    public void order(Product product, Customer customer){
+        orders.putIfAbsent(product, new ArrayList<>());
+        orders.get(product).add(product.getModelNames());
+        customers.add(customer);
+        qualityAssurance.test(product);
+        customer.order(product);
+    }
+
