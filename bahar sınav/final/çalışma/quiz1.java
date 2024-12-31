@@ -181,3 +181,53 @@ class Customer{
     public boolean removeItem(Item item){
         return card.remove(item);
     }
+    public boolean purchase(){
+        return this.paymentMethod.pay(this.card);
+    }
+    public void display(){
+        card.sort(Comparable<Item>::compareTo);
+        for (Item item : card) {
+            System.out.println(item.getPrice()+" - "+item.getName());
+        }
+    }
+}
+
+class InvalidPriceException extends RuntimeException{
+    private double price;
+    InvalidPriceException(double price){
+        super("ERROR: Invalid price: "+price);
+        this.price=price;
+    }
+    public double getPrice() {
+        return price;
+    }
+}
+class CreditCardException extends Exception{
+    private long cardNumber;
+    private int cvv;
+    CreditCardException(int cvv){
+        super("ERROR: Invalid cvv "+cvv);
+        this.cvv=cvv;
+    }
+    CreditCardException(long cardNumber){
+        super("ERROR: Invalid cvv "+cardNumber);
+        this.cardNumber=cardNumber;
+    }
+    public long getCardNumber() {
+        return cardNumber;
+    }
+    public int getCvv() {
+        return cvv;
+    }
+}
+
+class A{
+    String s;
+    A(String a){
+        s=a;
+    }
+    @Override
+    public String toString() {
+        return s;
+    }
+}
