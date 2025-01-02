@@ -218,3 +218,46 @@ class Laptop extends Computer{
     }
 }
 
+class Desktop extends Computer{
+    java.util.ArrayList<String> peripherals;
+    Desktop(CPU cpu, RAM ram,String[] varargsPeripherals){
+        super(cpu, ram);
+        // this.peripherals=Array.varargsPeripherals;
+    }
+    @Override
+    public void run(){
+        
+    }
+    public void plugIn(String peripheral){
+        this.peripherals.add(peripheral);
+    }
+    public void plugOut(){
+        this.peripherals.remove(peripherals.size()-1);
+    }
+    public String plugOut(int index){
+        String result= peripherals.get(index);
+        peripherals.remove(index);
+        return result;
+    }
+    @Override
+    public String toString(){
+        String result= super.toString()+" ";
+        for(int i=0;i<peripherals.size();i++){
+            result+= peripherals.get(i)+" ";
+        }
+        return result;
+    }
+
+} 
+class MemoryException extends RuntimeException{
+    RAM ram;
+    MemoryException(RAM ram, int i, int j){
+        super("indexes are out of bound of the memory"+"for indexes"+i+", and"+j);
+        this.ram=ram;
+    }
+
+}
+class computationException extends Exception{
+    CPU cpu;
+    computationException(CPU cpu, int result){
+        super("an exception occures durring comp. ,"+result);
