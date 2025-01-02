@@ -261,3 +261,5 @@ class computationException extends Exception{
     CPU cpu;
     computationException(CPU cpu, int result){
         super("an exception occures durring comp. ,"+result);
+    }
+}
