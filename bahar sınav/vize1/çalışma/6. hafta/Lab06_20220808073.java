@@ -180,3 +180,96 @@ abstract class  Car extends Veicle implements Comparable<Car> {
 
  }
 
+ class Mercedes extends Veicle implements Electric, Diesel{
+    private int currentBattery;
+    Mercedes(String model, int year, int horsePower) {
+        super(model, year, horsePower);
+       
+    }
+
+    @Override
+    public void refuael() {
+        System.out.println("Refuleging ..."+ this);
+    }
+
+    @Override
+    public Rentable rentOut(Gallery gallery) {
+        return this;
+    }
+
+    @Override
+    public void returnVehicle(Gallery gallery) {
+        
+    }
+
+    @Override
+    public void cleanDieselFilter() {
+        System.out.println("Uses clean diesel");
+    }
+
+    @Override
+    public void chargeBattery(int amount) {
+        currentBattery += amount;
+    }
+
+    @Override
+    void startEngine() {
+        System.out.println("Started the engine of "+ this.getClass());
+    }
+    @Override
+    public int getCurrentBattery() {
+       return currentBattery;
+    }
+
+    
+ }
+
+ class Gallery{
+    // private ArrayList<Veicle> vehicles;
+    private ArrayList<Combustion> combustionCars;
+    private ArrayList<Electric> electricCars;
+    Gallery(){
+        combustionCars= new ArrayList<>();
+        electricCars= new ArrayList<>();
+    }
+    public void addCar(Car car){
+        if(car instanceof Combustion)
+        combustionCars.add((Combustion) car);
+        else if(car instanceof Electric)
+            electricCars.add((Electric) car);
+    }
+    public void addCombustionCar(Combustion car){
+        // if(car instanceof Combustion )
+        combustionCars.add(car);
+    }
+    public void addElectricCar(Electric car){
+        // if(car instanceof Electric)
+        electricCars.add(car);
+    }
+    public void displayRentableCars(){
+        ArrayList<Car> rentableCars = new ArrayList<>();
+        for(Combustion car : combustionCars){
+            if(car instanceof Rentable)
+            rentableCars.add((Car) car);
+        }
+        for(Electric car : electricCars){
+            if(car instanceof Rentable)
+            rentableCars.add((Car) car);
+        }
+        Collections.sort(rentableCars);
+
+        for(Car car: rentableCars){
+            System.out.println(car.toString());
+        }
+        // combustionCars.sort(null);
+        // electricCars.sort(null);
+        
+    }
+    
+ }
+
+
+// class Bike extends Veicle{
+
+// }
+
