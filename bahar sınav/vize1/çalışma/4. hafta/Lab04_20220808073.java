@@ -178,3 +178,42 @@ class BankAccount extends UserUser{
     }
 
 }
+class AccountNotFindException extends Exception{
+    private int id;
+    boolean active;
+    double initialde;
+    double balance;
+    User account;
+    // BankAccount(User account, int id, double balance){
+       
+    // }
+    AccountNotFindException(int id){
+        System.out.println(id);
+    }
+    public int getId() {
+        return id;
+    }public double getBalance() {
+        return balance;
+    }
+    public double getInitialde() {
+        return initialde;
+    }
+    void setBlanace(double balance){
+        if(balance<0)
+        System.out.println();
+        // throw new InvalidAmountException;
+    }
+
+
+}
+class InvalidAmountException extends Exception{
+    double amount;
+    InvalidAmountException(double amount){
+    super("Invalid");
+    }
+}
+class InsufficientFoundsExceptipon extends InvalidAmountException{
+    InsufficientFoundsExceptipon(double amount){
+        super(amount);
+    }
+}
