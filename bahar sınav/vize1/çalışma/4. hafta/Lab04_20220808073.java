@@ -70,3 +70,111 @@ class UserException extends Exception{
 
 
     }
+    // public String getMessage() {
+    //     return message;
+    // }
+    @Override
+    public String getMessage(){
+        return "An exception has occured."+super.getMessage();
+    }
+
+}
+class InvalidOperationException extends RuntimeException{
+    InvalidOperationException(String message){
+
+    }
+    InvalidOperationException(User User){
+          super("invalid Operation with: "+User);
+    }
+    @Override
+    public String getMessage(){
+        return "Runtime Exception has occured."+super.getMessage();
+    }   
+
+}
+
+class Account{
+    
+}
+class User extends UserUser{
+    ArrayList<Account> accounts;
+    void deposit(double amount) throws InvalidAmountException
+{
+    if(amount<0)
+    System.out.println();
+    // throw new InvalidAmountExceptionamount();
+    // setBalance(getBalance()+amount);
+
+}    
+User(String name) {
+        super(name);
+        // public boolean isActive(int accountId){
+
+        // }
+        //TODO Auto-generated constructor stub
+    }
+    String username;
+    // User(){
+    //     super(String username);
+    // }
+public double id=5;
+
+}
+class UserUser {
+    String username;
+    int id;
+    boolean active;
+    UserUser(String name){
+        setUsername(name);
+        
+
+    }
+    public void setUsername(String username) {
+        this.username = username;
+    }
+    public int getId() {
+        return id;
+    }
+    public String getUsername() {
+        return username;
+    }
+    public void setActive(boolean active) {
+        // for (BankAccount bankAccount : account) {
+        //     int accountId;
+        //     if(bankAccount.getId()==accountId)
+        //     bankAccount.setActive(true);
+        // }
+        this.active = active;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
+    public void deactivate() throws UserException{
+        if(active)
+            throw new UserException(this);
+    } 
+    public void performOperation() throws InvalidOperationException{
+        System.out.println("sdfghjk");
+        
+    }
+
+    @Override
+    public String toString(){
+        return String.format("User: \n\t id: %d \n\t Username: %s \n\t: %b", id, username, active);
+    }
+}
+
+class BankAccount extends UserUser{
+    void withDraw(){
+
+    }
+    BankAccount(String name) {
+        super(name);
+        //TODO Auto-generated constructor stub
+    }
+    String accountNumber;
+    void BankUserExcpetion(){
+        // super(String username);
+    }
+
+}
