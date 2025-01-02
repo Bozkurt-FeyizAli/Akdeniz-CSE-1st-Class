@@ -106,3 +106,77 @@ abstract class  Car extends Veicle implements Comparable<Car> {
 
     
 }
+
+ class Tesla extends Car implements Electric, Rentable{
+    private int currentBattery;
+
+    Tesla(String model, int year, int horsePower) {
+        
+        super(model, year, horsePower);
+       
+    }
+
+    @Override
+    public int compareTo(Car o) {
+        return this.getHorsePower()-o.getHorsePower();
+    }
+
+    @Override
+    public Rentable rentOut(Gallery gallery) {
+        return this;
+    }
+
+    @Override
+    public void returnVehicle(Gallery gallery) {
+    }
+
+    @Override
+    public void chargeBattery(int amount) {
+        currentBattery+= amount;
+    }
+    
+
+    @Override
+    void startEngine() {
+       System.out.println("Started the engine of "+ this.getClass().getSimpleName());
+      
+    }
+    @Override
+    public void drive() {
+    System.out.println( "Electrical");
+    super.drive();
+    }
+    public int getCurrentBattery() {
+        return currentBattery;
+    }
+    
+ }
+ class Ford extends Car implements Combustion{
+    
+
+    Ford(String model, int year, int horsePower) {
+        super(model, year, horsePower);
+    }
+
+    @Override
+    public int compareTo(Car o) {
+        return this.getHorsePower()-o.getHorsePower();
+    }
+
+    @Override
+    void startEngine() {
+       System.out.println("Started the engine of "+ this.getClass());
+    }
+
+    @Override
+    public void refuael() {
+       
+    }
+    @Override 
+    public void drive(){
+        System.out.println( "Combustion");
+        super.drive();
+    }
+
+ }
+
