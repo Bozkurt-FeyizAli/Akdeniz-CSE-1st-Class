@@ -179,3 +179,104 @@ class Motorcycle extends Vehicle{
         this.hasABS=hasABS;
     }
 }
+class Customer{
+    private String firstName;
+    private String lastName;
+    private int ID;
+    private ArrayList<Vehicle> rentedVehicles;
+    private ArrayList<RentalContrat> contrats;
+
+    Customer(String firstName, String lastName, String id){
+        rentedVehicles= new ArrayList<>();
+        contrats= new ArrayList<>();
+    }
+    public String getFirstName(){
+        return firstName;
+    }
+    public String getLastName(){
+        return lastName;
+    }
+    public int getID(){
+        return ID;
+    }
+    public void setFirstName(String firstName){
+        this.firstName=firstName;
+    }
+    public void setLastName(String lastName){
+        this.lastName=lastName;
+    }
+     void setID(){
+        Random rnd= new Random();
+        ID=rnd.nextInt(1000,9999);
+    }
+    // public void rent(Vehicle v){
+    //     rentedVehicles.add(v);
+    //     RentalContrats.add(new RentalContrat(this, v, startDate, endDate));
+    // RentalContact.get(RentalContact.size()-1)
+    // }
+    public Vehicle turnIn(RentalContrat contract){
+        Vehicle a= contract.getRentedVehicle();
+        rentedVehicles.remove(a);
+        Customer c=contract.getCustomer();
+        // rentedContacts.remove(contract);
+        return a;
+    }
+
+
+}
+// class RentalContrat{
+//     Customer customer;
+//     Vehicle vehicle;
+//     Date renta;
+//     Date end;
+//     RentalContrat(Customer customer, Vehicle vehicle, Date rDate, Date eDate){
+
+//     }
+
+
+//}
+class RentalContrat{
+    Customer customer;
+    Vehicle rentedVehicle;
+    Date rentalStartDate;
+    Date rentalEndDate;
+    public RentalContrat(Customer customer, Vehicle rentedVehicle,Date rentalStartDate, Date rentalEndDate){
+
+    }
+    // void CalculateRentalPeriod(){
+    //     return new Date()
+    // }
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+    public void setRentalEndDate(Date rentalEndDate) {
+        this.rentalEndDate = rentalEndDate;
+    }
+    public void setRentalStartDate(Date rentalStartDate) {
+        this.rentalStartDate = rentalStartDate;
+    }
+    public void setRentedVehicle(Vehicle rentedVehicle) {
+        this.rentedVehicle = rentedVehicle;
+    }
+    public Customer getCustomer() {
+        return customer;
+    }
+    public Date getRentalEndDate() {
+        return rentalEndDate;
+    }
+    public Date getRentalStartDate() {
+        return rentalStartDate;
+    }
+    public Vehicle getRentedVehicle() {
+        return rentedVehicle;
+    }
+}
+
+
+
+
+
+
+
+
+
