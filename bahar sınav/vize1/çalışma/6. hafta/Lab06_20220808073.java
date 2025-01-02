@@ -273,3 +273,24 @@ abstract class  Car extends Veicle implements Comparable<Car> {
 
 // }
 
+interface Electric{
+    void chargeBattery(int ammount);
+    int getCurrentBattery();
+}
+
+interface Combustion{
+     void refuael();
+}
+
+interface Rentable{
+    Rentable rentOut(Gallery gallery);
+    void  returnVehicle(Gallery gallery);
+}
+
+interface Diesel extends Combustion, Rentable  {
+    void cleanDieselFilter();
+    
+}
+
+
+
