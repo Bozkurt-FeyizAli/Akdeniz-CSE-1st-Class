@@ -177,3 +177,88 @@ class Rectangle extends Shape implements Scalable{
         return perimeter();
     }
 }
+
+class Cylinder extends Shape implements Scalable, Resizable{
+    double radius;
+    double h;
+    double area;
+    double perimeter;
+    double volume;
+    String color;
+    @Override
+    public void scale(double factor) {
+        h*=factor;
+        
+    }
+    @Override
+    public void resize(double facor) {
+        radius*=facor;
+        
+    }
+    Cylinder(int radius, int h, String color){
+        setColor(color);
+        try{
+            setH(h);
+        setRadius(radius);
+        }
+        catch(Exception e){
+            
+        }
+        
+    }
+    public double getArea() {
+        return area;
+    }
+    public double getPerimeter() {
+        return perimeter;
+    }
+    public double getRadius() {
+        return radius;
+    }
+    public double getVolume() {
+        return volume;
+    }
+    public String getColor() {
+        return color;
+    }
+    public void setColor(String color) {
+        this.color = color;
+    }
+    public void setRadius(double radius) throws InvalidRadiusException {
+        if(radius<0)
+            throw new InvalidRadiusException("color");
+        this.radius = radius;
+    }
+    public void setH(double h) throws InvalidLengthException {
+        if(h<0)
+            throw new InvalidLengthException("color");
+        this.h = h;
+    }
+
+    @Override
+    public double volume(){
+        return Math.PI*radius*radius*h;
+    }
+    @Override
+    public double perimeter(){
+        return 2*Math.PI*radius*radius+2*Math.PI*radius*h;
+    }
+    @Override 
+    public double area(){
+        return perimeter();
+    }
+
+}
+
+class InvalidLengthException extends RuntimeException{
+    InvalidLengthException(String m){
+        super(m);
+    }
+}
+
+
+class InvalidRadiusException extends RuntimeException{
+    InvalidRadiusException(String m){
+        super(m);
+    }
+}
