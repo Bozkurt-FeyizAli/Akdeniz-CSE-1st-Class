@@ -108,3 +108,52 @@ class Customer{
     }
     
 }
+
+class InsufficientFundsException extends RuntimeException{
+    double balance;
+    double amount;
+    InsufficientFundsException(double balance){
+        super("InsufficientFundsException: invallid balance: "+balance);
+        this.balance=balance;
+    }
+
+    InsufficientFundsException(double balance, double amount){
+        super("InsufficientFundsException: Required amount is "+amount+", but anly "+balance+" remaining");
+        this.balance=balance;
+        this.amount=amount;
+    }
+}
+
+class InvalidTransactionException extends Exception{
+    double amount;
+    InvalidTransactionException(double amount){
+        super(Double.toString(amount)+" is invalid");
+        this.amount=amount;
+    } 
+
+    InvalidTransactionException(InvalidTransactionException e, String message){
+        super(e.getMessage()+ ":\n\t "+message);
+    }
+
+    
+
+}
+class AccountNotFoundException extends RuntimeException{
+    String AccountNumber;
+    Customer Customer;
+    AccountNotFoundException(Customer customer, String AccountNumber){
+        super(customer.getName()+" does not have any account with number "+AccountNumber);
+        this.Customer=customer;
+        this.AccountNumber=AccountNumber;
+    }
+}
+
+class AccountAlreadyExistException extends RuntimeException{
+    Customer customer;
+    Account account;
+    AccountAlreadyExistException(Customer customer, Account account){
+        super("Account with number "+ account.getAccountNumber()+" already exist in the clollection of "+customer.getName());
+        this.customer=customer;
+        this.account=account;
+    }
+}
