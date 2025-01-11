@@ -169,3 +169,100 @@ class Time{
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class Integration{
+    double[] xComponents;
+    double[] interval;
+    Integration(double[] xComponents, double[] interval){
+        this.xComponents=xComponents;
+        this.interval=interval;
+    }
+
+    double resultOfAFunction(double[] xComponents, double x){
+        double result=0;
+        for (int index = 0; index < xComponents.length; index++) {
+            result+=x*xComponents[index];
+        }
+        return result;
+    }
+    double[] differentioatonOfAFunction(double[] xComponents){
+        double[] function= new double[xComponents.length-1];
+        for (int index = 0, us=xComponents.length-1; index < xComponents.length; index++,us--) {
+            function[index]=us*xComponents[index];
+        }
+        return function;
+    }
+    String fonksiyonunYönelimi(double[] xComponents, double[] interval){
+         if((resultOfAFunction(xComponents, interval[1])-resultOfAFunction(xComponents, interval[0]))>0)
+         return "ARTAN";
+         else return "AZALAN";
+    }
+    double ustToplam(double[] xComponents, double[] aralik, int pointNumber){
+        double ustToplam=0;
+        double taban=(aralik[1]-aralik[0])*1.0/pointNumber*1.0;
+        if(fonksiyonunYönelimi(xComponents, aralik).equals("ARTAN"))
+        for (double index = aralik[0]; index <= aralik[1]; index+=taban) {
+            ustToplam+=resultOfAFunction(xComponents, taban)*taban;
+        }
+        else 
+        for (double index = aralik[0]+taban; index <= aralik[1]; index+=taban) {
+            ustToplam+=resultOfAFunction(xComponents, taban)*taban;
+        }
+        return ustToplam;
+    }
+    double ustToplam(int pointNumber){
+        double ustToplam=0;
+        double taban=(interval[1]-interval[0])*1.0/pointNumber*1.0;
+        if(fonksiyonunYönelimi(xComponents, interval).equals("ARTAN"))
+        for (double index = interval[0]; index <= interval[1]; index+=taban) {
+            ustToplam+=resultOfAFunction(xComponents, taban)*taban;
+        }
+        else 
+        for (double index = interval[0]+taban; index <= interval[1]; index+=taban) {
+            ustToplam+=resultOfAFunction(xComponents, index)*taban;
+        }
+        return ustToplam;
+    }
+    double altToplam(double[] xComponents, double[] aralik, int pointNumber){
+        double altToplam=0;
+        double taban=(aralik[1]-aralik[0])*1.0/pointNumber*1.0;
+        if(fonksiyonunYönelimi(xComponents, aralik).equals("AZALAN"))
+        for (double index = aralik[0]; index <= aralik[1]; index+=taban) {
+           altToplam+=resultOfAFunction(xComponents, taban)*taban;
+        }
+        else 
+        for (double index = aralik[0]+taban; index <= aralik[1]; index+=taban) {
+            altToplam+=resultOfAFunction(xComponents, taban)*taban;
+        }
+        return altToplam;
+    }
+    double altToplam(int pointNumber){
+        double altToplam=0;
+        double taban=(interval[1]-interval[0])*1.0/pointNumber*1.0;
+        if(fonksiyonunYönelimi(xComponents, interval).equals("AZALAN"))
+        for (double index = interval[0]; index <= interval[1]; index+=taban) {
+           altToplam+=resultOfAFunction(xComponents, taban)*taban;
+        }
+        else 
+        for (double index = interval[0]+taban; index <= interval[1]; index+=taban) {
+            altToplam+=resultOfAFunction(xComponents, taban)*taban;
+        }
+        return altToplam;
+    }
+
+}
