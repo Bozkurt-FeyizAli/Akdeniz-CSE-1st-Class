@@ -149,3 +149,37 @@ class Fan{
     }
 
     public void setRadius(double radius){
+        this.radius=radius;
+    }
+
+    public void setSpeed(int speed){
+        if(on==true){
+            this.speed=speed;
+        }
+    }
+
+    public void setColor(String color){
+        this.color=color;
+    }
+
+    public boolean isOn(){
+        return on;
+    }
+
+    @Override
+    public String toString(){
+        if(on==true){
+            return String.format("Speed: %d, Radius %.2f, Color: %s",
+            speed,radius,color);
+        }else{
+            return "Fan is off";
+        }
+    }
+
+    public void change(){
+        if(on==true)
+        on=false;
+        else
+        on=true;
+    }
+}
