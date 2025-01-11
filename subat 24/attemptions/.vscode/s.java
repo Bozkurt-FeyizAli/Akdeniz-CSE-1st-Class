@@ -99,3 +99,53 @@ class Stock{
         return ((currentPrice-previousClosingPrice)/previousClosingPrice)*100;
     }
 }
+
+class Fan{
+    static final int SLOW=1;
+    static final int MEDIUM=2;
+    static final int FAST=3;
+    private int speed;
+    private boolean on;
+    private double radius;
+    private String color;
+
+    Fan(double radius,String color){
+        this();
+        this.radius=radius;
+        this.color=color;
+    }
+
+    Fan(){
+        speed=1;
+        on=false;
+        radius=5;
+        color ="Blue";
+    }
+
+    public void getData(){
+        System.out.printf("speed: %d, radius: %.2f, color: %s\n"
+        ,speed,radius,color);
+    }
+
+    public int getSpeed(){
+        if(on==true)
+        return speed;
+        else
+        return 0;
+    }
+
+    public double getRadius(){
+        return radius;
+    }
+
+    public String getColor(){
+        return color;
+    }
+
+    public void setData(int speed,double radius,String color){
+        this.color=color;
+        this.radius=radius;
+        this.speed=speed;
+    }
+
+    public void setRadius(double radius){
