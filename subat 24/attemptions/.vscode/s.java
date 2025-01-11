@@ -41,3 +41,61 @@ class Stock{
         this.name=a+rest;
         this.symbol=symbol.toUpperCase();
     }
+
+    public void getData(){
+        System.out.printf("symbol: %s, name: %s, "+
+        "previous closing price: %f, current price: %f\n"
+        ,symbol,name,previousClosingPrice,currentPrice);
+    }
+
+    public String getSymbol(){
+        return symbol;
+    }
+
+    public String getName(){
+        return name;
+    }
+
+    public double getPreviousClosingPrice(){
+        return previousClosingPrice;
+    }
+
+    public double getCurrentPrice(){
+        return currentPrice;
+    }
+
+    public void setData(double previousClosingPrice,double currentPrice){
+        if(previousClosingPrice<0||currentPrice<0){
+            System.out.println("ERROR : values cant be negative.");
+        }else{
+        this.previousClosingPrice=previousClosingPrice;
+        this.currentPrice=currentPrice;
+        }
+    }
+
+    public void setPreviousClosingPrice(double previousClosingPrice){
+        if(previousClosingPrice<0){
+            System.out.println("ERROR : values cant be negative.");
+        }else{
+        this.previousClosingPrice=previousClosingPrice;
+        
+        }
+    }
+
+    public void setCurrentPrice(double currentPrice){
+        if(previousClosingPrice<0){
+            System.out.println("ERROR : values cant be negative.");
+        }else{
+        this.currentPrice=currentPrice;
+        }
+    }
+
+    @Override
+    public String toString(){
+        return symbol+" "+name+":"+currentPrice;
+    }
+
+    public double getChangePercent(){
+        return ((currentPrice-previousClosingPrice)/previousClosingPrice)*100;
+    }
+}
