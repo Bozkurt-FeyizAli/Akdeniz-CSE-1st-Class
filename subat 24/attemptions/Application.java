@@ -64,3 +64,108 @@ class ali{
         System.out.println(100/attempt);
     }
 }
+
+
+
+class  LinearEquation{
+    private double a;
+    private double b;
+    private double c;
+    private double d;
+    private double e;
+    private double f;
+    LinearEquation(double a, double b, double c, double d, double e, double f){
+        this.a=a;
+        this.b=b;
+        this.c=c;
+        this.d=d;
+        this.e=e;
+        this.f=f;
+    }
+    // accesor
+    public double getA(){
+        return a;
+    }
+    public double getB(){
+        return b;
+    }
+    public double getC(){
+        return c;
+    }
+    public double getD(){
+        return d;
+    }
+    public double getE(){
+        return e;
+    }
+    public double getF(){
+        return f;
+    }
+    public boolean isSolveable(){
+        return (a*d-b*c==0) ? false : true;
+    }
+    //  x = ed- bf / ad- bc  and  y = af- ec / ad- bc
+            
+    public double getX(){
+        return ((e*d-b*f)/(a*d-b*c));
+    }
+    public double getY(){
+        return ((a*f-e*c)/(a*d-b*c));
+    }
+    @Override
+    public String toString(){
+        if(isSolveable())
+        return String.format("value of x is %.3f , and value of y is %.3f .", getX(), getY());
+        else return "The equation has no solution";
+    }
+
+
+}
+
+class Time{
+    double startTime;
+    double currentTime;
+    double timePassed;
+    String[] time;
+    Time(){
+
+    }
+    Time(double startTime, double currentTime){
+        timePassed=timePassed(startTime, currentTime);
+    }
+    public double startTime(){
+        return System.currentTimeMillis();
+    }
+    public double currentTime(){
+        return System.currentTimeMillis();
+    }
+    public double timePassed(double startTime, double currentTime){
+        return currentTime-startTime;
+    }
+    public String[] time(double timePassed){
+        String[] time= new String[4];
+        time[2]=Double.toString(timePassed%60)+" minute";
+        timePassed/=60;
+        time[1]=Double.toString(timePassed%60)+" hour";
+        timePassed/=60;
+        time[2]=Double.toString(timePassed%24)+" day";
+        timePassed/=24;
+        time[3]=Double.toString(timePassed%365)+" year";
+        return time;
+    }
+
+    public String timeEdit(String[] time){
+        String timeS="";
+        for (int index = 0; index < time.length; index++) {
+            if(!time[index].equals("null"))
+                timeS+=time[index];
+        }
+        return timeS;
+    }
+
+    @Override
+    public String toString(){
+        return String.format("The time passed is %s .", timeEdit(time(timePassed)));
+    }
+
+}
