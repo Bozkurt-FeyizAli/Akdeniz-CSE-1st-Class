@@ -1,3 +1,14 @@
+// Exception
+
+import java.util.ArrayList;
+
+public class try2{
+    public static void main(String[] args) {
+        // try {
+        //     // getUser(5);
+        //     System.out.println("Recevied User.");
+        // } catch (UserException e) {
+        //     // TODO: handle exception  
         //     // narrow exception
         //     System.out.println(e.getMessage());
         //     // System.out.println("something");
@@ -77,3 +88,93 @@ Ensure that classes User, UserUser, and BankAccount are set up correctly with pr
 
 Implement toString method:
 In the User class, implement the toString method to provide a string representation of the User object.
+
+Handle exceptions in AccountNotFindException and InvalidAmountException:
+Implement necessary handling for exceptions in the AccountNotFindException and InvalidAmountException classes.
+
+Review and test:
+Review the code to ensure all methods are implemented correctly. Test the code with different scenarios to ensure proper functionality and exception handling.
+ */
+class UserException extends Exception{
+    User user;
+
+    UserException(UserUser userUser){
+        this.user=(User) userUser;
+
+
+    }
+    // public String getMessage() {
+    //     return message;
+    // }
+    @Override
+    public String getMessage(){
+        return "An exception has occured."+super.getMessage();
+    }
+
+}
+class InvalidOperationException extends RuntimeException{
+    InvalidOperationException(String message){
+
+    }
+    InvalidOperationException(User User){
+          super("invalid Operation with: "+User);
+    }
+    @Override
+    public String getMessage(){
+        return "Runtime Exception has occured."+super.getMessage();
+    }   
+
+}
+class User extends UserUser{
+    
+    
+    void deposit(double amount) throws InvalidAmountException
+{
+    if(amount<0)
+    System.out.println();
+    // throw new InvalidAmountExceptionamount();
+    // setBalance(getBalance()+amount);
+
+}    
+User(String name) {
+        super(name);
+        // public boolean isActive(int accountId){
+
+        // }
+        //TODO Auto-generated constructor stub
+    }
+    String username;
+    // User(){
+    //     super(String username);
+    // }
+public double id=5;
+// public boolean isActive(int accountId){
+//     return
+// }
+
+}
+class UserUser {
+    // ArrayList<Account> accounts= new ArrayList<>();
+    String username;
+    int accountId;
+    boolean active;
+    ArrayList<BankAccount> bankAccounts;
+    UserUser(String name){
+        setUsername(name);
+        
+        
+
+    }
+    public void setUsername(String username) {
+        this.username = username;
+    }
+    public int getId() {
+        return accountId;
+    }
+    public String getUsername() {
+        return username;
+    }
+    
+
+
+    public void setActive(boolean active) {
