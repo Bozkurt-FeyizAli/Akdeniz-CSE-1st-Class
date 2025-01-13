@@ -88,3 +88,93 @@ Methods:
 - calculateRentalCost(int days): Computes the rental cost for a given number of days.
 4. Motorcycle Class:
 plaintext
+Attributes:
+- make (String): The make of the motorcycle.
+- model (String): The model of the motorcycle.
+- year (int): The year the motorcycle was manufactured.
+- pricePerDay (double): The rental price per day for the motorcycle.
+- engineVolume (int): The engine volume of the motorcycle.
+
+Methods:
+- calculateRentalCost(int days): Computes the rental cost for a given number of days. */
+
+
+
+
+class Car extends Vehicle{
+    private int passengerCapacity;
+    private boolean automaticTransmission;
+    public Car(String brand, String model, int year, boolean isRented,int passengerCapacity, boolean automaticTransmission){
+    super(brand, model, year, isRented);
+    // you can de that with protected keyword otherwise from private
+    // this.brand=brand;
+    setPassengerCapacit(passengerCapacity);
+    setAutomaticTransmission(automaticTransmission);
+    }
+    public boolean getAutomaticTransmission(){
+        return automaticTransmission;
+    }
+    public int getPassengerCapacity(){
+        return passengerCapacity;
+    }
+    public void setAutomaticTransmission(boolean automaticTransmission){
+        this.automaticTransmission=automaticTransmission;
+    }
+    public void setPassengerCapacit(int passengerCapacity){
+        this.passengerCapacity=passengerCapacity;
+    }
+    @Override
+    public void run(){
+       System.out.println("Car is running");
+    }
+}
+
+class Truck extends Vehicle{
+    private int loadCapacity;
+    private boolean fourWheelDrive;    
+    public void run(){
+        System.out.println("Truck is running");
+    }
+
+    public Truck(String brand, String model, int year,boolean isRented, int loadCapacity, boolean fourWheelDrive){
+        super(brand, model, year, isRented);
+        setLoadCapacity(loadCapacity);
+        
+    }
+    public int getLoadCapacity(){
+        return loadCapacity;
+    }
+    public boolean getFourWheelDrive(){
+        return fourWheelDrive;
+    }
+    public void setFourWheelDrive(boolean fourWheelDrive){
+        this.fourWheelDrive=fourWheelDrive;
+    }
+    public void setLoadCapacity(int loadCapacity){
+        this.loadCapacity=loadCapacity;
+    }
+}
+class Motorcycle extends Vehicle{
+    public void run(){
+        System.out.println("Motocycle is running");
+    };
+    private int engineVolume;
+    private boolean hasABS;
+    public Motorcycle(String brand, String model,int  year,boolean isRented, int engineVolume, boolean hasABS){
+        super(brand, model ,year ,isRented);
+        setEngineVolume(engineVolume);
+        setHasABS(hasABS);
+    }
+    public int getEngineVolume(){
+        return engineVolume;
+    }
+    public boolean getHasABS(){
+        return hasABS;
+    }
+    public void setEngineVolume(int engineVolume){
+        this.engineVolume=engineVolume;
+    }
+    public void setHasABS(boolean hasABS){
+        this.hasABS=hasABS;
+    }
+}
