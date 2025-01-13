@@ -1,3 +1,6 @@
+import javax.sound.midi.Soundbank;
+
+public class StatisticLecture{
     public static void main(String[] args) {
     // double[] datas= {10,20,22,34,18,22,34};
     // double[] datas2={30,40,52,50,40,52,48,34,32};
@@ -84,4 +87,51 @@ class Statistic{
         }
         return varianceS_2;
     }
+
+    public double mod(double[] datas){
+        double candidateData=0;
+        double data=0;
+        int candidateTimes=0;
+        int times=0;
+        for (int then = 0; then < datas.length; then++) {
+            candidateData=datas[then];
+            for (int index = 0; index < datas.length; index++) {
+                if(datas[index]==candidateData)
+                candidateTimes++;
+            }
+            if(candidateTimes>times){
+                times=candidateTimes;
+                data= candidateData;
+            }
+        }
+        mod=data;
+        return medyan;
+    }
+
+    public void sortArray(double[] array){
+        double swap=0;
+        for (int index = 0; index < array.length; index++) {
+            for (int j = 0; j < array.length; j++) {
+                if(array[index]>array[j]){
+                    swap=array[j];
+                    array[j]=array[index];
+                    array[index]=swap;
+                }
+            }
+        }
+    }
+
+    public double medyan(double[] datas){
+        if(datas.length%2==1){
+            return (datas[datas.length/2]+datas[datas.length/2+1])/2;
+        }
+        else
+        return datas[datas.length/2];
+    }
+    
+    public int h(double[] datas){
+        return (int)Math.sqrt(datas.length);
+    }
+
+    public double[][] frequence(double[] datas){
 
