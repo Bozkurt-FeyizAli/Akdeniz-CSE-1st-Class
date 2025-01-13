@@ -178,3 +178,83 @@ class UserUser {
 
 
     public void setActive(boolean active) {
+        for (BankAccount bankAccount : bankAccounts) {
+            if(bankAccount.getId()==accountId)
+            bankAccount.setActive(true);
+        }
+        this.active = active;
+        
+    }
+    public void setId(int accountId) {
+        this.accountId = accountId;
+    }
+    public void deactivate() throws UserException{
+          if(active)
+          throw new UserException(this);
+    } 
+    public void performOperation() throws InvalidOperationException{
+        System.out.println("sdfghjk");
+        
+    }
+
+    @Override
+    public String toString(){
+        return String.format("User: \n\t id: %d \n\t Username: %s \n\t: %b", accountId, username, active);
+    }
+}
+
+class BankAccount extends UserUser{
+    void withDraw(){
+
+    }
+    BankAccount(String name) {
+        super(name);
+        //TODO Auto-generated constructor stub
+    }
+    String accountNumber;
+    void BankUserExcpetion(){
+        // super(String username);
+    }
+
+}
+class AccountNotFindException extends Exception{
+    private int id;
+    boolean active;
+    double initialde;
+    double balance;
+    User account;
+    AccountNotFindException(User account, int id, double balance){
+       
+    }
+    AccountNotFindException(int id){
+        System.out.println(id);
+    }
+    public int getId() {
+        return id;
+    }public double getBalance() {
+        return balance;
+    }
+    public double getInitialde() {
+        return initialde;
+    }
+    void setBlanace(double balance) throws InvalidAmountException{
+        if(balance<0)
+        System.out.println();
+        throw new InvalidAmountException(balance);
+    }
+
+
+}
+class InvalidAmountException extends Exception{
+    double amount;
+    InvalidAmountException(double amount){
+    super("Invalid");
+    }
+}
+class InsufficiemtFoundsExceptipon extends InvalidAmountException{
+    InsufficiemtFoundsExceptipon(double amount){
+        super(amount);
+    }
+}
+
+
