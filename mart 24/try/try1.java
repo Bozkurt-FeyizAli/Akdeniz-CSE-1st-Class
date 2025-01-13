@@ -88,6 +88,7 @@ Methods:
 - calculateRentalCost(int days): Computes the rental cost for a given number of days.
 4. Motorcycle Class:
 plaintext
+Copy code
 Attributes:
 - make (String): The make of the motorcycle.
 - model (String): The model of the motorcycle.
@@ -252,3 +253,32 @@ class RentalContrat{
     public void setRentalEndDate(Date rentalEndDate) {
         this.rentalEndDate = rentalEndDate;
     }
+    public void setRentalStartDate(Date rentalStartDate) {
+        this.rentalStartDate = rentalStartDate;
+    }
+    public void setRentedVehicle(Vehicle rentedVehicle) {
+        this.rentedVehicle = rentedVehicle;
+    }
+    public Customer getCustomer() {
+        return customer;
+    }
+    public Date getRentalEndDate() {
+        return rentalEndDate;
+    }
+    public Date getRentalStartDate() {
+        return rentalStartDate;
+    }
+    public Vehicle getRentedVehicle() {
+        return rentedVehicle;
+    }
+}
+
+
+
+
+
+
+
+
+
+
