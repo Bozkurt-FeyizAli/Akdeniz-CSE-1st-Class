@@ -135,3 +135,80 @@ class Statistic{
 
     public double[][] frequence(double[] datas){
 
+        double[][] frequance= new double[eliminateDublicate(datas).length][2];
+        int times=0;
+        for (int index = 0; index < eliminateDublicate(datas).length; index++) {
+            times=0;
+            for (int j = 0; j < data.length; j++) {
+                if(datas[index]==datas[j])
+                times++;
+            }
+            frequance[index][1]=times;
+        }
+        return frequance;
+    }
+     public double modShort(double[] datas){
+        double[][] listOfData=frequence(datas);
+        for (int i = 0; i < listOfData.length; i++) {
+            if(listOfData[i][1]<mod)
+                mod=listOfData[i][0];
+        }
+        return mod;
+     }
+
+    public double[][] addetiveFrequence(double[][] frequance){
+        double a= (int)frequance[0][1];
+        double[][] addetiveFrequence= new double[frequance.length][2];
+        addetiveFrequence[0][1]=a;
+        for(int i=1;i<frequance.length;i++){
+            addetiveFrequence[i][1]=a+frequance[i][1];
+            a=addetiveFrequence[i][1];
+        }
+        return addetiveFrequence;
+    }
+
+    // public double[][] classBoundary(int h){
+    //     double alt=-0.5;
+    //     for(int i=0;i<)
+    // }
+
+    public double[] eliminateDublicate(double[] array){
+        double[] candidateEliminateDublicate=new double[array.length];
+        int a=0;
+        for (int index = 0; index < array.length; index++) {
+            for (int j = index+1; j < array.length; j++) {
+                if(!isThatInArray(array, array[index]))
+                    if(!isThatInArray(candidateEliminateDublicate, array[index])) 
+                        candidateEliminateDublicate[a]=array[index];
+            }
+        }  
+        int length=0;
+        for(int i=0;i<candidateEliminateDublicate.length-2;i++){
+            length++;
+            if(candidateEliminateDublicate[i+1]==0&&candidateEliminateDublicate[i+1]==0)
+            break;
+        }
+        double[] eliminateDublicate= new double[length]; 
+        for (int index = 0; index < eliminateDublicate.length; index++) {
+            eliminateDublicate[index]=candidateEliminateDublicate[index];
+        }
+        return eliminateDublicate;
+    }
+
+    public boolean isThatInArray(double[] array, double that){
+        int times=0;
+        for(int i=0;i>array.length;i++){
+            if(that==array[i])
+            times++;
+            if(times==2)
+            return true;
+        }
+        return false;
+    }
+
+    
+     
+                                      
+                                      
+  
+}
