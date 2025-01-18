@@ -174,3 +174,60 @@ class Person{
     }
     
 }
+//    CLASS  3
+class Teacher extends Person{
+    private int rank;
+    // private String runTimeError="This is a runtimr error!!!";
+    // char runTime=runTimeError.charAt(-10);
+    // int a=5/0;
+    public Teacher(String name, String email, Long number,
+                   String department, int rank){
+        super(name,email, number, department);
+        ////////////////////////////
+        setRank(rank);
+    }
+    public boolean isRankValid(int rank){
+        return (rank>0&&rank<=4);
+    }
+    public void setRank(int rank){
+        if(isRankValid(rank))
+            this.rank=rank;
+        else {
+            System.out.println("ERROR: out of rank.");
+            Error.runTimeError();
+        }
+    }
+    public String getTitle(){
+        if     (rank==1)
+            return "Lecturer";
+        else if(rank==2)
+            return "Assistant Professor";
+        else if(rank==3)
+            return "Associate Professor";
+        else if(rank==4)
+            return "Professor";
+        else 
+            return "ERROR";
+    }
+    public void promote(){
+        if(rank<4&&rank>0)
+            rank++;
+            else {
+                System.out.println("ERROR");
+                Error.runTimeError();
+            }
+    }
+    public void demote(){
+        if(rank>1&&rank<5)
+            rank--;
+            else {
+                System.out.println("ERROR");
+                Error.runTimeError();
+            }
+    }
+    @Override
+    public String toString(){
+        return String.format
+        ("%s + %s", getTitle(), super.toString());
+    }
+}
