@@ -105,3 +105,74 @@ class Stock{
     }
 }
 
+class Fan{
+    private static final int  SLOW  = 1;
+    private static final int  MEDIUM= 2;
+    private static final int  FAST  = 3;
+    private int     speed ;
+    private boolean on    ;
+    private double  radius;
+    private String  color ;
+    Stock helperMethods= new Stock("a","a");
+    Fan(){
+        speed = SLOW  ;
+        on    = false ;
+        radius= 5     ;
+        color = "Blue";
+    }
+    
+    Fan(double radius, String color){
+        this.radius=radius;
+        this.color =helperMethods.UpperFirstLetterEachWord(color) ;
+        // this.speed =speed ;
+    }
+    
+    public int getSpeed(){
+        // System.out.println("Spedd data is accesed.");
+        return speed;
+    }
+    
+    public String getColor(){
+        // System.out.println("Color data is accesed.");
+        return helperMethods.UpperFirstLetterEachWord(color);
+    }
+    
+    public double getRadius(){
+        // System.out.println("Radius data is accesed.");
+        return radius;
+    }
+    //mutator
+    public void setSpeed(int speed){
+        if(on)
+        this.speed= speed;
+        else
+        System.out.println("ERROR: Fan is close.");
+    }
+    
+    public void setRadius(double radius){
+        if(radius>=0)
+        this.radius= radius;
+        else
+        System.out.println("ERROR: Invalid value was entered.");
+    }
+    
+    public void setColor(String color){
+        this.color= color;
+    }
+    
+    public boolean isOn(){
+        return on;
+    }
+    
+    public void change(){
+        on=!on;
+    }
+    @Override
+    public String toString(){
+        if(on)
+        return String.format("Speed: %d, Radius %.2f, Color: %s", 
+                                     speed,     radius,      helperMethods.UpperFirstLetterEachWord(color));
+        else
+        return "Fan is of";
+    }
+}
