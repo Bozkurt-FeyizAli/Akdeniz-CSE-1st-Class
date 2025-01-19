@@ -110,3 +110,100 @@ class Computer{
              return "Computer: "+cpu+" "+ram;
         }
 }
+
+class CPU{
+    private String name;
+    private double clock;
+
+    CPU(String name, double clock){
+      this.clock=clock;
+      this.name=name;
+    }
+
+    public double getClock() {
+        return clock;
+    }
+    public String getName() {
+        return name;
+    }
+    public int compute(int a, int b ) throws java.lang.InterruptedException,
+                                                       ComputationException {
+        try{
+            Thread.sleep((int)((5/clock)*1000));
+        }
+        catch(InterruptedException e){
+            System.out.println
+            ("Exception occurred due to internal clock speed: "+clock);
+        }
+        if(a+b<0){
+            throw new ComputationException(this, a+b);
+        }
+        return a+b;    
+    }
+    public String toString(){
+        return "CPU: " + name + " " + clock + "Ghz";
+    }
+}
+
+class RAM{
+    private String type;
+    private int capacity;
+    private int[][] memory;
+    
+    RAM(String type, int capacity){
+        this.capacity=capacity;
+        this.type=type;
+        initMemory();
+    }
+    
+    public void setMemory(int[][] memory) {
+        this.memory = memory;
+    }
+    public int getCapacity() {
+        return capacity;
+    }
+    public int[][] getMemory() {
+        return memory;
+    }
+    public String getType() {
+        return type;
+    }
+    // use random class
+    private void initMemory(){
+        java.util.Random random = new java.util.Random();
+       this.memory= new int[capacity][capacity];
+       for(int i=0;i<memory.length;i++){
+           for(int j=0;j<memory.length;j++){
+            memory[i][j]=random.nextInt(11);
+           }
+       }
+    }
+    public int random(){
+        java.util.Random r= new java.util.Random();
+        return r.nextInt( 11);
+    }
+    private boolean check(int i, int j) throws MemoryException{
+        if(i<0||i>capacity||j<0||j>capacity)
+        throw new MemoryException(this, i, j);
+        else 
+        return true;
+    }
+    public int getValue(int i, int j){
+        if(check(i, j))
+        return memory[i][j];
+        else throw new MemoryException(this, i, j);
+    }
+    public void setValue(int i, int j, int value)throws MemoryException{
+        try{
+        if(check(i, j))
+            this.memory[i][j]=value;
+        }
+        catch(MemoryException e){
+            throw new MemoryException(this, i, j);
+        }
+    }
+    public String toString(){
+        return  "RAM: " + type + " " + capacity + "GB";
+    }
+}
+
