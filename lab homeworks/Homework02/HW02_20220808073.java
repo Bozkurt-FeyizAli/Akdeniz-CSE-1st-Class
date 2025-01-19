@@ -66,3 +66,27 @@ class City{
         return name;
     }
 }
+
+class Person{
+    private String name;
+    private String surname;
+    private String phoneNumber;
+    Person(String name, String surname, String phoneNumber){
+        this.name=name;
+        this.surname=surname;
+        setPhoneNumber(phoneNumber);
+    }
+    public String getName() {
+        return name;
+    }
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+    public String getSurname() {
+        return surname;
+    }
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+}
