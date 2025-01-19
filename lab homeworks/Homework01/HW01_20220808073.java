@@ -53,3 +53,55 @@ class Stock{
         }
         return newWord;
     }
+    // i am not sure
+    Stock(String symbol, String name){
+        this.symbol=capitalizeWord(symbol);
+        this.name=UpperFirstLetterEachWord(name); 
+    }
+    //accsesor
+    public String getSymbol(){
+        // System.out.println("Symbol data is accesed.");
+        return UpperFirstLetterEachWord(symbol);
+    }
+    
+    public String getName(){
+        // System.out.println("Name data is accesed.");
+        return UpperFirstLetterEachWord(name);
+    }
+    
+    public double getPreviousClosingPrice(){
+        // System.out.println("PreviousClosingPrice data is accesed.");
+        return previousClosingPrice;
+    }
+    
+    public double getCurrentPrice(){
+        // System.out.println("CurrentPrice data is accesed.");
+        return currentPrice;
+    }
+    // mutator
+    public void setPreviousClosingPrice(int previousClosingPrice){
+        if(previousClosingPrice<0)
+        System.out.println("ERROR: invalid value was enetered.");
+        else
+        this.previousClosingPrice= previousClosingPrice;
+    }
+    
+    public void setCurrentPrice(int currentPrice){
+        if(currentPrice<0)
+        System.out.println("ERROR: invalid value was enetered.");
+        else
+        this.currentPrice=currentPrice;
+    }
+    
+    public double getChangePercent(){
+        return ((currentPrice-previousClosingPrice)
+                 /previousClosingPrice*(100.0));
+    }
+    // toString(): String – returns “[symbol] - [name]: [currentPrice]
+    @Override
+    public String toString(){
+        return String.format("[%s] - [%s]: [%f]", 
+        capitalizeWord(symbol), UpperFirstLetterEachWord(name), currentPrice);
+    }
+}
+
