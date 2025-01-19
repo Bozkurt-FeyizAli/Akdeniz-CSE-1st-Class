@@ -60,3 +60,52 @@ class Book{
         this.price = price;
     }
 }
+
+class EBook extends Book{
+    String downloadUrl;
+    String sizeMb;
+
+    EBook(String isbn, String title, Author author, double price, String downloadUrl, String sizeMb ) {
+        super(isbn, title, author, price);
+        this.downloadUrl=downloadUrl;
+        this.sizeMb=sizeMb;
+    } 
+    EBook(String isbn, String title, Author author, String downloadUrl, String sizeMb ) {
+        super(isbn, title, author);
+        this.downloadUrl=downloadUrl;
+        this.sizeMb=sizeMb;
+    } 
+    public String getDownloadUrl() {
+        return downloadUrl;
+    }
+    public String getSizeMb() {
+        return sizeMb;
+    }
+}
+
+class PaperBook extends Book{
+    int shippingWeight;
+    boolean inStock;
+
+    PaperBook(String isbn, String title, Author author, double price, int shippingWeight, boolean inStock) {
+        super(isbn, title, author, price);
+        this.shippingWeight=shippingWeight;
+        setInStock(inStock);
+    }
+    PaperBook(String isbn, String title, Author author, boolean inStock) {
+        super(isbn, title, author);
+        this.shippingWeight=(int)(Math.random()*11)+5;
+        setInStock(inStock);
+    }
+    public int getShippingWeight() {
+        return shippingWeight;
+    }
+    public boolean getInStock(){
+        return inStock;
+    }
+    public void setInStock(boolean inStock) {
+        this.inStock = inStock;
+    }
+    
+}
+
