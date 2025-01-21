@@ -255,3 +255,66 @@ class Laptop extends Computer{
         return super.toString()+" "+battery;
     }
 }
+
+class Desktop extends Computer{
+    private java.util.ArrayList<String> peripherals;
+
+    Desktop(CPU cpu, RAM ram, String[] varargsPeripherals){
+        super(cpu, ram);
+        this.peripherals = new java.util.ArrayList<>
+                              (java.util.Arrays.asList(varargsPeripherals));
+    }
+
+    @Override
+    public void run() {
+        int sum=0;
+        for (int index = 0; index < getRam().getMemory().length; index++) {
+            for (int j = 0; j < getRam().getMemory().length; j++) {
+                try {
+                    sum= getCpu().compute(getRam().getValue(index,j), sum );
+                } catch (java.lang.InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ComputationException e) {
+                    // throw new ComputationException(e);
+                    e.getStackTrace();
+                }
+            }
+        }
+        // degiiştmrk gerekenübilir
+        ram.setValue(0, 0, sum);
+    }
+    public void plugIn(String peripheral){
+        this.peripherals.add(peripheral);
+    }
+    public String plugOut(){
+        String s =this.peripherals.get(peripherals.size()-1);
+        this.peripherals.remove(peripherals.size()-1);
+        return s;
+    }
+    public String plugOut(int index){
+        String result= peripherals.get(index);
+        peripherals.remove(index);
+        return result;
+    }
+    @Override
+    public String toString(){
+        String result= super.toString();
+        for (String string : peripherals) {
+            result+=(" "+string);
+        }
+        return result;
+    }
+} 
+class MemoryException extends RuntimeException{
+    private RAM ram;
+    private int adress1;
+    private int adress2;
+
+    MemoryException(RAM ram, int adress1, int adress2){
+        super(String.format
+        ("Memory out of range! With addresses #[%d, %d]", adress1, adress2 ));
+        this.adress1=adress1;
+        this.adress2=adress2;
+        this.ram=ram;
+    }
+}
