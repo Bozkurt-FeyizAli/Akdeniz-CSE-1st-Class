@@ -207,3 +207,51 @@ class RAM{
     }
 }
 
+class Laptop extends Computer{
+    private int milliAmp;
+    private int battery;
+
+    Laptop(CPU cpu, RAM ram, int milliAmp){
+        super(cpu, ram);
+        setMilliAmp(milliAmp);
+        this.battery=(int)(milliAmp*0.3);
+    }
+
+    public void setBattery(int battery) {
+        this.battery = battery;
+    }
+    public void setMilliAmp(int milliAmp) {
+        this.milliAmp = milliAmp;
+    }
+    public int getBattery() {
+        return battery;
+    }
+    public int getMilliAmp() {
+        return milliAmp;
+    }
+    public int  batteryPercentage(){
+        return (int)((battery * 100) / milliAmp);
+    }
+    public void charge(){
+        while(batteryPercentage() <= 90){
+            this.battery += (int)(0.02 * milliAmp);
+        }
+    }
+    @Override
+    public void run(){
+        if(batteryPercentage()>5){
+                try {
+                    super.run();
+                } catch (ComputationException e) {
+                    System.out.println(e);
+                }
+                finally{
+                    this.battery-=(int)(0.03*milliAmp);
+                }
+            }
+        else charge();
+    }
+    public String toString(){
+        return super.toString()+" "+battery;
+    }
+}
