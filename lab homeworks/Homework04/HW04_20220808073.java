@@ -318,3 +318,39 @@ class MemoryException extends RuntimeException{
         this.ram=ram;
     }
 }
+
+class ComputationException extends Exception{
+    private CPU cpu;
+    private int value1;
+    private int value2;
+
+    ComputationException(CPU cpu, int value1, int value2){
+        super(String.format
+        ("Computation exception occurred on " + cpu +
+         " with values: (%d, %d)", value1, value2));
+        this.cpu=cpu;
+        this.value1=value1;
+        this.value2=value2;
+    }
+    ComputationException(CPU cpu, int result){
+        super("an exception occures durring comp. ,"+result);
+    }
+    ComputationException(ComputationException e){
+        super(String.format
+        ("Unhandled exception occurred at " + e.cpu + " with values  " 
+        + e.value1 + " and " + e.value2 + ":\n\t" + e.getMessage() ));
+    }
+
+    public int fixComputation(int value1, int value2) 
+    throws ComputationException, InterruptedException{
+        this.value1=Math.abs(value1);
+        this.value2=Math.abs(value2);
+        int fixComputation=0;
+        try {
+            fixComputation = cpu.compute(value1, value2);
+        } catch (ComputationException | InterruptedException e) {
+            e.getStackTrace();
+        }
+        return fixComputation;
+    }
+}
