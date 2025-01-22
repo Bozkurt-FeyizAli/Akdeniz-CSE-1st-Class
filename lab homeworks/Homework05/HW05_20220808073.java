@@ -470,3 +470,113 @@ class Paladin extends PlayableCharacter implements Caster , Combat{
     }
     
 }
+
+class Party {
+    private static final int partyLimit = 8;
+    private ArrayList<PlayableCharacter> fighters;
+    private ArrayList<PlayableCharacter> healers;
+    private int counter;
+
+    public Party() {
+        this.fighters = new ArrayList<>();
+        this.healers = new ArrayList<>();
+        this.counter = 0;
+    }
+
+    public void addCharacter(PlayableCharacter character) 
+    throws PartyLimitReachedException {
+        if (fighters.size() + healers.size() >= partyLimit) {
+            throw new PartyLimitReachedException
+            ("the error message:Party limit reached"+
+            ". Cannot add more characters.");
+        }
+        if (character instanceof Warrior) {
+            fighters.add((Warrior) character);
+        } else if (character instanceof Cleric) {
+            healers.add((Cleric) character);
+        } else if (character instanceof Paladin) {
+            if (counter < 4) {
+                fighters.add((Paladin) character);
+            } else {
+                healers.add((Paladin) character);
+            }
+            counter++;
+        }
+    }
+
+    public void removeCharacter(PlayableCharacter character)
+     throws CharacterIsNotInPartyException {
+        if (character instanceof Warrior) {
+            if (!fighters.remove((Warrior) character)) {
+                throw new CharacterIsNotInPartyException
+                ("the error message: Warrior is not in the party.");
+            }
+        } else if (character instanceof Cleric) {
+            if (!healers.remove((Cleric) character)) {
+                throw new CharacterIsNotInPartyException
+                ("the error message:Cleric is not in the party.");
+            }
+        } else if (character instanceof Paladin) {
+            if (fighters.remove((Paladin) character)||
+                healers.remove((Paladin) character)) {
+                counter--;
+            } else {
+                throw new CharacterIsNotInPartyException
+                ("the error message:Paladin is not in the party.");
+            }
+        }
+    }
+    public void partyLevelUp(){
+        for(int i=0;i<fighters.size();i++){
+            fighters.get(i).levelUp();
+        }
+        for(int i=0;i<healers.size();i++){
+           if(!(healers.get(i) instanceof Paladin))
+            healers.get(i).levelUp();
+        }
+    }
+    @Override
+    public String toString() {
+        List<Character> characters = new ArrayList<>();
+        characters.addAll(fighters);
+        characters.addAll(healers);
+        characters.sort(Comparable::compareTo);
+        StringBuilder sb = new StringBuilder();
+        for (Character character : characters) {
+            sb.append(character).append("\n");
+        }
+        return sb.toString();
+    }
+}
+class AlreadyInPartyException extends Exception{
+    AlreadyInPartyException(String message){
+        super(message);
+    }
+
+}
+class CharacterIsNotInPartyException extends Exception{
+    CharacterIsNotInPartyException(String message){
+        super(message);
+    }
+}
+
+class ItemNotFoundException extends Exception{
+    ItemNotFoundException(String message){
+        super(message);
+    }
+}
+
+class PartyLimitReachedException extends Exception{
+    PartyLimitReachedException(String message){
+        super(message);
+    }
+}
+// class MissingFormatArgumentException {
+
+// }
+
+
+
+
+
+
