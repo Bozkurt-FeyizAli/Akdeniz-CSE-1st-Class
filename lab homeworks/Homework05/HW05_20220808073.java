@@ -256,3 +256,94 @@ class Merchant extends NonPlayableCharacter{
     }
 }
 
+class Skeleton extends NonPlayableCharacter implements Combat{
+
+    Skeleton(String name, Attributes attributes) {
+        super(name, attributes);
+        
+    }
+    
+    @Override
+    public void takeDamage(int damage) {
+        if(isAlive())
+        health-=damage;
+    }
+
+    @Override
+    public void takeHealing(int healing) {
+        if(isAlive())
+        takeDamage(healing);
+    }
+
+    @Override
+    public boolean isAlive() {
+        return health>0; 
+    }
+    @Override
+    public void attack(Damageable target) {
+        if(isAlive())
+        target.takeDamage(super.attributes.getStrength());
+    }
+
+    @Override
+    public void lootWeapon(Weapon weapon) {
+    }
+    @Override
+    public void levelUp() {
+        if(isAlive()){
+        level+=1;
+        attributes.increaseIntelligence(1);
+        attributes.increaseStrength(1);
+        }
+    }
+
+}
+
+class Warrior extends PlayableCharacter implements Combat{
+    private Useable weapon;
+
+    Warrior(String name) throws AlreadyInPartyException {
+        super(name, new Attributes(4,2));
+        health=35;
+    }
+
+    @Override
+    public void takeDamage(int damage) {
+        if(isAlive())
+        health-=damage;
+    }
+    @Override
+    public void takeHealing(int healing) {
+        if(isAlive())
+        healing+=healing;
+    }
+    @Override
+    public boolean isAlive() {
+        return health>0;
+    }
+    @Override
+    public int compareTo(Character c) {
+        return super.compareTo(c);
+    }
+
+    @Override
+    public void attack(Damageable target) {
+        if(isAlive())
+        target.takeDamage(weapon.use());
+    }
+
+    @Override
+    public void lootWeapon(Weapon weapon) {
+        if(isAlive())
+        this.weapon=weapon;
+    }
+    @Override
+    public void levelUp(){
+        if(isAlive()){
+        super.levelUp();
+        attributes.increaseIntelligence(1);
+        attributes.increaseStrength(2);
+        }
+    }
+    
+}
