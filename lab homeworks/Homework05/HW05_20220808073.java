@@ -113,3 +113,83 @@ class Attributes{
                              "]", strength, intelligence);
     }
 }
+
+abstract class Character implements Comparable<Character>, Damageable {
+    private String name;
+    protected int level;
+    protected Attributes attributes;
+    protected int health;
+
+    Character(String name, Attributes attributes) {
+        this.name = name;
+        this.attributes = attributes;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    abstract void levelUp();
+
+    @Override
+    public int compareTo(Character other) {
+        return Integer.compare(this.level, other.level);
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName()
+               + " LvL: " + level + " – " + attributes;
+    }
+}
+
+abstract class PlayableCharacter  extends Character {
+    boolean inParty;
+    Party party;
+
+    PlayableCharacter(String name, Attributes attributes)
+                          throws AlreadyInPartyException{
+        super(name, attributes);
+    }
+    /// differ from pdf
+    public boolean isInParty(){
+        return inParty;
+    }
+    public void levelUp(){
+        level+=1;
+    }
+    // unfinished
+    public void joinParty(Party party) 
+    throws AlreadyInPartyException , PartyLimitReachedException{
+        if(isInParty())
+            throw new AlreadyInPartyException("the error message");
+        else{
+            try {
+                party.addCharacter(this);
+            } catch (PartyLimitReachedException  e) {
+                throw new 
+                PartyLimitReachedException("the error message"); 
+            }
+        } 
+    }
+    public void quitParty() throws CharacterIsNotInPartyException{
+        if(isInParty()){
+            try {
+                party.removeCharacter(this);
+                inParty=false;
+                party=null;
+            } catch (CharacterIsNotInPartyException e) {
+                throw new CharacterIsNotInPartyException
+                ("the error message");
+            }
+        }
+        else{
+            throw new CharacterIsNotInPartyException
+            ("the error message");
+        }
+    }
+}
