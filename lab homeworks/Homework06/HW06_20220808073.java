@@ -1,3 +1,4 @@
+public class HW06_20220808073{
     public static void main(String[] args){
         
     }
@@ -40,5 +41,54 @@ abstract class Product implements Sellable{
     @Override
     public String toString(){
         return this.getClass().getSimpleName() + " (" + name + ", " + getPrice() + ")"; 
+    }
+}
+class Mirror extends Product{
+    private int width;
+    private int height;
+    Mirror(int width, int height){
+        super("mirror",2);
+        setHeight(height);
+        setWidth(width);
+    }
+    private void setHeight(int height){
+        this.height = height;
+    }
+    private void setWidth(int width){
+        this.width = width;
+    }
+    // public int getHeight(){
+    //     return height;
+    // }
+    // public int getWidth(){
+    //     return width;
+    // }
+    public int getArea(){
+        return height*width;
+    }
+    @Override
+    public double getPrice(){
+        return super.getPrice()*getArea();
+    }
+    public <T> T reflect(T item){
+        System.out.println("reflected item: " + item);
+        return item;
+    }
+    // @Override
+    // public String toString(){
+    //     return this.getClass().getSimpleName() + " (" + super.getName() + ", " + getPrice() + ")"; 
+    // }
+    
+}
+class Paper extends Product implements Wrappable{
+    private String note;
+    Paper(){
+        super("Paper", 0.5);
+    }
+    public String getNote(){
+        return note;
+    }
+    public void setNote(String note){
+        this.note = note;
     }
 }
