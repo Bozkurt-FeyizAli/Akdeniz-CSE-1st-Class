@@ -347,3 +347,126 @@ class Warrior extends PlayableCharacter implements Combat{
     }
     
 }
+
+class Cleric extends PlayableCharacter implements Caster{
+    private Useable spell;
+
+    Cleric(String name) throws AlreadyInPartyException {
+        super(name, new Attributes(4,2));
+        health=25;
+    }
+
+    @Override
+    public int compareTo(Character c) {
+        return super.compareTo(c);
+    }
+
+    @Override
+    public void takeDamage(int damage) {
+        if(isAlive())
+        health-=damage;
+    }
+
+    @Override
+    public void takeHealing(int healing) {
+        if(isAlive())
+        health+=healing;
+    }
+
+    @Override
+    public boolean isAlive() {
+       return health>0;
+    }
+    // anlamadım
+    @Override
+    public void castSpell(Damageable target) {
+        int healing = attributes.getIntelligence() + ((Spell) spell).use();
+        if(isAlive())
+        target.takeHealing(healing);
+    }
+
+    @Override
+    public void learnSpell(Spell spell) {
+        this.spell = spell;
+    }
+    @Override
+    public void levelUp(){
+        if(isAlive()){
+        super.levelUp();
+        attributes.increaseIntelligence(2);
+        attributes.increaseStrength(1);
+        }
+    }
+    
+}
+
+class Paladin extends PlayableCharacter implements Caster , Combat{
+    private Useable weapon;
+    private Useable spell;
+
+    Paladin(String name) throws AlreadyInPartyException {
+        super(name, new Attributes());
+        health=30;
+    }
+
+    @Override
+    public void takeDamage(int damage) {
+        if(isAlive())
+        health-=damage;
+    }
+    @Override
+    public void takeHealing(int healing) {
+        if(isAlive())
+        health+=healing;
+    }
+
+    @Override
+    public boolean isAlive() {
+        return health>0;
+    }
+
+    @Override
+    public int compareTo(Character c) {
+        return super.compareTo(c);
+    }
+
+    @Override
+    public void attack(Damageable target) {
+        if(isAlive())
+        target.takeDamage(weapon.use());
+    }
+
+    @Override
+    public void lootWeapon(Weapon weapon) {
+        if(isAlive())
+        this.weapon=weapon;
+    }
+
+    @Override
+    public void castSpell(Damageable target) {
+        int healing = attributes.getIntelligence() + ((Spell) spell).use();
+        if(isAlive())
+        target.takeHealing(healing);
+    }
+
+    @Override
+    public void learnSpell(Spell spell) {
+        if(isAlive())
+        this.spell = spell;
+    }
+    @Override
+    public void levelUp(){
+        if(isAlive()){
+        if(getLevel()/2==0){
+            attributes.increaseIntelligence(1);
+            attributes.increaseStrength(2);
+        }
+        else{
+            attributes.increaseIntelligence(2);
+            attributes.increaseStrength(1);
+        }
+        super.levelUp();
+    }
+    }
+    
+}
