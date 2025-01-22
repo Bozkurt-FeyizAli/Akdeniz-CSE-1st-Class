@@ -92,3 +92,69 @@ class Paper extends Product implements Wrappable{
         this.note = note;
     }
 }
+class Matroschka <T extends Wrappable> extends Product implements Wrappable, Package<T>{
+    private T item;
+
+    Matroschka(T item){
+        super("Doll", 5+(item==null? 0: item.getPrice()));
+        pack(item);
+    }
+    @Override
+    public String toString(){
+        return super.toString() + "{" + item + "]"; 
+    }
+    @Override
+    public boolean pack(T item){
+        if(this.item!=null){
+            return false;
+        }
+        this.item = item;
+        return true;
+    }
+    @Override
+    public boolean isEmpty(){
+        return this.item==null;
+    }
+    @Override
+    public T extract(){
+        T eItem = item;
+        item = null;
+        return eItem;
+    }
+}
+class Box <T extends Sellable> implements Package<T>{
+    private T item;
+    private boolean seal;
+    Box(){
+        item=null;
+    }
+    Box(T item){
+        seal=true;
+        pack(item);
+    }
+    public T extract(){
+        T eItem = item;
+        this.item = null;
+        this.seal = false;
+        return eItem;
+    }
+    public boolean isSealBroken(){
+        return seal;
+    }
+    @Override
+    public boolean pack(T item){
+        if(this.item!=null){
+            return false;
+        }
+        this.item = item;
+        return true;
+    }
+    @Override
+    public boolean isEmpty(){
+        return this.item==null;
+    }
+    @Override
+    public String toString(){
+        return this.getClass().getSimpleName() + " {" + item + "} Seal: " + seal; 
+    }
+}
