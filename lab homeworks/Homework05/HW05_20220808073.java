@@ -54,3 +54,62 @@ class Spell implements Useable{
     }
 
 }
+
+class Weapon implements Useable{
+    private int minDamage;
+    private int maxDamage;
+    private String name;
+    
+    Weapon(String name, int minDamage, int maxDamage){
+        setName(name);
+        this.maxDamage=maxDamage;
+        this.minDamage=minDamage;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    public String getName() {
+        return name;
+    }
+    @Override
+    public int use() {
+        return attack();
+    }
+    private int attack(){
+        return minDamage +(int)((maxDamage+1)*Math.random());
+    }
+}
+
+class Attributes{
+    private int strength;
+    private int intelligence;
+    
+    Attributes(){
+        this.strength=3;
+        this.intelligence=3;
+    }
+    Attributes(int strength, int intelligence){
+        this.intelligence=intelligence;
+        this.strength=strength;
+    }
+
+    public void increaseStrength(int amount){
+        this.strength+=amount;
+    }
+    public void increaseIntelligence(int amount){
+        this.intelligence+=amount;
+    }
+    public int getIntelligence() {
+        return intelligence;
+    }
+    public int getStrength() {
+        return strength;
+    }
+    @Override
+    public String toString(){
+        return String.format("Attributes [Strength= " + strength +
+                             ", intelligence= " + intelligence +
+                             "]", strength, intelligence);
+    }
+}
