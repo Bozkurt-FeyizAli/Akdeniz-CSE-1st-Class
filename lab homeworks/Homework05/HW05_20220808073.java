@@ -193,3 +193,66 @@ abstract class PlayableCharacter  extends Character {
         }
     }
 }
+
+abstract class NonPlayableCharacter  extends Character{
+
+    NonPlayableCharacter(String name, Attributes attributes) {
+        super(name, attributes);
+    }
+    
+}
+
+class Merchant extends NonPlayableCharacter{
+    private java.util.ArrayList<Useable> inventory;    
+    // have problem
+    
+
+    Merchant(String name) {
+        super(name, new Attributes(0,0));
+        inventory=new ArrayList<>();
+    }
+
+    public void display(){
+        for (Useable useable : inventory) {
+            System.out.println(useable);
+        }
+    }
+    public Useable buy(int itemNumber)throws ItemNotFoundException{
+        try {
+            return inventory.get(itemNumber);
+        }catch (IndexOutOfBoundsException e) {
+            throw new ItemNotFoundException("the error message");
+        }
+    }
+    public void sell(Useable item){
+        if(isAlive())
+        inventory.add(item);
+    }
+    
+    @Override
+    public int compareTo(Character character){
+        return super.compareTo(character);
+    }
+
+    @Override
+    public void takeDamage(int damage) {
+        if(isAlive())
+        health-=damage;
+    }
+
+    @Override
+    public void takeHealing(int healing) {
+        if(isAlive())
+        health+=healing;
+    }
+
+    @Override
+    public boolean isAlive() {
+        return health>0;
+    }
+
+    @Override
+    public void levelUp() {
+    }
+}
+
