@@ -453,3 +453,30 @@ class Matroschka <T extends Wrappable> extends Product implements Wrappable,Pack
         return "Matroschka { " +"item = " + item +" } ";
     }
 }
+
+
+class Mirror extends Product{
+    private int height;
+    private int width;
+
+    public Mirror(String name, double price, int height, int width) {
+        super("Mirror", 2.0);
+        this.height = height;
+        this.width = width;
+    }
+
+    public int getArea(){
+        return width*height;
+    }
+
+    @Override
+    public double getPrice() {
+        return super.getPrice()*getArea();
+    }
+
+    public <T> T reflect( T item){
+        System.out.println(item);
+        return item;
+    }
+
+}
