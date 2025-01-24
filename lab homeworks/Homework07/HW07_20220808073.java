@@ -216,3 +216,55 @@ class Container implements Stack<Box<?>>, Node<Container>,
     }
 
 }
+class Matroschka <T extends Wrappable> extends Product
+                    implements Wrappable, Package<T>{
+    private T item;
+    Matroschka(T item){
+        super("Doll", 5+(item==null? 0: item.getPrice()));
+        pack(item);
+    }
+    public T extract(){
+        T newItem=this.item;
+        this.item=null;
+        return newItem;
+    }
+    public double getPriority() throws UnsupportedOperationException{
+        throw new UnsupportedOperationException
+        ("UnsupportedOperationException - "+
+        "because getting the priority is not implemented");
+    }
+    @Override
+    public String toString() {
+        return super.toString() + "{" + item + "]"; 
+    }
+    public boolean pack(T item){
+        if(!isEmpty())
+            return false;
+        this.item=item;
+        return true;
+    }
+    public boolean isEmpty(){
+        return this.item==null;
+    }
+    
+}
+class Mirror extends Product{
+    private int height;
+    private int width;
+    Mirror(int width, int height){
+        super("mirror",2);
+        this.height = height;
+        this.width = width;
+    }
+    public int getArea(){
+        return width*height;
+    }
+    public double getPrice(){
+        return getArea()*super.getPrice();
+    }
+    public <T>T reflect(T item){
+        System.out.println(item);
+        return item;
+    }
+
+}
