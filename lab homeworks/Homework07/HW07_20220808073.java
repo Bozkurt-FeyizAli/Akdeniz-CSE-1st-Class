@@ -268,3 +268,42 @@ class Mirror extends Product{
     }
 
 }
+class Paper extends Product implements Wrappable{
+    private String note;
+    public Paper() {
+        super("Paper", 0.5);
+    }
+    public String getNote() {
+        return note;
+    }
+    public void setNote(String note) {
+        this.note = note;
+    }
+}
+abstract class Product implements Sellable{
+    private String name;
+    private double price;
+    public String getName() {
+        return name;
+    }
+    private void setName(String name) {
+        this.name = name;
+    }
+    public double getPrice() {
+        return price;
+    }
+    private void setPrice(double price) {
+        this.price = price;
+    }
+    public Product(String name, double price) {
+        setName(name);
+        setPrice(price);
+    }
+    @Override
+    public String toString() {
+        return this.getClass().getSimpleName() + " (" 
+        + name + ", " + getPrice() + ")";
+    }
+    
+    
+}
