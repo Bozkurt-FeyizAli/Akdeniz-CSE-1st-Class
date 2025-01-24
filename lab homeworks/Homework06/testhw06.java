@@ -61,3 +61,64 @@ public class testhw06 {
 
     // Test Mirror class getArea() method
     @Test
+    public void testMirrorArea() {
+        Mirror mirror = new Mirror(4, 6);
+        assertEquals(24, mirror.getArea());
+    }
+
+    // Test Mirror class getPrice() method
+    @Test
+    public void testMirrorPrice() {
+        Mirror mirror = new Mirror(4, 6);
+        assert(48== mirror.getPrice());
+    }
+
+    // Test Mirror class reflect() method
+    // @Test
+    // public void testMirrorReflect() {
+    //     Mirror mirror = new Mirror(4, 6);
+    //     assertEquals("reflected item: Paper", mirror.reflect(new Paper()).getNote());
+    // }
+
+    // Test Paper class constructor
+    @Test
+    public void testPaperConstructor() {
+        Paper paper = new Paper();
+        assertNull(paper.getNote());
+    }
+
+    // Test Matroschka class constructor
+    @Test
+    public void testMatroschkaConstructor() {
+        Matroschka<Paper> matroschka = new Matroschka<>(new Paper());
+        assertEquals("Matroschka (Doll, 5.5){Paper (Paper, 0.5)]", matroschka.toString());                                                                                                                        
+    }
+
+    // Test Matroschka class extract() method
+    // @Test
+    // public void testMatroschkaExtract() {
+    //     Matroschka<Paper> matroschka = new Matroschka<>(new Paper());
+    //     Paper extractedPaper = matroschka.extract();
+    //     assertNotNull(extractedPaper);
+    //     assertEquals("Paper", extractedPaper.getNote());
+    //     assertNull(matroschka.extract()); // Ensure matroschka is empty after extraction
+    // }
+
+    // Test Box class constructor
+    // @Test
+    // public void testBoxConstructor() {
+    //     Box<Paper> box = new Box<>(new Paper());
+    //     // assertTrue(box.isSealed());
+    // }
+
+    // Test Box class extract() method
+    // @Test
+    // public void testBoxExtract() {
+    //     Box<Paper> box = new Box<>(new Paper());
+    //     Paper extractedPaper = box.extract();
+    //     assertNotNull(extractedPaper);
+    //     assertEquals("Paper", extractedPaper.getNote());
+    //     // assertFalse(box.isSealed()); // Ensure box is unsealed after extraction
+    // }
+}
+
