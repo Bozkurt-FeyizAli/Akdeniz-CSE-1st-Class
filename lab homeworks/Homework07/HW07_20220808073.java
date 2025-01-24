@@ -147,3 +147,72 @@ class CargoFleet implements PriorityQueue<Container> {
     }
     
 }
+class Container implements Stack<Box<?>>, Node<Container>, 
+                                          Comparable<Container>{
+    private Box<?>[] boxes;
+    private Container next;
+    private double priority;
+    private int size;
+    private int top;
+    public Container() {
+        boxes=new Box<?>[DEFAULT_CAPACITY];
+    }
+    @Override
+    public String toString() {
+        return "CargoCompany [priority=" + priority + "]";
+    }
+    @Override
+    public boolean isEmpty(){
+        return size==0;
+    }
+    @Override
+    public Box<?> peek(){
+        if(isEmpty())
+        return null;
+        return boxes[top];
+    }
+    @Override
+    public Box<?> pop(){
+        if(isEmpty())
+            return null;
+        if(boxes[top-1]==null)
+            return null;
+        Box<?> newItem=boxes[top-1];
+        priority-=boxes[top-1].getPriority();
+        boxes[top-1]=null;
+        top--;
+        size--;
+        return newItem; 
+    }
+    @Override
+    public void setNext(Container item){
+        this.next=item;
+    }
+    @Override
+    public Container getNext() {
+        return next;
+    }
+    @Override
+    public double getPriority() {
+        return priority;
+    }
+    @Override
+    public int size(){
+        return size;
+    }
+    @Override
+    public int compareTo(Container o) {
+        return (int)(this.priority-o.getPriority());
+    }
+    @Override
+    public boolean push(Box<?> item) {
+        if(top==DEFAULT_CAPACITY)
+            return false;
+        boxes[top]=item;
+        top++;
+        size++;
+        priority+=item.getPriority();
+        return true;
+    }
+
+}
