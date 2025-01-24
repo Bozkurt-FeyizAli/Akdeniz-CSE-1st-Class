@@ -165,3 +165,72 @@ interface Wrappable extends Sellable{
     }
     
 }
+
+
+class Box<T extends Sellable> extends Object implements Package<T>{
+    private int distanceToAddress;
+    private T item;
+    private boolean seal;
+
+    public Box() {
+        this.distanceToAddress = 0;
+        this.item = null;
+        this.seal = false;
+    }
+
+    public Box(int disstanceToAddress, T item) {
+        this.distanceToAddress = disstanceToAddress;
+        this.item = item;
+        this.seal = true;
+    }
+
+    @Override
+    public T extract(){
+        if(!seal||isEmpty()){
+            return null;
+        }
+        T extractedItem = item;
+        item = null;
+        seal = false;
+        return extractedItem;
+    }
+
+    // public boolean isEmpty(){
+    //     if(seal==false || isEmpty()){
+    //         return true;
+    //     }
+    //     return false;
+    // }
+
+    @Override
+    public boolean isEmpty() {
+        return seal == false || item == null;
+    }
+
+    @Override
+    public boolean pack(T item){
+        if (!isEmpty()) return false;
+    this.item = item;
+    seal = true;
+    return true;
+    }
+
+
+    boolean isSealBroken(){
+        return !seal;
+    }
+
+    @Override
+    public double getPriority() {
+        if (isEmpty()) {
+            return 0;}
+    return item.getPrice() / (double) distanceToAddress;
+    }
+
+    @Override
+    public String toString() {
+        return "Box [distanceToAddress=" + distanceToAddress + ", item=" + item + ", seal=" + seal + "]";
+    }
+
+    
+}
