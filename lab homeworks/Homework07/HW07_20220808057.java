@@ -480,3 +480,21 @@ class Mirror extends Product{
     }
 
 }
+
+class Paper extends Product implements Wrappable{
+    private String note;
+
+    public Paper() {
+        super("Paper", 0.5);
+        // this.note = note;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+    
+}
