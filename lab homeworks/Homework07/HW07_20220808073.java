@@ -54,3 +54,36 @@ class Box<T extends Sellable> implements Package<T>{
         return item==null;
     }
 }
+class CargoCompany{
+    private CargoFleet queue;
+    private Container stack;
+    CargoCompany(){
+        stack= new Container();
+        queue= new CargoFleet();
+    }
+    public <T extends Box<?>> void add(T box){
+        if(!queue.isEmpty())
+            ship(queue);
+        if(!stack.isEmpty())
+            queue.enqueue(stack);
+        stack.push(box);
+    }
+    private void ship(CargoFleet fleet){
+        while (!fleet.isEmpty()) {
+            empty(fleet.dequeue());
+        }
+        
+    }
+    private void empty(Container container){
+        while(!container.isEmpty()){
+            // System.out.println(container.pop()); // i added
+            deliver(container.pop());    
+        }
+    }
+    private <T extends Box<?>> Sellable deliver(T box){
+        if(box==null)
+        return null;
+        // System.out.println("delivered "+box);// i added
+        return box.extract();
+    }
+}
