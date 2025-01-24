@@ -112,3 +112,56 @@ public class HW07_20220808057 {
         cargoCompany.add(boxMatroschka2);
     }       
 }
+
+
+interface Common<T>{
+    boolean isEmpty();
+    T peek();
+    int size();
+}
+
+interface Node<T>{
+   T getNext();
+   double getPriority();
+   void setNext(T item); 
+   static final int DEFAULT_CAPACITY =2;
+}
+
+interface  Package<T>{
+    T extract();
+    double getPriority();
+    boolean isEmpty();
+    boolean pack(T item);
+}
+
+interface PriorityQueue<T> extends Common<T>{
+    static final int FLEET_CAPACITY =3;
+    T dequeue();
+    boolean enqueue(T item);
+}
+
+interface Sellable{
+    String getName();
+    double getPrice();
+}
+
+interface Stack<T> extends Common<T>{
+    T pop();
+    boolean push(T item);
+}
+
+interface Wrappable extends Sellable{
+
+    @Override
+    default String getName() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getName'");
+    }
+
+    @Override
+    default double getPrice() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getPrice'");
+    }
+    
+}
