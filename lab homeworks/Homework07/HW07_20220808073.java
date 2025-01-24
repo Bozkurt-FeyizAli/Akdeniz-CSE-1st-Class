@@ -87,3 +87,63 @@ class CargoCompany{
         return box.extract();
     }
 }
+class CargoFleet implements PriorityQueue<Container> {
+    private Container head;
+    private int size;
+    public CargoFleet(){
+    }
+    @Override
+    public boolean isEmpty() {
+        return head==null;
+    }
+    
+    @Override
+    public Container peek() {
+        return head;
+    }
+    @Override
+    public int size() {
+        return size;
+    }
+
+    @Override
+    public boolean enqueue(Container item) {
+        if(size==FLEET_CAPACITY)
+            return false;
+        if(isEmpty()){
+            head=item;
+        }
+        else{
+            Container cHead=this.head;
+            Container cTail=null;
+            while(cHead.getNext()!=null&&cHead.compareTo(item)<0){
+                cTail=cHead;
+                cHead=cHead.getNext();
+            }
+            if(cTail==null){
+                item.setNext(cHead);
+                this.head=item;
+            }
+            else{
+                cTail.setNext(item);
+                item.setNext(cHead);
+            }
+            // while(container.getNext()!=null&&item.compareTo(container)<0)
+            //     container=container.getNext();
+            // item.setNext(container.getNext());
+            // container.setNext(item);    
+        }
+        size++;
+        return true;
+    }
+    @Override
+    public Container dequeue() {
+        if(isEmpty())
+            return null;
+        Container container=head;
+        head=head.getNext();
+        size--;
+        return container;
+    }
+    
+}
