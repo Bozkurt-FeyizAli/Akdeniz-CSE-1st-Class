@@ -272,3 +272,70 @@ class CargoCompany extends Object{
         return box.extract();
     }
 }
+
+
+class CargoFleet extends Object implements PriorityQueue<Container>{
+    private Container head;
+    private int size;
+
+    public static final int FLEET_CAPACITY = 3;
+
+    CargoFleet(){
+        this.head = null;
+        this.size = 0;
+    }
+
+    @Override
+    public boolean enqueue(Container item){
+        if(size == FLEET_CAPACITY){
+            return false;
+        }
+        if(isEmpty()){
+            head=item;
+        }
+        else{
+            Container current = head;
+            Container previous = null;
+            while (current != null && item.compareTo(current) > 0) {
+                previous = current;
+                current = current.getNext();
+            }
+            if (previous == null) {
+                item.setNext(head);
+                head = item;
+            } 
+            else {
+                previous.setNext(item);
+                item.setNext(current);
+            }
+        }
+        size++;
+        return true;
+    }
+
+    @Override
+    public Container dequeue(){
+        if(isEmpty()){
+            return null;
+        }
+        Container removedContainer = head;
+        head = head.getNext();
+        size--;
+        return removedContainer;
+    }
+    @Override
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    public int size(){
+        return size;
+    }
+
+    public Container peek(){
+        if(isEmpty()){
+            return null;
+        }
+        return head;
+    }
+}
