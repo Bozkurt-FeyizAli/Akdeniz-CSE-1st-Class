@@ -418,3 +418,38 @@ class Container extends Object implements Stack<Box<?>>, Node<Container>, Compar
         return item;
     }
 }
+
+class Matroschka <T extends Wrappable> extends Product implements Wrappable,Package<T>{
+    private T item;
+
+    Matroschka(T item) {
+        super("Matroschka", 5.0 + item.getPrice()); 
+        this.item = item;
+    }
+    @Override
+    public T extract() {
+        T extractedItem = item;
+        item = null;
+        return extractedItem;
+    }
+    @Override
+    public boolean isEmpty() {
+        return item == null;
+    }
+    @Override
+    public boolean pack(T newItem) {
+        if (!isEmpty()) {
+            return false;
+        }
+        item = newItem;
+        return true;
+    }
+    @Override
+    public double getPriority() {
+        throw new UnsupportedOperationException("Getting the priority is not implemented");
+    }
+    @Override
+    public String toString() {
+        return "Matroschka { " +"item = " + item +" } ";
+    }
+}
