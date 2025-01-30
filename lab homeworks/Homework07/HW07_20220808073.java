@@ -307,3 +307,36 @@ abstract class Product implements Sellable{
     
     
 }
+interface Common<T>{
+    boolean isEmpty();
+    T peek();
+    int size();
+}
+interface Node<T>{
+    int DEFAULT_CAPACITY=2;
+    T getNext();
+    double getPriority();
+    void setNext(T item);
+}
+interface Package<T>{
+    T extract();
+    double getPriority();
+    boolean isEmpty();
+    boolean pack(T item);
+}
+interface PriorityQueue<T> extends Common<T>{
+    int FLEET_CAPACITY=3;
+    T dequeue();
+    boolean enqueue(T item);    
+}
+interface Stack<T> extends Common<T>{
+    T pop();
+    boolean push(T item);
+}
+interface Wrappable extends Sellable{
+
+}
+interface Sellable{
+    String getName();
+    double getPrice();
+}
