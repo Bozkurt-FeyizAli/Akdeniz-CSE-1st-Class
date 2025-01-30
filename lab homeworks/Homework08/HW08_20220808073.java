@@ -133,3 +133,63 @@ class Post {
             return true;
         }
     } 
+    public boolean commentBy(User user, Comment comment){
+       comments.putIfAbsent(user, new ArrayList<>());
+       return comments.get(user).add(comment);
+    }
+    public String getContent(){
+        System.out.println("Posted at: " + datePosted);
+        return content;
+    }
+    public Comment getComment(User user, int index){
+        if(!comments.containsKey(user))
+            return null;
+        if(comments.get(user).size()-1<index)
+            return null;
+        return comments.get(user).get(index);
+    }
+    public int getCommentCount(){
+        int getCommentCount=0;
+        for (var userComments : comments.entrySet()) {
+            getCommentCount+=userComments.getValue().size();
+        }
+        return getCommentCount;
+    }
+    public int getCommentCountByUser(User user){
+        if(user==null||!comments.containsKey(user))
+            return 0;
+        else return comments.get(user).size();
+    }
+}
+
+class Message{
+    private boolean seen;
+    private java.util.Date dateSent;
+    private String content; 
+    private User sender;
+    public Message(User sender, String content) {
+        this.content = content;
+        this.sender = sender;
+        this.dateSent=new Date(System.currentTimeMillis());
+        this.seen=false;
+    }
+    public String read(User reader){
+        if(!sender.equals(reader))
+            seen=true; 
+        System.out.println("Sent at: " + dateSent);
+        return content;
+    }
+    public boolean hasRead(){
+        return seen;
+    }
+    // @Override
+    // public String toString() {
+    //     return content;
+    // }
+}
+class Comment extends Post{
+    public Comment(String content) {
+        super(content);
+    }
+}
+
