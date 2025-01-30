@@ -193,3 +193,59 @@ class Comment extends Post{
     }
 }
 
+class SocialNetwork{
+    private static Map<User, List<Post>> postsByUsers= new HashMap<>();
+
+    public static User register(String username, String email){
+        User user= new User(username, email);
+        if(getUser(email)==null){
+            postsByUsers.put(user, new ArrayList<Post>());
+            return user;
+        }
+        return null;
+    }
+    public static Post post(User user, String content){
+        Post newPost=new Post(content);
+        if (postsByUsers.containsKey(user)) {
+            postsByUsers.get(user).add(newPost);
+            return newPost;
+        }
+        return null;
+    }
+    public static User getUser(String email){
+        for (User user : postsByUsers.keySet()) {
+            if(user.hashCode()==Objects.hash(email))
+                return user;
+        }
+        return null;
+    }
+    public static Set<Post> getFeed(User user){
+        Set<Post> getFeed = new HashSet<>();
+        for (var following: user.getFollowing()) {
+            if(postsByUsers.containsKey(following))
+                getFeed.addAll(postsByUsers.get(following));
+        }
+        return getFeed;
+    }
+    public static Map<User, String> search(String keyword){
+        Map<User, String> search= new HashMap<>();
+        for (var user : postsByUsers.keySet()) {
+            if(user.getUsername().contains(keyword))
+                search.put(user, user.getUsername());
+        }
+        return  search;
+    }
+    public static <V,K> Map<V, Set<K>> reverseMap(Map<K, V> map){
+        Map<V, Set<K>> reverseMap= new HashMap<>();
+        for (var kV : map.entrySet()) {
+            K k=kV.getKey();
+            V v=kV.getValue();
+            Set<K> setK= new HashSet<K>();
+            reverseMap.putIfAbsent(v, setK);
+            if(reverseMap.containsKey(v))
+                reverseMap.get(v).add(k);
+        }
+        return reverseMap;
+    }
+    
+}
