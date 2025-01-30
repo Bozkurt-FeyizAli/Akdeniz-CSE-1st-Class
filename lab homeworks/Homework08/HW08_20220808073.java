@@ -57,3 +57,79 @@ class User{
     public Set<Post> getLikedPosts() {
         return likedPosts;
     }
+    public void message(User recipient, String content){
+        if(!messages.containsKey(recipient)){
+            messages.put(recipient, new ConcurrentLinkedQueue<>());
+        }
+        if(!recipient.messages.containsKey(this)){
+            recipient.messages.put(this, new ConcurrentLinkedQueue<>());
+        }
+        Message message = new Message(this, content);
+        recipient.messages.get(this).add(message);
+        messages.get(recipient).add(message);
+        read(recipient);
+    }
+    public void read(User user){
+        if(messages.containsKey(user))
+            for (Message message : messages.get(user))
+                System.out.println(message.read(this));
+    }
+    public void follow(User user){
+        if(this.following.contains(user)){
+            this.following.remove(user);
+            user.followers.remove(this);
+        }
+        else {
+            this.following.add(user);
+            user.followers.add(this);
+        }    
+    }
+    public void like(Post post){
+        if(this.likedPosts.contains(post))
+            this.likedPosts.remove(post);
+        else
+            this.likedPosts.add(post);
+        post.likedBy(this);
+    }
+    public Post post(String content){
+        return new Post(content);
+    }
+    public Comment comment(Post post, String content){
+        Comment newComment= new Comment(content);
+        post.commentBy(this, newComment);
+        return newComment;
+    }
+    @Override
+    public boolean equals(Object obj) {
+        if(obj==null)
+            return false;
+        User user= (User) obj;
+        return this.id==user.id;
+    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(email);
+    }
+}
+
+class Post {
+    java.util.Date datePosted;
+    String content; 
+    Set<User> likes; 
+    Map<User, List<Comment>> comments;
+    public Post(String content) {
+        this.content = content;
+        this.datePosted=new Date(System.currentTimeMillis());
+        this.comments= new HashMap<>();
+        this.likes= new HashSet<>();
+    }
+    public boolean likedBy(User user){
+        if(likes.contains(user)){
+            likes.remove(user);
+            return false; 
+        }
+        else{
+            likes.add(user);
+            return true;
+        }
+    } 
