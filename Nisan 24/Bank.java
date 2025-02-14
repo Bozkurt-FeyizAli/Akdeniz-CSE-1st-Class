@@ -56,3 +56,55 @@ class Manager extends Staff{
     }
 
 }
+class Teller extends Staff {
+    
+}
+class Security extends Staff{
+
+}
+abstract class Account{
+    int accountNumber;
+    int amount;
+    Account(int accountNumber){
+        this.amount=0;
+        this.accountNumber=accountNumber;
+    }
+
+    void withdraw(double n){
+        if(amount>n)
+        amount-=n;
+        else System.out.println(0/0);
+    }
+    void deposit(double n){
+        if(n>=0)
+        amount+=n;
+        else throw new ArithmeticException();
+    }
+
+}
+
+class Debit extends Account{
+
+    Debit(int accountNumber) {
+        super(accountNumber);
+        //TODO Auto-generated constructor stub
+    }
+
+}
+
+class Investment extends Account{
+    double Irate;
+
+    Investment(int accountNumber,double Irate) {
+        super(accountNumber);
+        if(Irate>=0&&Irate<=1)
+        this.Irate=Irate;
+        //TODO Auto-generated constructor stub
+    }
+
+    void accrueInterest(){
+        amount+=amount*Irate;
+    }
+    
+}
+
